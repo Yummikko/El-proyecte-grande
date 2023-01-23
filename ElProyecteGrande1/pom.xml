@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.codecool</groupId>
-    <artifactId>super-sprinter-3000</artifactId>
+    <artifactId>dream-catcher</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>super-sprinter-3000</name>
+    <name>dream-catche</name>
     <description>DreamCatcher</description>
     <properties>
         <java.version>17</java.version>
