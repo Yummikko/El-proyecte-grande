@@ -1,30 +1,16 @@
-package com.codecool.elproyectegrande1.entity;
+package com.codecool.elproyectegrande1.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+public class DreamDto {
 
-@Entity
-public class Dream {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank
-    @Size(min = 1, max = 10)
     private String dreamTitle;
-
-    @NotBlank
     private String dreamDescription;
 
-    public Dream() {
+    public DreamDto() {
     }
 
-    public Dream(String dreamTitle, String dreamDescription) {
+    public DreamDto(Long id, String dreamTitle, String dreamDescription) {
+        this.id = id;
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
     }
