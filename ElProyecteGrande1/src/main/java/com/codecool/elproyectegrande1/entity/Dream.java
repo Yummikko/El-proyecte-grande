@@ -1,9 +1,6 @@
 package com.codecool.elproyectegrande1.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -15,19 +12,24 @@ public class Dream {
     private Long id;
 
     @NotBlank
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 50)
     private String dreamTitle;
 
     @NotBlank
     private String dreamDescription;
 
+    @Column(name = "likes", columnDefinition = "INT DEFAULT 0")
+    private int likes;
+
     public Dream() {
     }
 
-    public Dream(String dreamTitle, String dreamDescription) {
+    public Dream(String dreamTitle, String dreamDescription, int likes) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
+        this.likes = 0;
     }
+
 
     public Long getId() {
         return id;
@@ -51,5 +53,13 @@ public class Dream {
 
     public void setDreamDescription(String dreamDescription) {
         this.dreamDescription = dreamDescription;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 }
