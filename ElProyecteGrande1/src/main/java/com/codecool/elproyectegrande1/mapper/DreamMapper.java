@@ -12,7 +12,9 @@ public class DreamMapper {
                 entity.getId(),
                 entity.getDreamTitle(),
                 entity.getDreamDescription(),
-                entity.getLikes());
+                entity.getLikes(),
+                entity.getDreamStatus()
+        );
     }
 
     public Dream mapNewDreamDtoToEntity(NewDreamDto dto) {

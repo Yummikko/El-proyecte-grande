@@ -21,6 +21,10 @@ public class Dream {
     @Column(name = "likes", columnDefinition = "INT DEFAULT 0")
     private int likes;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "dream_status")
+    private DreamStatus dreamStatus;
+
     public Dream() {
     }
 
@@ -28,6 +32,7 @@ public class Dream {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = 0;
+        this.dreamStatus = DreamStatus.PRESENTING;
     }
 
     public Long getId() {
@@ -60,5 +65,13 @@ public class Dream {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public DreamStatus getDreamStatus() {
+        return dreamStatus;
+    }
+
+    public void setDreamStatus(DreamStatus dreamStatus) {
+        this.dreamStatus = dreamStatus;
     }
 }

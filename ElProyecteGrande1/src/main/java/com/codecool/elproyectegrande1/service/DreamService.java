@@ -3,6 +3,7 @@ package com.codecool.elproyectegrande1.service;
 import com.codecool.elproyectegrande1.dto.DreamDto;
 import com.codecool.elproyectegrande1.dto.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
+import com.codecool.elproyectegrande1.entity.DreamStatus;
 import com.codecool.elproyectegrande1.mapper.DreamMapper;
 import com.codecool.elproyectegrande1.repository.DreamRepository;
 import com.codecool.elproyectegrande1.repository.DreamerRepository;
@@ -46,5 +47,11 @@ public class DreamService {
     public DreamDto getDreamById(Long id) {
         Dream dream = dreamRepository.findById(id).orElseThrow();
         return dreamMapper.mapEntityToDreamDto(dream);
+    }
+
+    public void updateDreamStatus(Long id, String status) {
+        Dream dream = dreamRepository.findById(id).orElseThrow();
+        dream.setDreamStatus(DreamStatus.valueOf(status.toUpperCase()));
+        dreamRepository.save(dream);
     }
 }
