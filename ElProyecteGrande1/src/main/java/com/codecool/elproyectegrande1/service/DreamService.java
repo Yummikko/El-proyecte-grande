@@ -9,6 +9,8 @@ import com.codecool.elproyectegrande1.repository.DreamerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class DreamService {
 
@@ -28,5 +30,21 @@ public class DreamService {
         Dream toBeSaved = dreamMapper.mapNewDreamDtoToEntity(newDream);
         Dream savedDream = dreamRepository.save(toBeSaved);
         return dreamMapper.mapEntityToDreamDto(savedDream);
+    }
+
+    public void likeDream(Long dreamId) {
+        Dream dream = dreamRepository.findById(dreamId).orElseThrow();
+        dream.setLikes(dream.getLikes() + 1);
+        dreamRepository.save(dream);
+    }
+
+
+    public Dream getDreamWithMostLikes() {
+        return dreamRepository.findTopByOrderByLikesDesc();
+    }
+
+    public DreamDto getDreamById(Long id) {
+        Dream dream = dreamRepository.findById(id).orElseThrow();
+        return dreamMapper.mapEntityToDreamDto(dream);
     }
 }
