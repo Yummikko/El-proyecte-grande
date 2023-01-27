@@ -1,5 +1,7 @@
 package com.codecool.elproyectegrande1.dto;
 
+import com.codecool.elproyectegrande1.entity.DreamStatus;
+
 import javax.persistence.criteria.CriteriaBuilder;
 
 public class DreamDto {
@@ -9,14 +11,17 @@ public class DreamDto {
     private String dreamDescription;
     private int likes = 0;
 
+    private DreamStatus dreamStatus;
+
     public DreamDto() {
     }
 
-    public DreamDto(Long id, String dreamTitle, String dreamDescription, int likes) {
+    public DreamDto(Long id, String dreamTitle, String dreamDescription, int likes, DreamStatus dreamStatus) {
         this.id = id;
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = likes;
+        this.dreamStatus = dreamStatus;
     }
 
     public Long getId() {
@@ -49,5 +54,13 @@ public class DreamDto {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public DreamStatus getDreamStatus() {
+        return dreamStatus;
+    }
+
+    public void setDreamStatus(DreamStatus dreamStatus) {
+        this.dreamStatus = dreamStatus;
     }
 }

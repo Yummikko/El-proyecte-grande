@@ -38,4 +38,7 @@ public class DreamController {
     public Dream getDreamWithMostLikes() {
         return dreamService.getDreamWithMostLikes();
     }
+
+    @PutMapping("{id}/dream-status/{status}")
+    public void updateStatus(@PathVariable Long id, @PathVariable String status) { dreamService.updateDreamStatus(id, status); }
 }
