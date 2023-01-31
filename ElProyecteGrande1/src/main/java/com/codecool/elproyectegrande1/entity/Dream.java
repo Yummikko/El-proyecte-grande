@@ -21,6 +21,9 @@ public class Dream {
     @Column(name = "likes", columnDefinition = "INT DEFAULT 0")
     private int likes;
 
+    @Column(name = "views", columnDefinition = "INT DEFAULT 0")
+    private int views;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "dream_status")
     private DreamStatus dreamStatus;
@@ -28,10 +31,11 @@ public class Dream {
     public Dream() {
     }
 
-    public Dream(String dreamTitle, String dreamDescription, int likes) {
+    public Dream(String dreamTitle, String dreamDescription, int likes, int views) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = 0;
+        this.views = 0;
         this.dreamStatus = DreamStatus.PRESENTING;
     }
 
@@ -65,6 +69,14 @@ public class Dream {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
     }
 
     public DreamStatus getDreamStatus() {

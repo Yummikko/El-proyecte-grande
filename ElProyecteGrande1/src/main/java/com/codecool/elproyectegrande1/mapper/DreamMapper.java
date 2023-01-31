@@ -13,6 +13,7 @@ public class DreamMapper {
                 entity.getDreamTitle(),
                 entity.getDreamDescription(),
                 entity.getLikes(),
+                entity.getViews(),
                 entity.getDreamStatus()
         );
     }
@@ -21,6 +22,7 @@ public class DreamMapper {
         return new Dream(
                 dto.getDreamTitle(),
                 dto.getDreamDescription(),
+                0,
                 0);
     }
 }

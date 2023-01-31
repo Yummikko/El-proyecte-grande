@@ -54,4 +54,10 @@ public class DreamService {
         dream.setDreamStatus(DreamStatus.valueOf(status.toUpperCase()));
         dreamRepository.save(dream);
     }
+
+    public void viewsDream(Long dreamId) {
+        Dream dream = dreamRepository.findById(dreamId).orElseThrow();
+        dream.setViews(dream.getViews() + 1);
+        dreamRepository.save(dream);
+    }
 }

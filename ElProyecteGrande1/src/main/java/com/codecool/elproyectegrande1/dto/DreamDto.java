@@ -11,16 +11,19 @@ public class DreamDto {
     private String dreamDescription;
     private int likes = 0;
 
+    private int views = 0;
+
     private DreamStatus dreamStatus;
 
     public DreamDto() {
     }
 
-    public DreamDto(Long id, String dreamTitle, String dreamDescription, int likes, DreamStatus dreamStatus) {
+    public DreamDto(Long id, String dreamTitle, String dreamDescription, int likes, int views, DreamStatus dreamStatus) {
         this.id = id;
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = likes;
+        this.views = views;
         this.dreamStatus = dreamStatus;
     }
 
@@ -55,6 +58,10 @@ public class DreamDto {
     public void setLikes(int likes) {
         this.likes = likes;
     }
+
+    public int getViews() { return views; }
+
+    public void setViews(int views) { this.views = views; }
 
     public DreamStatus getDreamStatus() {
         return dreamStatus;
