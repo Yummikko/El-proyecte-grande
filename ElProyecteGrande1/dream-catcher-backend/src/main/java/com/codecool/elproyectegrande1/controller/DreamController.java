@@ -46,4 +46,9 @@ public class DreamController {
     public void viewDream(@PathVariable Long id) {
         dreamService.viewsDream(id);
     }
+
+    @PutMapping("{id}/update-dream/{title}/{description}/{status}")
+    public void updateStatus(@PathVariable Long id, @PathVariable String title, @PathVariable String description, @PathVariable String status) {
+        dreamService.updateDream(id, title, description, status);
+    }
 }
