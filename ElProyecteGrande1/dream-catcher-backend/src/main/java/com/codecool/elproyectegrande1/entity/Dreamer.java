@@ -28,17 +28,21 @@ public class Dreamer {
     @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "followers", columnDefinition = "INT DEFAULT 0")
+    private int followers;
+
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
 
     public Dreamer() {
     }
 
-    public Dreamer(Long id, String nickname, String email, String password) {
+    public Dreamer(Long id, String nickname, String email, String password, int followers) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
         this.password = password;
+        this.followers = followers;
     }
 
     public Long getId() {
@@ -71,5 +75,13 @@ public class Dreamer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
     }
 }

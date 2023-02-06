@@ -1,27 +1,29 @@
 package com.codecool.elproyectegrande1.mapper;
 
-import com.codecool.elproyectegrande1.dto.UserDto;
+import com.codecool.elproyectegrande1.dto.DreamerDto;
 import com.codecool.elproyectegrande1.entity.Dreamer;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class NewDreamerMapper {
-    public UserDto mapEntityToUserDto(Dreamer entity) {
-        return new UserDto(
+    public DreamerDto mapEntityToUserDto(Dreamer entity) {
+        return new DreamerDto(
                 entity.getId(),
                 entity.getNickname(),
                 entity.getEmail(),
-                entity.getPassword()
+                entity.getPassword(),
+                entity.getFollowers()
         );
     }
 
-    public Dreamer mapUserDtoToEntity(UserDto dto) {
+    public Dreamer mapUserDtoToEntity(DreamerDto dto) {
         return new Dreamer(
                 dto.getId(),
                 dto.getNickname(),
                 dto.getEmail(),
-                dto.getPassword()
+                dto.getPassword(),
+                0
         );
     }
 }
