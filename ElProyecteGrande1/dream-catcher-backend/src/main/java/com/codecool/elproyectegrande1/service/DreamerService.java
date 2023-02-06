@@ -1,8 +1,6 @@
 package com.codecool.elproyectegrande1.service;
 
-import com.codecool.elproyectegrande1.dto.DreamDto;
 import com.codecool.elproyectegrande1.dto.DreamerDto;
-import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Dreamer;
 import com.codecool.elproyectegrande1.mapper.NewDreamerMapper;
 import com.codecool.elproyectegrande1.repository.DreamerRepository;
@@ -35,4 +33,11 @@ public class DreamerService {
         Dreamer dreamer = dreamerRepository.findById(id).orElseThrow();
         return dreamerMapper.mapEntityToUserDto(dreamer);
     }
+
+    public void unfollowDreamer(Long dreamerId) {
+        Dreamer dreamer = dreamerRepository.findById(dreamerId).orElseThrow();
+        dreamer.setFollowers(dreamer.getFollowers() - 1);
+        dreamerRepository.save(dreamer);
+    }
+
 }
