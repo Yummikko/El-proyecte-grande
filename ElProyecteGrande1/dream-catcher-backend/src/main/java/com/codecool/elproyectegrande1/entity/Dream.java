@@ -12,7 +12,7 @@ public class Dream {
     private Long id;
 
     @NotBlank
-    @Size(min = 1, max = 50)
+    @Size(min = 3, max = 50)
     private String dreamTitle;
 
     @NotBlank
