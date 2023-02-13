@@ -17,7 +17,9 @@ public class RegisterController {
     private RegistrationService userService;
 
     @PostMapping
-    public ResponseEntity<?> register(@RequestBody Dreamer dreamer) {
+    public ResponseEntity<?> register(@RequestBody String password) {
+        String encryptedPassword = userService.encryptPassword(password);
+        Dreamer dreamer = new Dreamer(encryptedPassword);
         try {
             userService.register(dreamer);
             return ResponseEntity.ok("User registered successfully");

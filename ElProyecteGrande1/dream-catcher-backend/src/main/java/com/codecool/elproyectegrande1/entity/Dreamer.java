@@ -37,6 +37,10 @@ public class Dreamer {
     public Dreamer() {
     }
 
+    public Dreamer(String password) {
+        this.password = password;
+    }
+
     public Dreamer(Long id, String nickname, String email, String password, int followers) {
         this.id = id;
         this.nickname = nickname;
