@@ -9,9 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.naming.AuthenticationException;
-import java.security.NoSuchAlgorithmException;
-
 @Service
 public class UserService {
 
@@ -19,7 +16,7 @@ public class UserService {
     @Autowired
     private DreamerRepository dreamerRepository;
 
-    public SignInDto signIn(SignInDto signInDto) throws Exception {
+    public SignInDto signIn(SignInDto signInDto) {
         Dreamer dreamer = dreamerRepository.findByEmail(signInDto.getEmail());
         if (dreamer == null) {
             throw new AuthenticationFailException("User not present");
@@ -32,9 +29,9 @@ public class UserService {
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("hashing password failed {}", e.getMessage());
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
 
-        return new SignInDto();
+        return new SignInDto("Login success");
     }
 }

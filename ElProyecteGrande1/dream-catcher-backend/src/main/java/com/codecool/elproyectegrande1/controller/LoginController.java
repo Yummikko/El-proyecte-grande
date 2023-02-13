@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.naming.AuthenticationException;
-
 @RestController
 @RequestMapping("/api/v1/login")
 public class LoginController {
@@ -21,7 +19,7 @@ public class LoginController {
     //#2: if yes then create a session for username
     //#3: need to hash password
     @PostMapping("/signIn/")
-    public SignInDto Signup(@RequestBody SignInDto signInDto) throws Exception {
+    public SignInDto Signup(@RequestBody SignInDto signInDto) {
         return userService.signIn(signInDto);
     }
 
