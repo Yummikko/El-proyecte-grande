@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DreamRepository extends JpaRepository<Dream, Long> {
     Dream findTopByOrderByLikesDesc();
+    Dream findTopByOrderByViewsDesc();
 }
 
