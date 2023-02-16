@@ -15,9 +15,6 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    //#1: check if the login data provided through the end point is correct
-    //#2: if yes then create a session for username
-    //#3: need to hash password
     @PostMapping("/signIn/")
     public SignInDto Signup(@RequestBody SignInDto signInDto) {
         return userService.signIn(signInDto);
