@@ -44,6 +44,10 @@ public class DreamService {
         return dreamRepository.findTopByOrderByLikesDesc();
     }
 
+    public Dream getDreamWithMostViews() {
+        return dreamRepository.findTopByOrderByViewsDesc();
+    }
+
     public DreamDto getDreamById(Long id) {
         Dream dream = dreamRepository.findById(id).orElseThrow();
         return dreamMapper.mapEntityToDreamDto(dream);

@@ -21,8 +21,8 @@ public class CommentController {
     }
 
     @PostMapping
-    public CommentDto addComment(@RequestBody NewCommentDto NewCommentDto) {
-        return commentService.addComment(NewCommentDto);
+    public CommentDto addComment(@RequestBody NewCommentDto newCommentDto) {
+        return commentService.addComment(newCommentDto);
     }
 
     @PutMapping("/{id}/like")
