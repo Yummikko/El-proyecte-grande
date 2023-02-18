@@ -2,10 +2,9 @@ package com.codecool.elproyectegrande1.service;
 
 import com.codecool.elproyectegrande1.dto.SignInDto;
 import com.codecool.elproyectegrande1.dto.SignInMentorDto;
-import com.codecool.elproyectegrande1.entity.Dreamer;
-import com.codecool.elproyectegrande1.entity.Mentor;
+import com.codecool.elproyectegrande1.entity.User;
+import com.codecool.elproyectegrande1.entity.UserRepository;
 import com.codecool.elproyectegrande1.exceptions.AuthenticationFailException;
-import com.codecool.elproyectegrande1.repository.DreamerRepository;
 import com.codecool.elproyectegrande1.repository.MentorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,18 +15,19 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     Logger logger = LoggerFactory.getLogger(UserService.class);
-    @Autowired
-    private DreamerRepository dreamerRepository;
+
     @Autowired
     private MentorRepository mentorRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public SignInDto signIn(SignInDto signInDto) {
-        Dreamer dreamer = dreamerRepository.findByEmail(signInDto.getEmail());
-        if (dreamer == null) {
+        User user = userRepository.findByEmail(signInDto.getEmail());
+        if (user == null) {
             throw new AuthenticationFailException("User not present");
         }
         try {
-            if (!dreamer.getPassword().equals(signInDto.getPassword())) {
+            if (!user.getPassword().equals(signInDto.getPassword())) {
                 //password doesn't match
                 throw new AuthenticationFailException("Wrong password");
             }
@@ -37,16 +37,16 @@ public class UserService {
             throw new RuntimeException(e.getMessage());
         }
 
-        return new SignInDto("Login success");
+        return new SignInDto(user.getEmail(), user.getPassword(),"Login success");
     }
 
-    public SignInDto signInMentor(SignInMentorDto signInMentorDto) {
-        Mentor mentor = mentorRepository.findByEmail(signInMentorDto.getEmail());
-        if (mentor == null) {
+    public SignInMentorDto signInMentor(SignInMentorDto signInMentorDto) {
+        User user = userRepository.findByEmail(signInMentorDto.getEmail());
+        if (user == null) {
             throw new AuthenticationFailException("User not present");
         }
         try {
-            if (!mentor.getPassword().equals(signInMentorDto.getPassword())) {
+            if (!user.getPassword().equals(signInMentorDto.getPassword())) {
                 //password doesn't match
                 throw new AuthenticationFailException("Wrong password");
             }
@@ -56,7 +56,7 @@ public class UserService {
             throw new RuntimeException(e.getMessage());
         }
 
-        return new SignInDto("Login success");
+        return new SignInMentorDto(user.getEmail(), user.getPassword(), "Login success");
     }
 
 }

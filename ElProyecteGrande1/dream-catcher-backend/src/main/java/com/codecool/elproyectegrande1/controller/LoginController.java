@@ -21,7 +21,7 @@ public class LoginController {
         return userService.signIn(signInDto);
     }
     @PostMapping("/signIn-mentor/")
-    public SignInDto SignInMentor(@RequestBody SignInMentorDto signInMentorDto) {
+    public SignInMentorDto SignInMentor(@RequestBody SignInMentorDto signInMentorDto) {
         return userService.signInMentor(signInMentorDto);
     }
 

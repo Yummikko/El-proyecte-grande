@@ -6,7 +6,9 @@ public class SignInDto {
 
     private String token;
 
-    public SignInDto(String token) {
+    public SignInDto(String email, String password, String token) {
+        this.email = email;
+        this.password = password;
         this.token = token;
     }
 

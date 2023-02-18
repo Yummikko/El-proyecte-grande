@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MentorRepository {
-    public Mentor findByEmail(String email);
+    Mentor findByEmail(String email);
 }

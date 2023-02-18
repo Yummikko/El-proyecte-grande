@@ -6,7 +6,9 @@ public class SignInMentorDto {
 
     private String token;
 
-    public SignInMentorDto(String token) {
+    public SignInMentorDto(String email, String password, String token) {
+        this.email = email;
+        this.password = password;
         this.token = token;
     }
 
