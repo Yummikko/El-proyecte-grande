@@ -4,7 +4,6 @@ import com.codecool.elproyectegrande1.dto.SignInDto;
 import com.codecool.elproyectegrande1.dto.SignInMentorDto;
 import com.codecool.elproyectegrande1.entity.User;
 import com.codecool.elproyectegrande1.exceptions.AuthenticationFailException;
-import com.codecool.elproyectegrande1.repository.MentorRepository;
 import com.codecool.elproyectegrande1.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +15,6 @@ public class UserService {
 
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    @Autowired
-    private MentorRepository mentorRepository;
     @Autowired
     private UserRepository userRepository;
 
