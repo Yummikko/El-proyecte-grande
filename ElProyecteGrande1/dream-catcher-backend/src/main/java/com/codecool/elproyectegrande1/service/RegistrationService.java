@@ -1,8 +1,10 @@
 package com.codecool.elproyectegrande1.service;
 
 
-import com.codecool.elproyectegrande1.entity.Dreamer;
-import com.codecool.elproyectegrande1.repository.DreamerRepository;
+import com.codecool.elproyectegrande1.dto.SignUpDto;
+import com.codecool.elproyectegrande1.entity.Role;
+import com.codecool.elproyectegrande1.entity.User;
+import com.codecool.elproyectegrande1.repository.UserRepository;
 import com.codecool.elproyectegrande1.util.PassBasedEnc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,19 +13,20 @@ import org.springframework.stereotype.Service;
 public class RegistrationService {
 
     @Autowired
-    private DreamerRepository dreamerRepository;
+    private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
-    public void register(Dreamer dreamer) {
-        // walidacja danych użytkownika
-        if (dreamerRepository.findByNickname(dreamer.getNickname())!=null) {
-            throw new RuntimeException("Username already exists");
-        }
-        if (dreamerRepository.findByEmail(dreamer.getEmail())!=null) {
-            throw new RuntimeException("Email already exists");
-        }
+    public void register(SignUpDto signUpDto) {
+        String encryptedPassword = encryptPassword(signUpDto.getPassword());
+        User user = new User(signUpDto.getFirstName(), encryptedPassword, signUpDto.getEmail(), Role.DREAMER);
+        userRepository.save(user);
+    }
 
-        // zapis danych użytkownika do bazy danych
-        dreamerRepository.save(dreamer);
+    public void registerMentor(SignUpDto signUpDto) {
+        String encryptedPassword = encryptPassword(signUpDto.getPassword());
+        User user = new User(signUpDto.getFirstName(), encryptedPassword, signUpDto.getEmail(), Role.MENTOR);
+        userRepository.save(user);
     }
 
     public String encryptPassword(String password) {

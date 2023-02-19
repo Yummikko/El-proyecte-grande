@@ -28,6 +28,19 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
+
+    public User() {}
+
+    public User(String name, String password, String email, Role role) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+
     public Long getId() {
         return id;
     }

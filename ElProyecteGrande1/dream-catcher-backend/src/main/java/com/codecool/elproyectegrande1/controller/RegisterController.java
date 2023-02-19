@@ -1,6 +1,6 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.entity.Dreamer;
+import com.codecool.elproyectegrande1.dto.SignUpDto;
 import com.codecool.elproyectegrande1.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +14,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController {
 
     @Autowired
-    private RegistrationService userService;
+    private RegistrationService registrationService;
 
-    @PostMapping
-    public ResponseEntity<?> register(@RequestBody String password) {
-        String encryptedPassword = userService.encryptPassword(password);
-        Dreamer dreamer = new Dreamer(encryptedPassword);
+    @PostMapping("/dreamer")
+    public ResponseEntity<?> register(@RequestBody SignUpDto signUpDto) {
         try {
-            userService.register(dreamer);
+            registrationService.register(signUpDto);
+            return ResponseEntity.ok("User registered successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error while registering user: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/mentor")
+    public ResponseEntity<?> registerMentor(@RequestBody SignUpDto signUpDto) {
+        try {
+            registrationService.registerMentor(signUpDto);
             return ResponseEntity.ok("User registered successfully");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error while registering user: " + e.getMessage());
