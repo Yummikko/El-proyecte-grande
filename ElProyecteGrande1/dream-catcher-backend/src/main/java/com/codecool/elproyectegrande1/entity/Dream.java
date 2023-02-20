@@ -3,6 +3,7 @@ package com.codecool.elproyectegrande1.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Dream {
@@ -28,15 +29,19 @@ public class Dream {
     @Column(name = "dream_status")
     private DreamStatus dreamStatus;
 
+    @ElementCollection
+    private List<String> hashtags;
+
     public Dream() {
     }
 
-    public Dream(String dreamTitle, String dreamDescription, int likes, int views) {
+    public Dream(String dreamTitle, String dreamDescription, int likes, int views, List<String> hashtags) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = 0;
         this.views = 0;
         this.dreamStatus = DreamStatus.PRESENTING;
+        this.hashtags = hashtags;
     }
 
     public Long getId() {
@@ -86,4 +91,13 @@ public class Dream {
     public void setDreamStatus(DreamStatus dreamStatus) {
         this.dreamStatus = dreamStatus;
     }
+
+    public List<String> getHashtags() {
+        return hashtags;
+    }
+
+    public void setHashtags(List<String> hashtags) {
+        this.hashtags = hashtags;
+    }
+
 }
