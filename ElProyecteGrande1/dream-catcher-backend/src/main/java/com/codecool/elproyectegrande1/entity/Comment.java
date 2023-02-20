@@ -19,26 +19,23 @@ public class Comment {
     @Column(name = "likes", columnDefinition = "INT DEFAULT 0")
     private int likes;
 
-    private LocalDateTime timeCreated = LocalDateTime.now();
+    private LocalDateTime timeCreated;
 
-    private LocalDateTime timeUpdated = LocalDateTime.now();
+    private LocalDateTime timeUpdated;
 
 //    @ManyToOne
 //    private Dreamer dreamer;
 
 
-    public Comment(String commentText, int likes, LocalDateTime timeCreated, LocalDateTime timeUpdated) {
+    public Comment(String commentText, int likes) {
         this.commentText = commentText;
         this.likes = likes;
-        this.timeCreated = timeCreated;
-        this.timeUpdated = timeUpdated;
+        this.timeCreated =  LocalDateTime.now();
+        this.timeUpdated =  LocalDateTime.now();
     }
 
-    public Comment(String comment, int i) {
-    }
 
     public Comment() {
-
     }
 
     public Long getId() {
