@@ -1,11 +1,9 @@
 package com.codecool.elproyectegrande1.entity;
 
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Comment {
@@ -21,20 +19,26 @@ public class Comment {
     @Column(name = "likes", columnDefinition = "INT DEFAULT 0")
     private int likes;
 
-    @CreatedDate
-    private Date createdDate;
+    private LocalDateTime timeCreated = LocalDateTime.now();
 
-    private Date updatedDate;
+    private LocalDateTime timeUpdated = LocalDateTime.now();
 
 //    @ManyToOne
 //    private Dreamer dreamer;
 
-    public Comment(String commentText, int likes) {
+
+    public Comment(String commentText, int likes, LocalDateTime timeCreated, LocalDateTime timeUpdated) {
         this.commentText = commentText;
         this.likes = likes;
+        this.timeCreated = timeCreated;
+        this.timeUpdated = timeUpdated;
+    }
+
+    public Comment(String comment, int i) {
     }
 
     public Comment() {
+
     }
 
     public Long getId() {
@@ -53,12 +57,13 @@ public class Comment {
 //        return dreamer;
 //    }
 
-    public Date getCreatedDate() {
-        return createdDate;
+
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
     }
 
-    public Date getUpdatedDate() {
-        return updatedDate;
+    public LocalDateTime getTimeUpdated() {
+        return timeUpdated;
     }
 
     public int getLikes() {
@@ -69,12 +74,12 @@ public class Comment {
         this.id = id;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setTimeCreated(LocalDateTime timeCreated) {
+        this.timeCreated = timeCreated;
     }
 
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
+    public void setTimeUpdated(LocalDateTime timeUpdated) {
+        this.timeUpdated = timeUpdated;
     }
 
     public void setComment(String comment) {
