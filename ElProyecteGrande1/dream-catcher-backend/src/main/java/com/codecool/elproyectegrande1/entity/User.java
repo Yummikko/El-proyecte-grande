@@ -23,6 +23,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    //add hash column
+
     @NotNull(message = "Email cannot be empty")
     @Email(message = "Please enter a valid email address")
     @Column(name = "email", unique = true)
@@ -71,5 +73,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

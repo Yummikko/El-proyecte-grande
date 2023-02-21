@@ -5,6 +5,12 @@ public class SignUpDto {
     private String email;
     private String password;
 
+    public SignUpDto(String firstName, String email, String password) {
+        this.firstName = firstName;
+        this.email = email;
+        this.password = password;
+    }
+
     public String getFirstName() {
         return firstName;
     }
