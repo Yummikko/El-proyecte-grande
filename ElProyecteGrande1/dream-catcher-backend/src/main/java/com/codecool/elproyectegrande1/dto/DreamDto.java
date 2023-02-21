@@ -2,7 +2,7 @@ package com.codecool.elproyectegrande1.dto;
 
 import com.codecool.elproyectegrande1.entity.DreamStatus;
 
-import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 
 public class DreamDto {
 
@@ -10,21 +10,21 @@ public class DreamDto {
     private String dreamTitle;
     private String dreamDescription;
     private int likes = 0;
-
     private int views = 0;
-
     private DreamStatus dreamStatus;
+    private List<String> hashtags;
 
     public DreamDto() {
     }
 
-    public DreamDto(Long id, String dreamTitle, String dreamDescription, int likes, int views, DreamStatus dreamStatus) {
+    public DreamDto(Long id, String dreamTitle, String dreamDescription, int likes, int views, DreamStatus dreamStatus, List<String> hashtags) {
         this.id = id;
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = likes;
         this.views = views;
         this.dreamStatus = dreamStatus;
+        this.hashtags = hashtags;
     }
 
     public Long getId() {
@@ -69,5 +69,13 @@ public class DreamDto {
 
     public void setDreamStatus(DreamStatus dreamStatus) {
         this.dreamStatus = dreamStatus;
+    }
+
+    public List<String> getHashtags() {
+        return hashtags;
+    }
+
+    public void setHashtags(List<String> hashtags) {
+        this.hashtags = hashtags;
     }
 }

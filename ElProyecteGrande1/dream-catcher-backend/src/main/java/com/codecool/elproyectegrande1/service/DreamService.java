@@ -10,6 +10,8 @@ import com.codecool.elproyectegrande1.repository.DreamerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +20,7 @@ public class DreamService {
     private final DreamRepository dreamRepository;
     private final DreamMapper dreamMapper;
     private final DreamerRepository dreamerRepository;
+    private final List<Dream> dreams = new ArrayList<>();
 
 
     @Autowired
@@ -30,6 +33,7 @@ public class DreamService {
     public DreamDto addDream(NewDreamDto newDream) {
         Dream toBeSaved = dreamMapper.mapNewDreamDtoToEntity(newDream);
         Dream savedDream = dreamRepository.save(toBeSaved);
+        dreams.add(savedDream);
         return dreamMapper.mapEntityToDreamDto(savedDream);
     }
 
@@ -72,4 +76,22 @@ public class DreamService {
         dream.setDreamStatus(DreamStatus.valueOf(status.toUpperCase()));
         dreamRepository.save(dream);
     }
+
+//    public List<DreamDto> searchDreamsByHashtag(List<String> hashtag) {
+//        List<DreamDto> dreams = new ArrayList<>();
+//        Dream dream = dreamRepository.findAllByHashtags(hashtag).orels;
+//        DreamDto dreamDto = dreamMapper.mapEntityToDreamDto(dream);
+//        dreams.add(dreamDto);
+//        return dreams;
+//    }
+
+//    public List<DreamDto> searchDreamsByHashtag(String hashtag) {
+//        List<DreamDto> dreamsByHashtag = new ArrayList<>();
+//        for (Dream dream : dreams) {
+//            if (dream.getHashtags().contains(hashtag)) {
+//                dreamsByHashtag.add(dreamMapper.mapEntityToDreamDto(dream));
+//            }
+//        }
+//        return dreamsByHashtag;
+//    }
 }

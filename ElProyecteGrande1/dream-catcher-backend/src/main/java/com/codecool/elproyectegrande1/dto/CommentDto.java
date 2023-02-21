@@ -1,6 +1,6 @@
 package com.codecool.elproyectegrande1.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 public class CommentDto {
@@ -8,13 +8,13 @@ public class CommentDto {
     private Long id;
     private String comment;
 
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
-    private Date updatedDate;
+    private LocalDateTime updatedDate;
 
     private int likes = 0;
 
-    public CommentDto(Long id, String comment, Date createdDate, Date updatedDate, int likes) {
+    public CommentDto(Long id, String comment, LocalDateTime createdDate, LocalDateTime updatedDate, int likes) {
         this.id = id;
         this.comment = comment;
         this.createdDate = createdDate;
@@ -34,11 +34,11 @@ public class CommentDto {
         return comment;
     }
 
-    public Date getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public Date getUpdatedDate() {
+    public LocalDateTime getUpdatedDate() {
         return updatedDate;
     }
 
@@ -54,11 +54,11 @@ public class CommentDto {
         this.comment = comment;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public void setUpdatedDate(Date updatedDate) {
+    public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }
 }
