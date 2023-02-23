@@ -1,8 +1,12 @@
 package com.codecool.elproyectegrande1.dto;
 
+import com.codecool.elproyectegrande1.util.PasswordMatches;
+import com.codecool.elproyectegrande1.util.ValidEmail;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@PasswordMatches
 public class UserDto {
     @NotNull
     @NotEmpty
@@ -17,6 +21,7 @@ public class UserDto {
     private String password;
     private String matchingPassword;
 
+    @ValidEmail
     @NotNull
     @NotEmpty
     private String email;

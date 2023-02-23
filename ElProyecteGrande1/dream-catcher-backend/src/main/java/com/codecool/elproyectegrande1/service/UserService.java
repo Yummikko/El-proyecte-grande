@@ -2,21 +2,46 @@ package com.codecool.elproyectegrande1.service;
 
 import com.codecool.elproyectegrande1.dto.SignInDto;
 import com.codecool.elproyectegrande1.dto.SignInMentorDto;
+import com.codecool.elproyectegrande1.dto.UserDto;
+import com.codecool.elproyectegrande1.entity.Role;
 import com.codecool.elproyectegrande1.entity.User;
 import com.codecool.elproyectegrande1.exceptions.AuthenticationFailException;
+import com.codecool.elproyectegrande1.exceptions.UserAlreadyExistException;
 import com.codecool.elproyectegrande1.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserService {
 
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserRepository userRepository;
+
+    public User registerNewUserAccount(UserDto userDto) throws UserAlreadyExistException {
+        if (emailExists(userDto.getEmail())) {
+            throw new UserAlreadyExistException("There is an account with that email address: "
+                    + userDto.getEmail());
+        }
+
+        User user = new User();
+        user.setName(userDto.getFirstName());
+        user.setPassword(userDto.getPassword());
+        user.setEmail(userDto.getEmail());
+        user.setRole(Role.DREAMER);
+
+        return userRepository.save(user);
+    }
+
+    private boolean emailExists(String email) {
+        return userRepository.findByEmail(email) != null;
+    }
 
     public SignInDto signIn(SignInDto signInDto) {
         User user = userRepository.findByEmail(signInDto.getEmail());
