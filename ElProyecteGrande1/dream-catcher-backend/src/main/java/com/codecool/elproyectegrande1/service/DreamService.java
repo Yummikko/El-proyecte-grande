@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DreamService {
@@ -77,21 +78,13 @@ public class DreamService {
         dreamRepository.save(dream);
     }
 
-//    public List<DreamDto> searchDreamsByHashtag(List<String> hashtag) {
-//        List<DreamDto> dreams = new ArrayList<>();
-//        Dream dream = dreamRepository.findAllByHashtags(hashtag).orels;
-//        DreamDto dreamDto = dreamMapper.mapEntityToDreamDto(dream);
-//        dreams.add(dreamDto);
-//        return dreams;
-//    }
-
-//    public List<DreamDto> searchDreamsByHashtag(String hashtag) {
-//        List<DreamDto> dreamsByHashtag = new ArrayList<>();
-//        for (Dream dream : dreams) {
-//            if (dream.getHashtags().contains(hashtag)) {
-//                dreamsByHashtag.add(dreamMapper.mapEntityToDreamDto(dream));
-//            }
-//        }
-//        return dreamsByHashtag;
-//    }
+    public List<DreamDto> searchDreamsByHashtag(String hashtag) {
+        List<Dream> dreams = dreamRepository.findByHashtagsContaining(hashtag);
+        List<DreamDto> dreamDtos = new ArrayList<>();
+        for (Dream dream : dreams) {
+            DreamDto dreamDto = dreamMapper.mapEntityToDreamDto(dream);
+            dreamDtos.add(dreamDto);
+        }
+        return dreamDtos;
+    }
 }

@@ -3,9 +3,14 @@ package com.codecool.elproyectegrande1.controller;
 import com.codecool.elproyectegrande1.dto.DreamDto;
 import com.codecool.elproyectegrande1.dto.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
+import com.codecool.elproyectegrande1.mapper.DreamMapper;
+import com.codecool.elproyectegrande1.repository.DreamRepository;
 import com.codecool.elproyectegrande1.service.DreamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/dreams")
@@ -36,10 +41,11 @@ public class DreamController {
 
     @GetMapping("/most-liked")
     public Dream getDreamWithMostLikes() {
+        System.out.println("DUPASDASDASDASD");
         return dreamService.getDreamWithMostLikes();
     }
 
-    @GetMapping("/most-viewd")
+    @GetMapping("/most-viewed")
     public Dream getDreamWithMostViews() {
         return dreamService.getDreamWithMostViews();
     }
@@ -55,5 +61,10 @@ public class DreamController {
     @PutMapping("{id}/update-dream/{title}/{description}/{status}")
     public void updateStatus(@PathVariable Long id, @PathVariable String title, @PathVariable String description, @PathVariable String status) {
         dreamService.updateDream(id, title, description, status);
+    }
+
+    @GetMapping("/search/{hashtag}")
+    public List<DreamDto> searchDreamsByHashtag(@PathVariable String hashtag) {
+        return dreamService.searchDreamsByHashtag(hashtag);
     }
 }
