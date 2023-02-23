@@ -12,8 +12,8 @@ public class CommentMapper {
         return new CommentDto(
                 entity.getId(),
                 entity.getComment(),
-                entity.getCreatedDate(),
-                entity.getUpdatedDate(),
+                entity.getTimeCreated(),
+                entity.getTimeUpdated(),
                 entity.getLikes()
         );
     }

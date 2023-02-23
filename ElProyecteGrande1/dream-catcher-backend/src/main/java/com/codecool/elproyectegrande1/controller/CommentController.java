@@ -7,7 +7,7 @@ import com.codecool.elproyectegrande1.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/comments")
@@ -31,7 +31,7 @@ public class CommentController {
     }
 
     @PutMapping("{id}/update-comment/{comment}/{updatedDate}")
-    public void updateComment(@PathVariable Long id, @PathVariable String comment, @PathVariable Date updatedDate) {
+    public void updateComment(@PathVariable Long id, @PathVariable String comment, @PathVariable LocalDateTime updatedDate) {
         commentService.updateComment(id, comment, updatedDate);
     }
 }

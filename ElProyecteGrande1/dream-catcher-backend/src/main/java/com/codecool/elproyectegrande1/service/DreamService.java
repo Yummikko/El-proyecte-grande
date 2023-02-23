@@ -10,7 +10,10 @@ import com.codecool.elproyectegrande1.repository.DreamerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DreamService {
@@ -18,6 +21,7 @@ public class DreamService {
     private final DreamRepository dreamRepository;
     private final DreamMapper dreamMapper;
     private final DreamerRepository dreamerRepository;
+    private final List<Dream> dreams = new ArrayList<>();
 
 
     @Autowired
@@ -30,6 +34,7 @@ public class DreamService {
     public DreamDto addDream(NewDreamDto newDream) {
         Dream toBeSaved = dreamMapper.mapNewDreamDtoToEntity(newDream);
         Dream savedDream = dreamRepository.save(toBeSaved);
+        dreams.add(savedDream);
         return dreamMapper.mapEntityToDreamDto(savedDream);
     }
 
@@ -71,5 +76,15 @@ public class DreamService {
         dream.setDreamDescription(description);
         dream.setDreamStatus(DreamStatus.valueOf(status.toUpperCase()));
         dreamRepository.save(dream);
+    }
+
+    public List<DreamDto> searchDreamsByHashtag(String hashtag) {
+        List<Dream> dreams = dreamRepository.findByHashtagsContaining(hashtag);
+        List<DreamDto> dreamDtos = new ArrayList<>();
+        for (Dream dream : dreams) {
+            DreamDto dreamDto = dreamMapper.mapEntityToDreamDto(dream);
+            dreamDtos.add(dreamDto);
+        }
+        return dreamDtos;
     }
 }

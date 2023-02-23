@@ -8,7 +8,7 @@ import com.codecool.elproyectegrande1.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Service
 public class CommentService {
@@ -36,10 +36,10 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    public void updateComment(Long id, String description, Date updatedDate) {
+    public void updateComment(Long id, String description, LocalDateTime updatedDate) {
         Comment comment = commentRepository.findById(id).orElseThrow();
         comment.setComment(description);
-        comment.setUpdatedDate(updatedDate);
+        comment.setTimeUpdated(updatedDate);
         commentRepository.save(comment);
     }
 }
