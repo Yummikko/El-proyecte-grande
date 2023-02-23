@@ -1,13 +1,13 @@
 package com.codecool.elproyectegrande1.controller;
 
 import com.codecool.elproyectegrande1.dto.SignUpDto;
+import com.codecool.elproyectegrande1.dto.UserDto;
 import com.codecool.elproyectegrande1.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 @RestController
 @RequestMapping("/api/register")
@@ -15,6 +15,13 @@ public class RegisterController {
 
     @Autowired
     private RegistrationService registrationService;
+
+    @GetMapping("/user")
+    public String showRegistrationForm(WebRequest request, Model model) {
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
+        return "registration";
+    }
 
     @PostMapping("/dreamer")
     public ResponseEntity<?> register(@RequestBody SignUpDto signUpDto) {
