@@ -3,7 +3,6 @@ package com.codecool.elproyectegrande1.service;
 import com.codecool.elproyectegrande1.dto.SignInDto;
 import com.codecool.elproyectegrande1.dto.SignInMentorDto;
 import com.codecool.elproyectegrande1.dto.UserDto;
-import com.codecool.elproyectegrande1.entity.Role;
 import com.codecool.elproyectegrande1.entity.User;
 import com.codecool.elproyectegrande1.exceptions.AuthenticationFailException;
 import com.codecool.elproyectegrande1.exceptions.UserAlreadyExistException;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 
 @Service
 @Transactional
@@ -31,10 +31,10 @@ public class UserService {
         }
 
         User user = new User();
-        user.setName(userDto.getFirstName());
+        user.setFirstName(userDto.getFirstName());
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
-        user.setRole(Role.DREAMER);
+        user.setRoles(Collections.emptyList());
 
         return userRepository.save(user);
     }
