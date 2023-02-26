@@ -13,7 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -34,7 +35,10 @@ public class UserService {
         user.setFirstName(userDto.getFirstName());
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
-        user.setRoles(Collections.emptyList());
+        List roles = new ArrayList<>();
+        roles.add("mentor");
+        roles.add("dreamer");
+        user.setRoles(roles);
 
         return userRepository.save(user);
     }
