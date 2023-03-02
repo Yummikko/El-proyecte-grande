@@ -3,14 +3,11 @@ package com.codecool.elproyectegrande1.controller;
 import com.codecool.elproyectegrande1.dto.DreamDto;
 import com.codecool.elproyectegrande1.dto.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
-import com.codecool.elproyectegrande1.mapper.DreamMapper;
-import com.codecool.elproyectegrande1.repository.DreamRepository;
 import com.codecool.elproyectegrande1.service.DreamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/dreams")
@@ -41,7 +38,6 @@ public class DreamController {
 
     @GetMapping("/most-liked")
     public Dream getDreamWithMostLikes() {
-        System.out.println("DUPASDASDASDASD");
         return dreamService.getDreamWithMostLikes();
     }
 
