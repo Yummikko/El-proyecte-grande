@@ -2,7 +2,6 @@ package com.codecool.elproyectegrande1.dto;
 
 import com.codecool.elproyectegrande1.util.PasswordMatches;
 import com.codecool.elproyectegrande1.util.ValidEmail;
-import com.codecool.elproyectegrande1.util.ValidPassword;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -17,7 +16,6 @@ public class UserDto {
     @Size(min = 1, message = "{Size.userDto.lastName}")
     private String lastName;
 
-    @ValidPassword
     private String password;
 
     @NotNull
