@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "dreamers")
@@ -31,6 +32,9 @@ public class Dreamer {
     @Column(name = "followers", columnDefinition = "INT DEFAULT 0")
     private int followers;
 
+    @Column(name = "funds", columnDefinition = "INT DEFAULT 0")
+    private BigDecimal funds;
+
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
 
@@ -47,6 +51,7 @@ public class Dreamer {
         this.email = email;
         this.password = password;
         this.followers = followers;
+        this.funds = new BigDecimal(0);
     }
 
     public Long getId() {
@@ -87,5 +92,13 @@ public class Dreamer {
 
     public void setFollowers(int followers) {
         this.followers = followers;
+    }
+
+    public BigDecimal getFunds() {
+        return funds;
+    }
+
+    public void setFunds(BigDecimal funds) {
+        this.funds = funds;
     }
 }

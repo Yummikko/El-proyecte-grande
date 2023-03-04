@@ -1,11 +1,15 @@
 package com.codecool.elproyectegrande1.dto;
 
+import java.math.BigDecimal;
+
 public class DreamerDto {
     private Long id;
     private String nickname;
     private String email;
     private String password;
     private int followers = 0;
+
+    private BigDecimal funds;
 
     public DreamerDto() {
     }
@@ -16,6 +20,7 @@ public class DreamerDto {
         this.email = email;
         this.password = password;
         this.followers = followers;
+        this.funds = new BigDecimal(0);
     }
 
     public Long getId() {
@@ -52,5 +57,13 @@ public class DreamerDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public BigDecimal getFunds() {
+        return funds;
+    }
+
+    public void setFunds(BigDecimal funds) {
+        this.funds = funds;
     }
 }
