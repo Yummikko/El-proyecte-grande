@@ -35,8 +35,7 @@ public class Dreamer {
     @Column(name = "funds", columnDefinition = "INT DEFAULT 0")
     private BigDecimal funds;
 
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
+    private ERole role;
 
     public Dreamer() {
     }
@@ -52,6 +51,7 @@ public class Dreamer {
         this.password = password;
         this.followers = followers;
         this.funds = new BigDecimal(0);
+        this.role = ERole.ROLE_DREAMER;
     }
 
     public Long getId() {
@@ -100,5 +100,13 @@ public class Dreamer {
 
     public void setFunds(BigDecimal funds) {
         this.funds = funds;
+    }
+
+    public ERole getRole() {
+        return role;
+    }
+
+    public void setRole(ERole role) {
+        this.role = role;
     }
 }

@@ -7,6 +7,8 @@ import com.codecool.elproyectegrande1.repository.DreamerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class DreamerService {
 
@@ -40,4 +42,9 @@ public class DreamerService {
         dreamerRepository.save(dreamer);
     }
 
+    public void donateDreamer(Long dreamerId, BigDecimal amount) {
+        Dreamer dreamer = dreamerRepository.findById(dreamerId).orElseThrow();
+        dreamer.setFunds(amount);
+        dreamerRepository.save(dreamer);
+    }
 }

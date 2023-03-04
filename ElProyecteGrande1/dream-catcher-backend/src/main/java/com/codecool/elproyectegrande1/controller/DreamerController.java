@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 
 @RestController
 @RequestMapping("/api/v1/dreamers")
@@ -47,5 +49,11 @@ public class DreamerController {
     @GetMapping("/most-followed")
     public Dreamer getMostPopularDreamer() {
         return dreamerService.getDreamerWithMostFollowers();
+    }
+
+    @PostMapping("/donate/{id}/{amount}")
+    public ResponseEntity<String> donateDreamer(@PathVariable Long id, @PathVariable BigDecimal amount) {
+        dreamerService.donateDreamer(id, amount);
+        return new ResponseEntity<>("You have donated to this dreamer", HttpStatus.OK);
     }
 }

@@ -29,6 +29,8 @@ public class Mentor {
     @Column(name = "followers", columnDefinition = "INT DEFAULT 0")
     private int followers;
 
+    private ERole role;
+
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
 
@@ -45,6 +47,7 @@ public class Mentor {
         this.email = email;
         this.password = password;
         this.followers = followers;
+        this.role = ERole.ROLE_MENTOR;
     }
 
     public Long getId() {
@@ -85,5 +88,13 @@ public class Mentor {
 
     public void setFollowers(int followers) {
         this.followers = followers;
+    }
+
+    public ERole getRole() {
+        return role;
+    }
+
+    public void setRole(ERole role) {
+        this.role = role;
     }
 }
