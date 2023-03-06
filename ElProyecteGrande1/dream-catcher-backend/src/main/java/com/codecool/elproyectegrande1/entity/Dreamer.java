@@ -35,6 +35,11 @@ public class Dreamer {
     @Column(name = "funds", columnDefinition = "INT DEFAULT 0")
     private BigDecimal funds;
 
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private ERole role;
 
     public Dreamer() {

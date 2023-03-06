@@ -51,7 +51,7 @@ public class DreamerController {
         return dreamerService.getDreamerWithMostFollowers();
     }
 
-    @PostMapping("/donate/{id}/{amount}")
+    @PutMapping("/donate/{id}/{amount}")
     public ResponseEntity<String> donateDreamer(@PathVariable Long id, @PathVariable BigDecimal amount) {
         dreamerService.donateDreamer(id, amount);
         return new ResponseEntity<>("You have donated to this dreamer", HttpStatus.OK);

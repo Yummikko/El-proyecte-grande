@@ -31,6 +31,11 @@ public class Mentor {
 
     private ERole role;
 
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
+
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
 
