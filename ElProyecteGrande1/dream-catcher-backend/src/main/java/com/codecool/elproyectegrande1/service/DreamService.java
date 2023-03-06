@@ -8,12 +8,12 @@ import com.codecool.elproyectegrande1.mapper.DreamMapper;
 import com.codecool.elproyectegrande1.repository.DreamRepository;
 import com.codecool.elproyectegrande1.repository.DreamerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class DreamService {
@@ -54,7 +54,8 @@ public class DreamService {
     }
 
     public DreamDto getDreamById(Long id) {
-        Dream dream = dreamRepository.findById(id).orElseThrow();
+        Dream dream = dreamRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dream not found"));
         return dreamMapper.mapEntityToDreamDto(dream);
     }
 
@@ -87,4 +88,9 @@ public class DreamService {
         }
         return dreamDtos;
     }
+
+    public void deleteDreamById(Long id) {
+        dreamRepository.deleteById(id);
+    }
+
 }

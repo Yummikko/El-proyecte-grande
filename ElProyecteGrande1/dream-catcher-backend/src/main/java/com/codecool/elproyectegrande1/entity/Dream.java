@@ -30,7 +30,6 @@ public class Dream {
     private DreamStatus dreamStatus;
 
     @ElementCollection
-//    @CollectionTable(name = "dream_hashtags", joinColumns = @JoinColumn(name = "dream_id"))
     private List<String> hashtags;
 
     public Dream() {

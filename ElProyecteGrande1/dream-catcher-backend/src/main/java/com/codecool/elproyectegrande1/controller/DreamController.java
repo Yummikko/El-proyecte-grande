@@ -3,8 +3,10 @@ package com.codecool.elproyectegrande1.controller;
 import com.codecool.elproyectegrande1.dto.DreamDto;
 import com.codecool.elproyectegrande1.dto.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
+import com.codecool.elproyectegrande1.payload.response.MessageResponse;
 import com.codecool.elproyectegrande1.service.DreamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,5 +64,11 @@ public class DreamController {
     @GetMapping("/search/{hashtag}")
     public List<DreamDto> searchDreamsByHashtag(@PathVariable String hashtag) {
         return dreamService.searchDreamsByHashtag(hashtag);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<MessageResponse> deleteDreamById(@PathVariable("id") Long id) {
+        dreamService.deleteDreamById(id);
+        return ResponseEntity.ok().body(new MessageResponse("Dream deleted successfully!"));
     }
 }
