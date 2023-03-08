@@ -8,7 +8,6 @@ public class DreamerDto {
     private Long id;
     private String nickname;
     private String email;
-    private String password;
     private int followers = 0;
 
     private BigDecimal funds;
@@ -18,11 +17,10 @@ public class DreamerDto {
     public DreamerDto() {
     }
 
-    public DreamerDto(Long id, String nickname, String email, String password, int followers, User user) {
+    public DreamerDto(Long id, String nickname, String email, int followers, User user) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
-        this.password = password;
         this.followers = followers;
         this.funds = new BigDecimal(0);
         this.user = user;
@@ -38,10 +36,6 @@ public class DreamerDto {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public int getFollowers() {
@@ -60,9 +54,6 @@ public class DreamerDto {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public BigDecimal getFunds() {
         return funds;

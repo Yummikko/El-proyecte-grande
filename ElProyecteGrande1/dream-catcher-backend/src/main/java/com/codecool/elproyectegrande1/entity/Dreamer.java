@@ -1,7 +1,5 @@
 package com.codecool.elproyectegrande1.entity;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -18,11 +16,6 @@ public class Dreamer {
     @NotNull(message = "First Name cannot be empty")
     @Column(name = "nickname")
     private String nickname;
-
-    @NotNull(message = "Password cannot be empty")
-    @Length(min = 7, message = "Password should be at least 7 characters long")
-    @Column(name = "password")
-    private String password;
 
     @NotNull(message = "Email cannot be empty")
     @Email(message = "Please enter a valid email address")
@@ -42,15 +35,10 @@ public class Dreamer {
     public Dreamer() {
     }
 
-    public Dreamer(String password) {
-        this.password = password;
-    }
-
-    public Dreamer(Long id, String nickname, String email, String password, int followers, User user) {
+    public Dreamer(Long id, String nickname, String email, int followers, User user) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
-        this.password = password;
         this.followers = followers;
         this.funds = new BigDecimal(0);
         this.user = user;
@@ -78,14 +66,6 @@ public class Dreamer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public int getFollowers() {

@@ -10,7 +10,6 @@ public class MentorMapper {
             entity.getId(),
             entity.getNickname(),
             entity.getEmail(),
-            entity.getPassword(),
             entity.getFollowers()
         );
     }

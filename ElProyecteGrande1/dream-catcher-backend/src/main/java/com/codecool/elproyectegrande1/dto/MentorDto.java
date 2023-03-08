@@ -4,17 +4,15 @@ public class MentorDto {
     private Long id;
     private String nickname;
     private String email;
-    private String password;
     private int followers = 0;
 
     public MentorDto() {
     }
 
-    public MentorDto(Long id, String nickname, String email, String password, int followers) {
+    public MentorDto(Long id, String nickname, String email, int followers) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
-        this.password = password;
         this.followers = followers;
     }
 
@@ -28,10 +26,6 @@ public class MentorDto {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public int getFollowers() {
@@ -50,7 +44,4 @@ public class MentorDto {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

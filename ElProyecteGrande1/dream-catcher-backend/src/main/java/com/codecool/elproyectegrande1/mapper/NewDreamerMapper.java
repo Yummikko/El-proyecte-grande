@@ -12,7 +12,6 @@ public class NewDreamerMapper {
                 entity.getId(),
                 entity.getNickname(),
                 entity.getEmail(),
-                entity.getPassword(),
                 entity.getFollowers(),
                 entity.getUser()
         );
@@ -23,7 +22,6 @@ public class NewDreamerMapper {
                 dto.getId(),
                 dto.getNickname(),
                 dto.getEmail(),
-                dto.getPassword(),
                 0,
                 dto.getUser()
         );
