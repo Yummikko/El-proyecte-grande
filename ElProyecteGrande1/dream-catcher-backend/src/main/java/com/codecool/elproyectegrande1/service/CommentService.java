@@ -42,4 +42,9 @@ public class CommentService {
         comment.setTimeUpdated(updatedDate);
         commentRepository.save(comment);
     }
+
+    public void deleteComment(Long commentId) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow();
+        commentRepository.delete(comment);
+    }
 }
