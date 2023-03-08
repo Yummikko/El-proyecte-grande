@@ -13,7 +13,8 @@ public class NewDreamerMapper {
                 entity.getNickname(),
                 entity.getEmail(),
                 entity.getPassword(),
-                entity.getFollowers()
+                entity.getFollowers(),
+                entity.getUser()
         );
     }
 
@@ -23,7 +24,8 @@ public class NewDreamerMapper {
                 dto.getNickname(),
                 dto.getEmail(),
                 dto.getPassword(),
-                0
+                0,
+                dto.getUser()
         );
     }
 }

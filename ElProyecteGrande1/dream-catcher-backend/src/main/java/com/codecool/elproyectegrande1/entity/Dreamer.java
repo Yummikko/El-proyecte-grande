@@ -35,12 +35,9 @@ public class Dreamer {
     @Column(name = "funds", columnDefinition = "INT DEFAULT 0")
     private BigDecimal funds;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    private ERole role;
 
     public Dreamer() {
     }
@@ -49,14 +46,14 @@ public class Dreamer {
         this.password = password;
     }
 
-    public Dreamer(Long id, String nickname, String email, String password, int followers) {
+    public Dreamer(Long id, String nickname, String email, String password, int followers, User user) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
         this.password = password;
         this.followers = followers;
         this.funds = new BigDecimal(0);
-        this.role = ERole.ROLE_DREAMER;
+        this.user = user;
     }
 
     public Long getId() {
@@ -107,11 +104,11 @@ public class Dreamer {
         this.funds = funds;
     }
 
-    public ERole getRole() {
-        return role;
+    public User getUser() {
+        return user;
     }
 
-    public void setRole(ERole role) {
-        this.role = role;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

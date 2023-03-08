@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -103,15 +104,15 @@ public class AuthController {
 
                         break;
                     case "mentor":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MENTOR)
+                        Role mentorRole = roleRepository.findByName(ERole.ROLE_MENTOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
+                        roles.add(mentorRole);
 
                         break;
                     default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_DREAMER)
+                        Role dreamerRole = roleRepository.findByName(ERole.ROLE_DREAMER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
+                        roles.add(dreamerRole);
                 }
             });
         }
@@ -123,6 +124,7 @@ public class AuthController {
     }
 
     @PostMapping("/signout")
+    @RolesAllowed({"ROLE_DREAMER", "ROLE_MENTOR", "ROLE_ADMIN"})
     public ResponseEntity<?> logoutUser() {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())

@@ -29,11 +29,8 @@ public class Mentor {
     @Column(name = "followers", columnDefinition = "INT DEFAULT 0")
     private int followers;
 
-    private ERole role;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
 //    @Enumerated(EnumType.STRING)
@@ -52,7 +49,6 @@ public class Mentor {
         this.email = email;
         this.password = password;
         this.followers = followers;
-        this.role = ERole.ROLE_MENTOR;
     }
 
     public Long getId() {
@@ -95,11 +91,11 @@ public class Mentor {
         this.followers = followers;
     }
 
-    public ERole getRole() {
-        return role;
+    public User getUser() {
+        return user;
     }
 
-    public void setRole(ERole role) {
-        this.role = role;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
