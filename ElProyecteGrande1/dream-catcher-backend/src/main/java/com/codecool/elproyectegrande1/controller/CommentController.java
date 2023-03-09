@@ -5,6 +5,8 @@ import com.codecool.elproyectegrande1.dto.CommentDto;
 import com.codecool.elproyectegrande1.dto.NewCommentDto;
 import com.codecool.elproyectegrande1.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -20,10 +22,6 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping
-    public CommentDto addComment(@RequestBody NewCommentDto newCommentDto) {
-        return commentService.addComment(newCommentDto);
-    }
 
     @PutMapping("/{id}/like")
     public void likeComment(@PathVariable Long id) {

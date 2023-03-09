@@ -1,12 +1,17 @@
 package com.codecool.elproyectegrande1.controller;
 
+import com.codecool.elproyectegrande1.dto.CommentDto;
 import com.codecool.elproyectegrande1.dto.DreamDto;
+import com.codecool.elproyectegrande1.dto.NewCommentDto;
 import com.codecool.elproyectegrande1.dto.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.payload.response.MessageResponse;
+import com.codecool.elproyectegrande1.service.CommentService;
 import com.codecool.elproyectegrande1.service.DreamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +21,12 @@ import java.util.List;
 public class DreamController {
 
     private final DreamService dreamService;
+    private final CommentService commentService;
 
     @Autowired
-    public DreamController(DreamService dreamService) {
+    public DreamController(DreamService dreamService, CommentService commentService) {
         this.dreamService = dreamService;
+        this.commentService = commentService;
     }
 
     @PostMapping
@@ -70,5 +77,12 @@ public class DreamController {
     public ResponseEntity<MessageResponse> deleteDreamById(@PathVariable("id") Long id) {
         dreamService.deleteDreamById(id);
         return ResponseEntity.ok().body(new MessageResponse("Dream deleted successfully!"));
+    }
+
+    @PostMapping("/{id}/comment")
+    public CommentDto addComment(@RequestBody NewCommentDto newCommentDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        return commentService.addComment(newCommentDto);
     }
 }
