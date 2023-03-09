@@ -1,6 +1,7 @@
 package com.codecool.elproyectegrande1.controller;
 
 import com.codecool.elproyectegrande1.dto.DreamerDto;
+import com.codecool.elproyectegrande1.dto.NewDreamerDto;
 import com.codecool.elproyectegrande1.entity.Dreamer;
 import com.codecool.elproyectegrande1.service.DreamerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class DreamerController {
         this.dreamerService = dreamerService;
     }
 
+
+    @PostMapping ("/create")
+    public DreamerDto createDreamer(@RequestBody NewDreamerDto newDreamerDto) {
+        return dreamerService.createDreamer(newDreamerDto);
+    }
 
     @GetMapping("/{id}")
     public DreamerDto getDreamerById(@PathVariable("id") Long id) {
