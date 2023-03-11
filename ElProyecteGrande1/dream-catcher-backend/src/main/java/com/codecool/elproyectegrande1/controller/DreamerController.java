@@ -9,10 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.math.BigDecimal;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/v1/dreamers")
 public class DreamerController {
@@ -26,6 +27,7 @@ public class DreamerController {
     }
 
 
+    @RolesAllowed({ "ROLE_DREAMER", "ROLE_MENTOR", "ROLE_ADMIN" })
     @PostMapping ("/create")
     public DreamerDto createDreamer(@RequestBody NewDreamerDto newDreamerDto) {
         return dreamerService.createDreamer(newDreamerDto);

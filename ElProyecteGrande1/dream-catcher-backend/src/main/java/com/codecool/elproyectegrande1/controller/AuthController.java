@@ -7,13 +7,11 @@ import com.codecool.elproyectegrande1.entity.UserDetailsImpl;
 import com.codecool.elproyectegrande1.jwt.JwtUtils;
 import com.codecool.elproyectegrande1.payload.request.LoginRequest;
 import com.codecool.elproyectegrande1.payload.request.SignupRequest;
+import com.codecool.elproyectegrande1.payload.response.JwtResponse;
 import com.codecool.elproyectegrande1.payload.response.MessageResponse;
-import com.codecool.elproyectegrande1.payload.response.UserInfoResponse;
 import com.codecool.elproyectegrande1.repository.RoleRepository;
 import com.codecool.elproyectegrande1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -52,34 +50,37 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
-
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(new UserInfoResponse(userDetails.getId(),
-                        userDetails.getUsername(),
-                        userDetails.getEmail(),
-                        roles));
+        return ResponseEntity.ok(new JwtResponse(jwt,
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                roles));
     }
 
+    @RolesAllowed({ "ROLE_DREAMER", "ROLE_MENTOR", "ROLE_ADMIN" })
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email is already in use!"));
         }
 
         // Create new user's account
@@ -104,15 +105,15 @@ public class AuthController {
 
                         break;
                     case "mentor":
-                        Role mentorRole = roleRepository.findByName(ERole.ROLE_MENTOR)
+                        Role modRole = roleRepository.findByName(ERole.ROLE_MENTOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(mentorRole);
+                        roles.add(modRole);
 
                         break;
                     default:
-                        Role dreamerRole = roleRepository.findByName(ERole.ROLE_DREAMER)
+                        Role userRole = roleRepository.findByName(ERole.ROLE_DREAMER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(dreamerRole);
+                        roles.add(userRole);
                 }
             });
         }
@@ -121,13 +122,5 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-    }
-
-    @PostMapping("/signout")
-    @RolesAllowed({"ROLE_DREAMER", "ROLE_MENTOR", "ROLE_ADMIN"})
-    public ResponseEntity<?> logoutUser() {
-        ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(new MessageResponse("You've been signed out!"));
     }
 }
