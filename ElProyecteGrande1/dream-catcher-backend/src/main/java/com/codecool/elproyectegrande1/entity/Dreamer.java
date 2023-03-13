@@ -35,13 +35,9 @@ public class Dreamer {
     public Dreamer() {
     }
 
-    public Dreamer(Long id, String nickname, String email, int followers, User user) {
-        this.id = id;
+    public Dreamer(String nickname, String email) {
         this.nickname = nickname;
         this.email = email;
-        this.followers = followers;
-        this.funds = new BigDecimal(0);
-        this.user = user;
     }
 
     public Long getId() {

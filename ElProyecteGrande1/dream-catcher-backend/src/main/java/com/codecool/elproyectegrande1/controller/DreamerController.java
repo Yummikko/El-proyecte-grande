@@ -1,6 +1,7 @@
 package com.codecool.elproyectegrande1.controller;
 
 import com.codecool.elproyectegrande1.dto.DreamerDto;
+import com.codecool.elproyectegrande1.dto.NewDreamerDto;
 import com.codecool.elproyectegrande1.entity.Dreamer;
 import com.codecool.elproyectegrande1.service.DreamerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 
 
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/v1/dreamers")
 public class DreamerController {
@@ -23,6 +25,10 @@ public class DreamerController {
         this.dreamerService = dreamerService;
     }
 
+    @PostMapping ("/create")
+    public DreamerDto createDreamer(@RequestBody NewDreamerDto newDreamerDto) {
+        return dreamerService.createDreamer(newDreamerDto);
+    }
 
     @GetMapping("/{id}")
     public DreamerDto getDreamerById(@PathVariable("id") Long id) {
