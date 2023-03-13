@@ -21,17 +21,19 @@ public class Comment {
 
     private LocalDateTime timeCreated;
 
-    private LocalDateTime timeUpdated;
+    private LocalDateTime timeUpdated = null;
+
+    private String username;
 
 //    @ManyToOne
 //    private Dreamer dreamer;
 
 
-    public Comment(String commentText, int likes) {
+    public Comment(String commentText, int likes, String username) {
         this.commentText = commentText;
         this.likes = likes;
         this.timeCreated =  LocalDateTime.now();
-        this.timeUpdated =  LocalDateTime.now();
+        this.username = username;
     }
 
 
@@ -91,7 +93,15 @@ public class Comment {
         this.commentText = commentText;
     }
 
-//    public void setDreamer(Dreamer dreamer) {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    //    public void setDreamer(Dreamer dreamer) {
 //        this.dreamer = dreamer;
 //    }
 }

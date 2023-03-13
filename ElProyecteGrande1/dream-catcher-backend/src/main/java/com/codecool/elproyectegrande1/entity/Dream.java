@@ -32,16 +32,20 @@ public class Dream {
     @ElementCollection
     private List<String> hashtags;
 
+    @ElementCollection
+    private List<String> comments;
+
     public Dream() {
     }
 
-    public Dream(String dreamTitle, String dreamDescription, int likes, int views, List<String> hashtags) {
+    public Dream(String dreamTitle, String dreamDescription, int likes, int views, List<String> hashtags, List<String> comments) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = 0;
         this.views = 0;
         this.dreamStatus = DreamStatus.PRESENTING;
         this.hashtags = hashtags;
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -100,4 +104,11 @@ public class Dream {
         this.hashtags = hashtags;
     }
 
+    public List<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
 }

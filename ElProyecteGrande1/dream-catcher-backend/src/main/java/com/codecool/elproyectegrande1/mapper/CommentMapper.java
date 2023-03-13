@@ -14,14 +14,16 @@ public class CommentMapper {
                 entity.getComment(),
                 entity.getTimeCreated(),
                 entity.getTimeUpdated(),
-                entity.getLikes()
+                entity.getLikes(),
+                entity.getUsername()
         );
     }
 
-    public Comment mapNewCommentDtoToEntity(NewCommentDto dto) {
+    public Comment mapNewCommentDtoToEntity(NewCommentDto dto, String username) {
         return new Comment(
                 dto.getComment(),
-                0
+                0,
+                username
         );
     }
 }

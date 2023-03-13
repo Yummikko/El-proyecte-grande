@@ -83,6 +83,6 @@ public class DreamController {
     public CommentDto addComment(@RequestBody NewCommentDto newCommentDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        return commentService.addComment(newCommentDto);
+        return commentService.addComment(newCommentDto, username);
     }
 }

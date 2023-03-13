@@ -10,15 +10,17 @@ public class NewDreamDto {
     private String dreamDescription;
     private DreamStatus dreamStatus;
     private List<String> hashtags;
+    private List<String> comments;
 
     public NewDreamDto() {
     }
 
-    public NewDreamDto(String dreamTitle, String dreamDescription, List<String> hashtags) {
+    public NewDreamDto(String dreamTitle, String dreamDescription, List<String> hashtags, List<String> comments) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.dreamStatus = DreamStatus.PRESENTING;
         this.hashtags = hashtags;
+        this.comments = comments;
     }
 
     public String getDreamTitle() {
@@ -47,6 +49,10 @@ public class NewDreamDto {
 
     public List<String> getHashtags() {
         return hashtags;
+    }
+
+    public List<String> getComments() {
+        return comments;
     }
 }
 

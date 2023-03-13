@@ -24,8 +24,8 @@ public class CommentService {
         this.commentMapper = commentMapper;
     }
 
-    public CommentDto addComment(NewCommentDto newCommentDto) {
-        Comment toBeSaved = commentMapper.mapNewCommentDtoToEntity(newCommentDto);
+    public CommentDto addComment(NewCommentDto newCommentDto, String username) {
+        Comment toBeSaved = commentMapper.mapNewCommentDtoToEntity(newCommentDto, username);
         Comment savedComment = commentRepository.save(toBeSaved);
         return commentMapper.mapEntityToCommentDto(savedComment);
     }

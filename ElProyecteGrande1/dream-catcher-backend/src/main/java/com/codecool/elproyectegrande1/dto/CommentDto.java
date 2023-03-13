@@ -14,12 +14,15 @@ public class CommentDto {
 
     private int likes = 0;
 
-    public CommentDto(Long id, String comment, LocalDateTime createdDate, LocalDateTime updatedDate, int likes) {
+    private String username;
+
+    public CommentDto(Long id, String comment, LocalDateTime createdDate, LocalDateTime updatedDate, int likes, String username) {
         this.id = id;
         this.comment = comment;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
         this.likes = likes;
+        this.username = username;
     }
 
     public Long getId() {
@@ -60,5 +63,13 @@ public class CommentDto {
 
     public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
