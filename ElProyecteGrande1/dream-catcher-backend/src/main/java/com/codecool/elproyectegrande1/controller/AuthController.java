@@ -20,7 +20,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -68,7 +67,6 @@ public class AuthController {
                 roles));
     }
 
-    @RolesAllowed({ "ROLE_DREAMER", "ROLE_MENTOR", "ROLE_ADMIN" })
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
