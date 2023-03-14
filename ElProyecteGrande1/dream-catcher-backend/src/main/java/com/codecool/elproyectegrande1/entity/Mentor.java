@@ -26,9 +26,6 @@ public class Mentor {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
-
     public Mentor() {
     }
 
