@@ -1,10 +1,15 @@
 package com.codecool.elproyectegrande1.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "mentors")
 public class Mentor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +27,9 @@ public class Mentor {
     @Column(name = "followers", columnDefinition = "INT DEFAULT 0")
     private int followers;
 
+    @OneToMany(mappedBy = "mentor", cascade = CascadeType.ALL)
+    private List<Offer> offers = new ArrayList<>();
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
@@ -29,11 +37,13 @@ public class Mentor {
     public Mentor() {
     }
 
-    public Mentor(Long id, String nickname, String email, int followers) {
+    public Mentor(Long id, String nickname, String email, int followers, List<Offer> offers, User user) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
         this.followers = followers;
+        this.offers = offers;
+        this.user = user;
     }
 
     public Long getId() {
@@ -74,5 +84,13 @@ public class Mentor {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 }

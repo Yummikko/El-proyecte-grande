@@ -12,7 +12,9 @@ public class MentorMapper {
             entity.getId(),
             entity.getNickname(),
             entity.getEmail(),
-            entity.getFollowers()
+            entity.getFollowers(),
+            entity.getOffers(),
+            entity.getUser()
         );
     }
 }
