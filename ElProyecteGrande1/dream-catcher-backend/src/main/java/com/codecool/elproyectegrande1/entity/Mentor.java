@@ -34,12 +34,9 @@ public class Mentor {
     public Mentor() {
     }
 
-    public Mentor(Long id, String nickname, String email, int followers, List<Offer> offers, User user) {
-        this.id = id;
+    public Mentor(String nickname, String email, User user) {
         this.nickname = nickname;
         this.email = email;
-        this.followers = followers;
-        this.offers = offers;
         this.user = user;
     }
 

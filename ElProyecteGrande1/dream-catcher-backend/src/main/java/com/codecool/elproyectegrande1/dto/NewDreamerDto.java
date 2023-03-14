@@ -1,5 +1,7 @@
 package com.codecool.elproyectegrande1.dto;
 
+import com.codecool.elproyectegrande1.entity.User;
+
 import java.math.BigDecimal;
 
 public class NewDreamerDto {
@@ -8,10 +10,13 @@ public class NewDreamerDto {
 
     private BigDecimal funds = new BigDecimal(0);
 
+    private User user;
 
-    public NewDreamerDto(String nickname, String email) {
+
+    public NewDreamerDto(String nickname, String email, User user) {
         this.nickname = nickname;
         this.email = email;
+        this.user = user;
     }
 
     public String getNickname() {
@@ -36,5 +41,13 @@ public class NewDreamerDto {
 
     public void setFunds(BigDecimal funds) {
         this.funds = funds;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

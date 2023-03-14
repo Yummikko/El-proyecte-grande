@@ -1,10 +1,6 @@
 package com.codecool.elproyectegrande1.service;
 
-import com.codecool.elproyectegrande1.dto.DreamerDto;
-import com.codecool.elproyectegrande1.dto.MentorDto;
 import com.codecool.elproyectegrande1.dto.OfferDto;
-import com.codecool.elproyectegrande1.dto.UserDto;
-import com.codecool.elproyectegrande1.entity.Dreamer;
 import com.codecool.elproyectegrande1.entity.Mentor;
 import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.entity.User;
@@ -12,12 +8,8 @@ import com.codecool.elproyectegrande1.mapper.MentorMapper;
 import com.codecool.elproyectegrande1.mapper.OfferMapper;
 import com.codecool.elproyectegrande1.repository.MentorRepository;
 import com.codecool.elproyectegrande1.repository.OfferRepository;
-import com.codecool.elproyectegrande1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
-import java.math.BigDecimal;
 
 @Service
 public class MentorService {
@@ -48,6 +40,9 @@ public class MentorService {
         return offerMapper.mapEntityToOfferDto(savedOffer);
     }
 
-
+    public void createMentorFromUser(User user) {
+        Mentor mentor = mentorMapper.mapUserToMentor(user);
+        mentorRepository.save(mentor);
+    }
 
 }

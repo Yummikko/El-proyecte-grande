@@ -11,6 +11,8 @@ import com.codecool.elproyectegrande1.payload.response.JwtResponse;
 import com.codecool.elproyectegrande1.payload.response.MessageResponse;
 import com.codecool.elproyectegrande1.repository.RoleRepository;
 import com.codecool.elproyectegrande1.repository.UserRepository;
+import com.codecool.elproyectegrande1.service.DreamerService;
+import com.codecool.elproyectegrande1.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,6 +47,15 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+
+    private final DreamerService dreamerService;
+    private final MentorService mentorService;
+
+    @Autowired
+    public AuthController(DreamerService dreamerService, MentorService mentorService) {
+        this.dreamerService = dreamerService;
+        this.mentorService = mentorService;
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -87,6 +98,7 @@ public class AuthController {
                 encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
+        System.out.println(signUpRequest.getRole());
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
@@ -96,13 +108,13 @@ public class AuthController {
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "admin":
+                    case "Admin":
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
 
                         break;
-                    case "mentor":
+                    case "Mentor":
                         Role modRole = roleRepository.findByName(ERole.ROLE_MENTOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
@@ -118,6 +130,11 @@ public class AuthController {
 
         user.setRoles(roles);
         userRepository.save(user);
+        if (strRoles.contains("Dreamer"))
+            dreamerService.createDreamerFromUser(user);
+        if (strRoles.contains("Mentor")) {
+            mentorService.createMentorFromUser(user);
+        }
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

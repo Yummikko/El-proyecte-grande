@@ -3,6 +3,7 @@ package com.codecool.elproyectegrande1.service;
 import com.codecool.elproyectegrande1.dto.DreamerDto;
 import com.codecool.elproyectegrande1.dto.NewDreamerDto;
 import com.codecool.elproyectegrande1.entity.Dreamer;
+import com.codecool.elproyectegrande1.entity.User;
 import com.codecool.elproyectegrande1.mapper.NewDreamerMapper;
 import com.codecool.elproyectegrande1.repository.DreamerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,11 @@ public class DreamerService {
     public void donateDreamer(Long dreamerId, BigDecimal amount) {
         Dreamer dreamer = dreamerRepository.findById(dreamerId).orElseThrow();
         dreamer.setFunds(amount);
+        dreamerRepository.save(dreamer);
+    }
+
+    public void createDreamerFromUser(User user) {
+        Dreamer dreamer = dreamerMapper.mapUserToDreamer(user);
         dreamerRepository.save(dreamer);
     }
 }

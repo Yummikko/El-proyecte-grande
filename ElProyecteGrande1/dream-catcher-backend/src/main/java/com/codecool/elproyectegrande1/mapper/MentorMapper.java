@@ -2,6 +2,7 @@ package com.codecool.elproyectegrande1.mapper;
 
 import com.codecool.elproyectegrande1.dto.MentorDto;
 import com.codecool.elproyectegrande1.entity.Mentor;
+import com.codecool.elproyectegrande1.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,6 +16,14 @@ public class MentorMapper {
             entity.getFollowers(),
             entity.getOffers(),
             entity.getUser()
+        );
+    }
+
+    public Mentor mapUserToMentor(User user) {
+        return new Mentor(
+                user.getUsername(),
+                user.getEmail(),
+                user
         );
     }
 }

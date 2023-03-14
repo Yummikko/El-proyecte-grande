@@ -35,9 +35,10 @@ public class Dreamer {
     public Dreamer() {
     }
 
-    public Dreamer(String nickname, String email) {
+    public Dreamer(String nickname, String email, User user) {
         this.nickname = nickname;
         this.email = email;
+        this.user = user;
     }
 
     public Long getId() {
