@@ -53,6 +53,18 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToOne
+    @JoinColumn(name = "inbox_id")
+    private Inbox inbox;
+
+    public Inbox getInbox() {
+        return inbox;
+    }
+
+    public void setInbox(Inbox inbox) {
+        this.inbox = inbox;
+    }
+
     public User() {
     }
 
