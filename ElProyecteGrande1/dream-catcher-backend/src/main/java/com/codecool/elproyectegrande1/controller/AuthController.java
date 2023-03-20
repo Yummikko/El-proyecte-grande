@@ -98,7 +98,7 @@ public class AuthController {
                 encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
-        System.out.println(signUpRequest.getRole());
+        System.out.println(strRoles);
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
@@ -108,13 +108,13 @@ public class AuthController {
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "Admin":
+                    case "admin":
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
 
                         break;
-                    case "Mentor":
+                    case "mentor":
                         Role mentorRole = roleRepository.findByName(ERole.ROLE_MENTOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(mentorRole);
@@ -128,13 +128,19 @@ public class AuthController {
             });
         }
 
+        for (String entry:strRoles) {
+            System.out.println(entry);
+            if (!"dreamer".equals(entry) && !"mentor".equals(entry)) {
+                return ResponseEntity.internalServerError().body(new MessageResponse("There's no such role."));
+            }
+        }
+
         user.setRoles(roles);
         userRepository.save(user);
-        if (strRoles.contains("Dreamer"))
+        if (strRoles.contains("dreamer"))
             dreamerService.createDreamerFromUser(user);
-        if (strRoles.contains("Mentor")) {
+        if (strRoles.contains("mentor"))
             mentorService.createMentorFromUser(user);
-        }
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
