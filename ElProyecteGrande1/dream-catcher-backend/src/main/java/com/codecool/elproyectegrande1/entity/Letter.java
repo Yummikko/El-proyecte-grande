@@ -21,6 +21,8 @@ public class Letter {
     @ManyToOne(fetch = FetchType.LAZY)
     private Inbox inbox;
 
+    private String recipient;
+
     public Letter(Long id, String content, LocalDateTime dateTime) {
         this.id = id;
         this.content = content;

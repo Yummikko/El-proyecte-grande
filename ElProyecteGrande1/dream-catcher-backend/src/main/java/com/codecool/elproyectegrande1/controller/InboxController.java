@@ -1,5 +1,7 @@
 package com.codecool.elproyectegrande1.controller;
 
+import com.codecool.elproyectegrande1.dto.NewCommentDto;
+import com.codecool.elproyectegrande1.dto.NewLetterDto;
 import com.codecool.elproyectegrande1.entity.Inbox;
 import com.codecool.elproyectegrande1.service.InboxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,9 @@ public class InboxController {
         return inboxService.getLetterById(id);
     }
 
-    @PostMapping("")
-    public Inbox addLetter(@RequestBody Inbox inbox) {
-        return inboxService.addLetter(inbox);
+    @PostMapping("/{user_name}/new_letter")
+    public Inbox sendLetter(@PathVariable String user_name, @RequestBody NewLetterDto newLetterDto) {
+        return inboxService.addLetter(user_name, newLetterDto);
     }
 
     @DeleteMapping("/{id}")
