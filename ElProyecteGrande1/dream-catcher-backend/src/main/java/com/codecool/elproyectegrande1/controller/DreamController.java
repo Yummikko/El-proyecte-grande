@@ -30,7 +30,7 @@ public class DreamController {
         this.commentService = commentService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto) {
         return dreamService.addDream(newDreamDto);
     }

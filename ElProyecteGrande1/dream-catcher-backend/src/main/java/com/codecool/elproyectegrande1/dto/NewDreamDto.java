@@ -2,6 +2,7 @@ package com.codecool.elproyectegrande1.dto;
 
 import com.codecool.elproyectegrande1.entity.DreamStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewDreamDto {
@@ -15,12 +16,12 @@ public class NewDreamDto {
     public NewDreamDto() {
     }
 
-    public NewDreamDto(String dreamTitle, String dreamDescription, List<String> hashtags, List<String> comments) {
+    public NewDreamDto(String dreamTitle, String dreamDescription) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.dreamStatus = DreamStatus.PRESENTING;
-        this.hashtags = hashtags;
-        this.comments = comments;
+        this.hashtags = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     public String getDreamTitle() {

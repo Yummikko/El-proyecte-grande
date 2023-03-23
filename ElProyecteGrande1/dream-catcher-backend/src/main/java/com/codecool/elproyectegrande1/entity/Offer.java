@@ -12,6 +12,7 @@ public class Offer {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentor_id")
     private Mentor mentor;
 
     @NotNull
