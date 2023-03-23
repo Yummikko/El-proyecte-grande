@@ -40,6 +40,15 @@ public class DreamController {
         return dreamService.getDreamById(id);
     }
 
+    @GetMapping("/all")
+    public List<DreamDto> getAllDreams() {
+        return dreamService.getAllDreams();
+    }
+
+    @GetMapping("/recents")
+    public List<DreamDto> getSixRecentDreams() {
+        return dreamService.getLastSixDreams();
+    }
 
     @PutMapping("/{id}/like")
     public void likeDream(@PathVariable Long id) {
