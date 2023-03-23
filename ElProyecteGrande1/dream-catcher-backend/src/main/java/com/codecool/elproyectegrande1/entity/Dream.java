@@ -42,7 +42,7 @@ public class Dream {
     public Dream() {
     }
 
-    public Dream(String dreamTitle, String dreamDescription, int likes, int views, List<String> hashtags, List<String> comments, String photo) {
+    public Dream(String dreamTitle, String dreamDescription, int likes, int views, List<String> hashtags, List<String> comments) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = 0;

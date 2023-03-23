@@ -14,12 +14,11 @@ public class DreamDto {
     private DreamStatus dreamStatus;
     private List<String> hashtags;
     private List<String> comments;
-    private String photo;
 
     public DreamDto() {
     }
 
-    public DreamDto(Long id, String dreamTitle, String dreamDescription, int likes, int views, DreamStatus dreamStatus, List<String> hashtags, List<String> comments, String photo) {
+    public DreamDto(Long id, String dreamTitle, String dreamDescription, int likes, int views, DreamStatus dreamStatus, List<String> hashtags, List<String> comments) {
         this.id = id;
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
@@ -90,11 +89,4 @@ public class DreamDto {
         this.comments = comments;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
 }
