@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.service;
 
+import com.codecool.elproyectegrande1.dto.LetterDto;
 import com.codecool.elproyectegrande1.dto.NewLetterDto;;
 import com.codecool.elproyectegrande1.entity.Letter;
 import com.codecool.elproyectegrande1.mapper.LetterMapper;
@@ -29,10 +30,10 @@ public class LetterService {
         return letterRepository.findById(id).orElse(null);
     }
 
-    public NewLetterDto addLetter(String sender, NewLetterDto newLetterDto) {
+    public LetterDto addLetter(String sender, NewLetterDto newLetterDto) {
         Letter toBeSaved = letterMapper.mapNewLetterDtoToEntity(newLetterDto, sender);
         Letter savedLetter = letterRepository.save(toBeSaved);
-        return letterMapper.mapEntityToNewLetterDto(savedLetter);
+        return letterMapper.mapEntityToLetterDto(savedLetter);
     }
 
     public void deleteLetterById(Long id) {

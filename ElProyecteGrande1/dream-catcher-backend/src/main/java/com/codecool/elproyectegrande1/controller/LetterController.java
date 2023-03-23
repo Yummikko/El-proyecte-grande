@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.controller;
 
+import com.codecool.elproyectegrande1.dto.LetterDto;
 import com.codecool.elproyectegrande1.dto.NewLetterDto;
 import com.codecool.elproyectegrande1.entity.Letter;
 import com.codecool.elproyectegrande1.service.LetterService;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inbox")
+@RequestMapping("/api/v1/inbox")
 public class LetterController {
 
     @Autowired
@@ -27,8 +28,8 @@ public class LetterController {
         return letterService.getLetterById(id);
     }
 
-    @PostMapping("/{recipient_name}/new_letter")
-    public NewLetterDto sendLetter(@PathVariable String recipient_name, @RequestBody NewLetterDto newLetterDto) {
+    @PostMapping("/test/new_letter")
+    public LetterDto sendLetter(@RequestBody NewLetterDto newLetterDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String sender = authentication.getName();
         return letterService.addLetter(sender, newLetterDto);

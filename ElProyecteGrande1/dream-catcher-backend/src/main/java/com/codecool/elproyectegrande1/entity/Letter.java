@@ -20,9 +20,6 @@ public class Letter {
 
     private String sender;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Inbox inbox;
-
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    private User user;
 
@@ -59,13 +56,7 @@ public class Letter {
         this.dateTime = dateTime;
     }
 
-    public Inbox getInbox() {
-        return inbox;
-    }
 
-    public void setInbox(Inbox inbox) {
-        this.inbox = inbox;
-    }
 //
 //    public User getUser() {
 //        return user;
