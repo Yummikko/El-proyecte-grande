@@ -12,6 +12,7 @@ public class NewDreamDto {
     private DreamStatus dreamStatus;
     private List<String> hashtags;
     private List<String> comments;
+    private String photos;
 
     public NewDreamDto() {
     }
@@ -54,6 +55,10 @@ public class NewDreamDto {
 
     public List<String> getComments() {
         return comments;
+    }
+
+    public String getPhotos() {
+        return photos;
     }
 }
 

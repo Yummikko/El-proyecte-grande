@@ -35,10 +35,13 @@ public class Dream {
     @ElementCollection
     private List<String> comments;
 
+    @Column(nullable = true, length = 64)
+    private String photos;
+
     public Dream() {
     }
 
-    public Dream(String dreamTitle, String dreamDescription, int likes, int views, List<String> hashtags, List<String> comments) {
+    public Dream(String dreamTitle, String dreamDescription, int likes, int views, List<String> hashtags, List<String> comments, String photos) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = 0;
@@ -46,6 +49,7 @@ public class Dream {
         this.dreamStatus = DreamStatus.PRESENTING;
         this.hashtags = hashtags;
         this.comments = comments;
+        this.photos = photos;
     }
 
     public Long getId() {
@@ -110,5 +114,13 @@ public class Dream {
 
     public void setComments(List<String> comments) {
         this.comments = comments;
+    }
+
+    public String getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String photos) {
+        this.photos = photos;
     }
 }
