@@ -28,7 +28,6 @@ public class DreamDto {
         this.dreamStatus = dreamStatus;
         this.hashtags = hashtags;
         this.comments = comments;
-        this.photo = photo;
     }
 
     public Long getId() {

@@ -6,6 +6,8 @@ import com.codecool.elproyectegrande1.entity.Dreamer;
 import com.codecool.elproyectegrande1.entity.User;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+
 
 @Component
 public class NewDreamerMapper {
@@ -15,7 +17,8 @@ public class NewDreamerMapper {
                 entity.getNickname(),
                 entity.getEmail(),
                 entity.getFollowers(),
-                entity.getUser()
+                entity.getUser(),
+                entity.getLetters()
         );
     }
 
@@ -23,19 +26,21 @@ public class NewDreamerMapper {
         return new Dreamer(
                 dto.getNickname(),
                 dto.getEmail(),
-                dto.getUser()
+                dto.getUser(),
+                dto.getLetters()
         );
     }
 
     public Dreamer mapNewDreamerDtoToEntity(NewDreamerDto dto) {
-        return new Dreamer(dto.getNickname(), dto.getEmail(), dto.getUser());
+        return new Dreamer(dto.getNickname(), dto.getEmail(), dto.getUser(), dto.getLetters());
     }
 
     public Dreamer mapUserToDreamer(User user) {
         return new Dreamer(
                 user.getUsername(),
                 user.getEmail(),
-                user
+                user,
+                new HashSet<>()
         );
     }
 }

@@ -32,7 +32,7 @@ public class Comment {
     public Comment(String commentText, int likes, String username) {
         this.commentText = commentText;
         this.likes = likes;
-        this.timeCreated =  LocalDateTime.now();
+        this.timeCreated = LocalDateTime.now();
         this.username = username;
     }
 

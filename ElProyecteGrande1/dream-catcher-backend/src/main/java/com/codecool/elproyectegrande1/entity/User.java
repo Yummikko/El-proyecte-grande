@@ -53,6 +53,14 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+//    @OneToMany(
+//            mappedBy = "user",
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true
+//    )
+//    private Set<Letter> letters = new HashSet<>();
+
+
     public User() {
     }
 
@@ -126,4 +134,12 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+//    public Set<Letter> getLetters() {
+//        return letters;
+//    }
+//
+//    public void setLetters(Set<Letter> letters) {
+//        this.letters = letters;
+//    }
 }

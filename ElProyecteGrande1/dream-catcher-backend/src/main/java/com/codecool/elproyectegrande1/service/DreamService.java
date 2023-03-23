@@ -8,12 +8,14 @@ import com.codecool.elproyectegrande1.mapper.DreamMapper;
 import com.codecool.elproyectegrande1.repository.DreamRepository;
 import com.codecool.elproyectegrande1.repository.DreamerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DreamService {
@@ -44,6 +46,26 @@ public class DreamService {
         dreamRepository.save(dream);
     }
 
+
+    public List<DreamDto> getAllDreams() {
+        List<Dream> dreams = dreamRepository.findAll();
+        return dreams.stream()
+                .map(dreamMapper::mapEntityToDreamDto)
+                .collect(Collectors.toList());
+    }
+
+
+    public List<DreamDto> getLastSixDreams() {
+        List<Dream> dreams = dreamRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        List<DreamDto> dreamDtos = new ArrayList<>();
+
+        for (int i = 0; i < 6 && i < dreams.size(); i++) {
+            DreamDto dto = dreamMapper.mapEntityToDreamDto(dreams.get(i));
+            dreamDtos.add(dto);
+        }
+
+        return dreamDtos;
+    }
 
     public Dream getDreamWithMostLikes() {
         return dreamRepository.findTopByOrderByLikesDesc();

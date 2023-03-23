@@ -35,8 +35,9 @@ public class Dream {
     @ElementCollection
     private List<String> comments;
 
-    @Column(nullable = true, length = 64)
-    private String photo;
+    @Lob
+    @Column(name = "imagedata", length = 1000)
+    private byte[] imageData;
 
     public Dream() {
     }
@@ -49,7 +50,6 @@ public class Dream {
         this.dreamStatus = DreamStatus.PRESENTING;
         this.hashtags = hashtags;
         this.comments = comments;
-        this.photo = photo;
     }
 
     public Long getId() {
@@ -114,13 +114,5 @@ public class Dream {
 
     public void setComments(List<String> comments) {
         this.comments = comments;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 }
