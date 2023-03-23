@@ -12,6 +12,7 @@ public class NewDreamDto {
     private DreamStatus dreamStatus;
     private List<String> hashtags;
     private List<String> comments;
+    private String photo;
 
     public NewDreamDto() {
     }
@@ -22,6 +23,7 @@ public class NewDreamDto {
         this.dreamStatus = DreamStatus.PRESENTING;
         this.hashtags = new ArrayList<>();
         this.comments = new ArrayList<>();
+        this.photo = "";
     }
 
     public String getDreamTitle() {
@@ -54,6 +56,14 @@ public class NewDreamDto {
 
     public List<String> getComments() {
         return comments;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
 

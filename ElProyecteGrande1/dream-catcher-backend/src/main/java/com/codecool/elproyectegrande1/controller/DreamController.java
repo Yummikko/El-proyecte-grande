@@ -8,13 +8,17 @@ import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.payload.response.MessageResponse;
 import com.codecool.elproyectegrande1.service.CommentService;
 import com.codecool.elproyectegrande1.service.DreamService;
+import com.codecool.elproyectegrande1.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.security.RolesAllowed;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -31,7 +35,12 @@ public class DreamController {
     }
 
     @PostMapping("/create")
-    public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto) {
+    public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        newDreamDto.setPhoto(fileName);
+        String uploadDir = "C:\\Users\\Trung\\IdeaProjects\\el-proyecte-grande-ui\\dream-catcher-ui\\dream-photos\\" + newDreamDto.getDreamTitle();
+
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return dreamService.addDream(newDreamDto);
     }
 

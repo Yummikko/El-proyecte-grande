@@ -16,7 +16,8 @@ public class DreamMapper {
                 entity.getViews(),
                 entity.getDreamStatus(),
                 entity.getHashtags(),
-                entity.getComments()
+                entity.getComments(),
+                entity.getPhoto()
         );
     }
 
@@ -27,6 +28,8 @@ public class DreamMapper {
                 0,
                 0,
                 dto.getHashtags(),
-                dto.getComments());
+                dto.getComments(),
+                dto.getPhoto()
+        );
     }
 }
