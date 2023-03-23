@@ -3,6 +3,7 @@ package com.codecool.elproyectegrande1.dto;
 import com.codecool.elproyectegrande1.entity.User;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 public class NewDreamerDto {
     private String nickname;
@@ -12,11 +13,14 @@ public class NewDreamerDto {
 
     private User user;
 
+    private Set<String> letters;
 
-    public NewDreamerDto(String nickname, String email, User user) {
+
+    public NewDreamerDto(String nickname, String email, User user, Set<String> letters) {
         this.nickname = nickname;
         this.email = email;
         this.user = user;
+        this.letters = letters;
     }
 
     public String getNickname() {
@@ -49,5 +53,13 @@ public class NewDreamerDto {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<String> getLetters() {
+        return letters;
+    }
+
+    public void setLetters(Set<String> letters) {
+        this.letters = letters;
     }
 }

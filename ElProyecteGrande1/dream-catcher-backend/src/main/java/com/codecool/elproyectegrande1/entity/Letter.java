@@ -18,15 +18,18 @@ public class Letter {
 
     private LocalDateTime dateTime;
 
+    private String sender;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Inbox inbox;
 
-    private String recipient;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private User user;
 
-    public Letter(Long id, String content, LocalDateTime dateTime) {
-        this.id = id;
+    public Letter(String content, String sender) {
         this.content = content;
-        this.dateTime = dateTime;
+        this.dateTime = LocalDateTime.now();;
+        this.sender = sender;
     }
 
     public Letter() {
@@ -62,5 +65,21 @@ public class Letter {
 
     public void setInbox(Inbox inbox) {
         this.inbox = inbox;
+    }
+//
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 }

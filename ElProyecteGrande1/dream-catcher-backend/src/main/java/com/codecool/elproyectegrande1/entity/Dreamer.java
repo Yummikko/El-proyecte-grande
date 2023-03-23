@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "dreamers")
@@ -31,14 +32,17 @@ public class Dreamer {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    @ElementCollection
+    private Set<String> letters;
 
     public Dreamer() {
     }
 
-    public Dreamer(String nickname, String email, User user) {
+    public Dreamer(String nickname, String email, User user, Set<String> letters) {
         this.nickname = nickname;
         this.email = email;
         this.user = user;
+        this.letters = letters;
     }
 
     public Long getId() {
@@ -87,5 +91,13 @@ public class Dreamer {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<String> getLetters() {
+        return letters;
+    }
+
+    public void setLetters(Set<String> letters) {
+        this.letters = letters;
     }
 }
