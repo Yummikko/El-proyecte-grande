@@ -37,9 +37,12 @@ public class DreamController {
     }
 
     @PostMapping("/create")
-    public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto, final @RequestParam("image") MultipartFile file) throws IOException {
+    public DreamDto createNewDream(@RequestParam("title") String title, @RequestParam("description") String description, final @RequestParam("image") MultipartFile file) throws IOException {
+        NewDreamDto newDreamDto = new NewDreamDto();
         imageService.uploadImage(file);
         Image imageData = imageService.getImageFromDb(file.getOriginalFilename());
+        newDreamDto.setDreamTitle(title);
+        newDreamDto.setDreamDescription(description);
         newDreamDto.setImage(imageData);
         return dreamService.addDream(newDreamDto);
     }
