@@ -18,13 +18,12 @@ public class NewDreamDto {
     public NewDreamDto() {
     }
 
-    public NewDreamDto(String dreamTitle, String dreamDescription, Image image) {
+    public NewDreamDto(String dreamTitle, String dreamDescription) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.dreamStatus = DreamStatus.PRESENTING;
         this.hashtags = new ArrayList<>();
         this.comments = new ArrayList<>();
-        this.image = image;
     }
 
     public String getDreamTitle() {

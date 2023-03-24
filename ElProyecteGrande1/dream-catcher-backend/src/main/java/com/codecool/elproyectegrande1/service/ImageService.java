@@ -28,4 +28,9 @@ public class ImageService {
         Optional<Image> imageData = imageRepo.findByName(fileName);
         return ImageUtil.decompressImage(imageData.get().getImageData());
     }
+
+    public Image getImageFromDb(String fileName) {
+        Image image = imageRepo.findImageByName(fileName);
+        return image;
+    }
 }
