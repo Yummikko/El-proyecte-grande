@@ -98,7 +98,6 @@ public class AuthController {
                 encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
-        System.out.println(strRoles);
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
@@ -129,7 +128,6 @@ public class AuthController {
         }
 
         for (String entry:strRoles) {
-            System.out.println(entry);
             if (!"dreamer".equals(entry) && !"mentor".equals(entry)) {
                 return ResponseEntity.internalServerError().body(new MessageResponse("There's no such role."));
             }

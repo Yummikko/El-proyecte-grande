@@ -24,10 +24,9 @@ public class DreamMapper {
         return new Dream(
                 dto.getDreamTitle(),
                 dto.getDreamDescription(),
-                0,
-                0,
                 dto.getHashtags(),
-                dto.getComments()
+                dto.getComments(),
+                dto.getImage()
         );
     }
 }

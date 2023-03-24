@@ -18,7 +18,7 @@ public class ImageController {
 
     @ResponseStatus(value = HttpStatus.OK)
     @PostMapping("/upload")
-    public void uploadImage(@RequestParam("productImage") MultipartFile file) throws IOException {
+    public void uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
         imageService.uploadImage(file);
     }
 

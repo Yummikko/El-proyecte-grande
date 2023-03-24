@@ -35,14 +35,13 @@ public class Dream {
     @ElementCollection
     private List<String> comments;
 
-    @Lob
-    @Column(name = "imagedata", length = 1000)
-    private byte[] imageData;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Image image;
 
     public Dream() {
     }
 
-    public Dream(String dreamTitle, String dreamDescription, int likes, int views, List<String> hashtags, List<String> comments) {
+    public Dream(String dreamTitle, String dreamDescription, List<String> hashtags, List<String> comments, Image image) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = 0;
@@ -50,6 +49,7 @@ public class Dream {
         this.dreamStatus = DreamStatus.PRESENTING;
         this.hashtags = hashtags;
         this.comments = comments;
+        this.image = image;
     }
 
     public Long getId() {
@@ -114,5 +114,13 @@ public class Dream {
 
     public void setComments(List<String> comments) {
         this.comments = comments;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }
