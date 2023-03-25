@@ -41,11 +41,13 @@ public class DreamController {
     public DreamDto createNewDream(@RequestParam("title") String title, @RequestParam("description") String description, final @RequestParam("image") Optional<MultipartFile> file) throws IOException {
         MultipartFile newFile = file.orElse(null);
         NewDreamDto newDreamDto = new NewDreamDto();
-        imageService.uploadImage(newFile);
-        Image imageData = imageService.getImageFromDb(newFile.getOriginalFilename());
+        if (!file.equals(Optional.empty())) {
+            imageService.uploadImage(newFile);
+            Image imageData = imageService.getImageFromDb(newFile.getOriginalFilename());
+            newDreamDto.setImage(imageData);
+        }
         newDreamDto.setDreamTitle(title);
         newDreamDto.setDreamDescription(description);
-        newDreamDto.setImage(imageData);
         return dreamService.addDream(newDreamDto);
     }
 
