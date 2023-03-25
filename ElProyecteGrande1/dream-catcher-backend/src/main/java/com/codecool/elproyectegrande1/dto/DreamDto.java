@@ -1,6 +1,7 @@
 package com.codecool.elproyectegrande1.dto;
 
 import com.codecool.elproyectegrande1.entity.DreamStatus;
+import com.codecool.elproyectegrande1.entity.Image;
 
 import java.util.List;
 
@@ -14,11 +15,12 @@ public class DreamDto {
     private DreamStatus dreamStatus;
     private List<String> hashtags;
     private List<String> comments;
+    private Image image;
 
     public DreamDto() {
     }
 
-    public DreamDto(Long id, String dreamTitle, String dreamDescription, int likes, int views, DreamStatus dreamStatus, List<String> hashtags, List<String> comments) {
+    public DreamDto(Long id, String dreamTitle, String dreamDescription, int likes, int views, DreamStatus dreamStatus, List<String> hashtags, List<String> comments, Image image) {
         this.id = id;
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
@@ -27,6 +29,7 @@ public class DreamDto {
         this.dreamStatus = dreamStatus;
         this.hashtags = hashtags;
         this.comments = comments;
+        this.image = image;
     }
 
     public Long getId() {
@@ -89,4 +92,11 @@ public class DreamDto {
         this.comments = comments;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
 }
