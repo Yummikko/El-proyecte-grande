@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.security.RolesAllowed;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/dreams")
@@ -37,10 +38,11 @@ public class DreamController {
     }
 
     @PostMapping("/create")
-    public DreamDto createNewDream(@RequestParam("title") String title, @RequestParam("description") String description, final @RequestParam("image") MultipartFile file) throws IOException {
+    public DreamDto createNewDream(@RequestParam("title") String title, @RequestParam("description") String description, final @RequestParam("image") Optional<MultipartFile> file) throws IOException {
+        MultipartFile newFile = file.orElse(null);
         NewDreamDto newDreamDto = new NewDreamDto();
         imageService.uploadImage(file);
-        Image imageData = imageService.getImageFromDb(file.getOriginalFilename());
+        Image imageData = imageService.getImageFromDb(newFile.getOriginalFilename());
         newDreamDto.setDreamTitle(title);
         newDreamDto.setDreamDescription(description);
         newDreamDto.setImage(imageData);
