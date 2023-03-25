@@ -33,4 +33,9 @@ public class ImageService {
         Image image = imageRepo.findImageByName(fileName);
         return image;
     }
+
+    public Optional<Image> getImageById(Long id) {
+        Optional<Image> image = imageRepo.findById(id);
+        return image;
+    }
 }
