@@ -16,7 +16,7 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepo;
 
-    public Image uploadImage(Optional<MultipartFile> file) throws IOException {
+    public Image uploadImage(MultipartFile file) throws IOException {
         Image pImage = new Image();
         pImage.setName(file.getOriginalFilename());
         pImage.setType(file.getContentType());
