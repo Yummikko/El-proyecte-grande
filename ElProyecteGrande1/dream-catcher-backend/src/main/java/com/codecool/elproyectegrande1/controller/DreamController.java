@@ -82,6 +82,11 @@ public class DreamController {
         return dreamService.getDreamWithMostViews();
     }
 
+    @GetMapping("/most-popular")
+    public List<DreamDto> getMostPopularDreams() {
+        return dreamService.getTop3DreamsByLikes();
+    }
+
     @PutMapping("{id}/dream-status/{status}")
     public void updateStatus(@PathVariable Long id, @PathVariable String status) { dreamService.updateDreamStatus(id, status); }
 
