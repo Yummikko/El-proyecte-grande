@@ -54,6 +54,10 @@ public class NewDreamDto {
         return hashtags;
     }
 
+    public void setHashtags(List<String> hashtags) {
+        this.hashtags = hashtags;
+    }
+
     public List<String> getComments() {
         return comments;
     }
