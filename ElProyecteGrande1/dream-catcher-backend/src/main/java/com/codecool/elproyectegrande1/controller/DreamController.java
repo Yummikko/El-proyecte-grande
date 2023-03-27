@@ -38,7 +38,8 @@ public class DreamController {
     }
 
     @PostMapping("/create")
-    public DreamDto createNewDream(@RequestParam("title") String title, @RequestParam("description") String description, final @RequestParam("image") Optional<MultipartFile> file) throws IOException {
+    public DreamDto createNewDream(@RequestParam("title") String title, @RequestParam("description") String description, final @RequestParam("hashtags") Optional<List<String>> hashtags, final @RequestParam("image") Optional<MultipartFile> file) throws IOException {
+        List<String> newHashTags = hashtags.orElse(null);
         MultipartFile newFile = file.orElse(null);
         NewDreamDto newDreamDto = new NewDreamDto();
         if (!file.equals(Optional.empty())) {
@@ -46,6 +47,9 @@ public class DreamController {
             Image imageData = imageService.getImageFromDb(newFile.getOriginalFilename());
             newDreamDto.setImage(imageData);
         }
+        if (!newHashTags.equals(Optional.empty()))
+            newDreamDto.setHashtags(newHashTags);
+
         newDreamDto.setDreamTitle(title);
         newDreamDto.setDreamDescription(description);
         return dreamService.addDream(newDreamDto);
