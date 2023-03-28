@@ -34,8 +34,9 @@ public class ImageService {
         return image;
     }
 
-    public Optional<Image> getImageById(Long id) {
+    public byte[] getImageById(Long id) {
         Optional<Image> image = imageRepo.findById(id);
-        return image;
+        byte [] imageData = ImageUtil.decompressImage(image.get().getImageData());
+        return imageData;
     }
 }
