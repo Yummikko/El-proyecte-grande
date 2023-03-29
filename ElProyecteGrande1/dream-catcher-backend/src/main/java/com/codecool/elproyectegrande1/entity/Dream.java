@@ -35,7 +35,7 @@ public class Dream {
     @ElementCollection
     private List<String> comments;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Image image;
 
     public Dream() {
