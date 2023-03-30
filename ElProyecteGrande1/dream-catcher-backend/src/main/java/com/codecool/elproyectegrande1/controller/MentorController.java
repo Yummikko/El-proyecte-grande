@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.controller;
 
+import com.codecool.elproyectegrande1.dto.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.OfferDto;
 import com.codecool.elproyectegrande1.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class MentorController {
     }
 
     @PostMapping("/{id}/offer")
-    public OfferDto addOffer(@PathVariable Long id, @RequestBody OfferDto offerDto) {
+    public OfferDto addOffer(@PathVariable Long id, @RequestBody NewOfferDto offerDto) {
         return mentorService.addOffer(id, offerDto);
     }
 

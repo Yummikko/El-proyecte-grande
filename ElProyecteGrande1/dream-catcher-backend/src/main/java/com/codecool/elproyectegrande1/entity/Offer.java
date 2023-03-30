@@ -30,15 +30,19 @@ public class Offer {
     @NotNull
     private LocalDate date;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Image image;
+
     public Offer() {
     }
 
-    public Offer(EOffer type, String title, String description, BigDecimal price, LocalDate date) {
+    public Offer(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.price = price;
         this.date = date;
+        this.image = image;
     }
 
 
@@ -96,5 +100,13 @@ public class Offer {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

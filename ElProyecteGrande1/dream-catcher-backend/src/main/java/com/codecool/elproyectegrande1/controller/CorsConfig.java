@@ -18,6 +18,10 @@ public class CorsConfig {
                         .allowedOrigins("http://localhost:8081")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("Content-Type", "Authorization");
+                registry.addMapping("/api/offers/**")
+                        .allowedOrigins("http://localhost:8081")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedHeaders("Content-Type", "Authorization");
             }
         };
     }
