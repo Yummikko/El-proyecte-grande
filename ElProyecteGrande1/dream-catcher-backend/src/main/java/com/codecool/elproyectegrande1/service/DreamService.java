@@ -115,4 +115,11 @@ public class DreamService {
         dreamRepository.deleteById(id);
     }
 
+    public List<DreamDto> getTop3DreamsByLikes() {
+        List<Dream> top3DreamsByLikes = dreamRepository.findTop3ByOrderByLikesDesc();
+        return top3DreamsByLikes.stream()
+                .map(dreamMapper::mapEntityToDreamDto)
+                .collect(Collectors.toList());
+    }
+
 }
