@@ -55,11 +55,11 @@ public class DreamService {
     }
 
 
-    public List<DreamDto> getLastSixDreams() {
+    public List<DreamDto> getLastEightDreams() {
         List<Dream> dreams = dreamRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         List<DreamDto> dreamDtos = new ArrayList<>();
 
-        for (int i = 0; i < 6 && i < dreams.size(); i++) {
+        for (int i = 0; i < 8 && i < dreams.size(); i++) {
             DreamDto dto = dreamMapper.mapEntityToDreamDto(dreams.get(i));
             dreamDtos.add(dto);
         }

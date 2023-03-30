@@ -66,8 +66,8 @@ public class DreamController {
     }
 
     @GetMapping("/recents")
-    public List<DreamDto> getSixRecentDreams() {
-        return dreamService.getLastSixDreams();
+    public List<DreamDto> getEightRecentDreams() {
+        return dreamService.getLastEightDreams();
     }
 
     @PutMapping("/{id}/like")
