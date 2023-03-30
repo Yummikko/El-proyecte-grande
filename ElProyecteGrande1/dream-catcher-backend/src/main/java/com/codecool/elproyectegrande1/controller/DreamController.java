@@ -47,7 +47,7 @@ public class DreamController {
             Image imageData = imageService.getImageFromDb(newFile.getOriginalFilename());
             newDreamDto.setImage(imageData);
         }
-        if (!newHashTags.equals(Optional.empty()))
+        if (!(newHashTags == null) && !newHashTags.equals(Optional.empty()))
             newDreamDto.setHashtags(newHashTags);
 
         newDreamDto.setDreamTitle(title);
