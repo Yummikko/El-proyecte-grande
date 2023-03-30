@@ -3,6 +3,7 @@ package com.codecool.elproyectegrande1.service;
 
 import com.codecool.elproyectegrande1.dto.DreamDto;
 import com.codecool.elproyectegrande1.dto.OfferDto;
+import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.mapper.OfferMapper;
 import com.codecool.elproyectegrande1.repository.OfferRepository;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OfferService {
@@ -27,5 +31,12 @@ public class OfferService {
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offer not found"));
         return offerMapper.mapEntityToOfferDto(offer);
+    }
+
+    public List<OfferDto> getAllOffers() {
+        List<Offer> offers = offerRepository.findAll();
+        return offers.stream()
+                .map(offerMapper::mapEntityToOfferDto)
+                .collect(Collectors.toList());
     }
 }
