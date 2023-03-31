@@ -1,10 +1,8 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.dto.DreamDto;
 import com.codecool.elproyectegrande1.dto.OfferDto;
 import com.codecool.elproyectegrande1.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +23,7 @@ public class OfferController {
     }
 
     @GetMapping("/{id}")
-    public OfferDto getDreamById(@PathVariable("id") Long id) {
+    public OfferDto getOfferById(@PathVariable("id") Long id) {
         return offerService.getOfferById(id);
     }
 

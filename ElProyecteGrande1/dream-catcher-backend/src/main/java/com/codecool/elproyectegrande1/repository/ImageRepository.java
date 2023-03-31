@@ -10,6 +10,9 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 
     Optional<Image> findByName(String fileName);
 
-    @Query("SELECT i FROM Image i WHERE i.name = :fileName AND i.id = max(i.id)")
+    @Query("SELECT i FROM Image i WHERE i.id = :id")
+    Image findImageByID(Long id);
+
+    @Query("SELECT i FROM Image i WHERE i.name = :fileName AND i.id = (SELECT max(id) from Image)")
     Image findImageByName(String fileName);
 }

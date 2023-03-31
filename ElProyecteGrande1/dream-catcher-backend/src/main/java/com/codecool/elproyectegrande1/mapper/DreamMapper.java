@@ -12,11 +12,7 @@ public class DreamMapper {
                 entity.getId(),
                 entity.getDreamTitle(),
                 entity.getDreamDescription(),
-                entity.getLikes(),
-                entity.getViews(),
-                entity.getDreamStatus(),
                 entity.getHashtags(),
-                entity.getComments(),
                 entity.getImage()
         );
     }

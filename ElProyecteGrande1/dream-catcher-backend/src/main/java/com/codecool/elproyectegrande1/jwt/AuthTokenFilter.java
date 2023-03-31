@@ -29,6 +29,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        System.out.println("Before filter" + System.currentTimeMillis());
         try {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
@@ -44,8 +45,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}", e);
         }
-
+        System.out.println("After filter" + System.currentTimeMillis());
         filterChain.doFilter(request, response);
+
     }
 
     private String parseJwt(HttpServletRequest request) {

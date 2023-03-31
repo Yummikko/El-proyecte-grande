@@ -19,7 +19,7 @@ public class ImageController {
     private ImageService imageService;
 
     @ResponseStatus(value = HttpStatus.OK)
-    @PostMapping("/upload")
+    @PostMapping(value="/upload", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
         imageService.uploadImage(file);
     }

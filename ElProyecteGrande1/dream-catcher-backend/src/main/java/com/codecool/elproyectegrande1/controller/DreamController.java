@@ -15,13 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.security.RolesAllowed;
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/v1/dreams")
 public class DreamController {
@@ -38,20 +36,9 @@ public class DreamController {
     }
 
     @PostMapping("/create")
-    public DreamDto createNewDream(@RequestParam("title") String title, @RequestParam("description") String description, final @RequestParam("hashtags") Optional<List<String>> hashtags, final @RequestParam("image") Optional<MultipartFile> file) throws IOException {
-        List<String> newHashTags = hashtags.orElse(null);
-        MultipartFile newFile = file.orElse(null);
-        NewDreamDto newDreamDto = new NewDreamDto();
-        if (!file.equals(Optional.empty())) {
-            imageService.uploadImage(newFile);
-            Image imageData = imageService.getImageFromDb(newFile.getOriginalFilename());
-            newDreamDto.setImage(imageData);
-        }
-        if (!(newHashTags == null) && !newHashTags.equals(Optional.empty()))
-            newDreamDto.setHashtags(newHashTags);
-
-        newDreamDto.setDreamTitle(title);
-        newDreamDto.setDreamDescription(description);
+    public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto) {
+        Image imageData = imageService.getImageFromDb(newDreamDto.getImageName());
+        newDreamDto.setImage(imageData);
         return dreamService.addDream(newDreamDto);
     }
 
