@@ -3,6 +3,7 @@ package com.codecool.elproyectegrande1.dto;
 import com.codecool.elproyectegrande1.entity.DreamStatus;
 import com.codecool.elproyectegrande1.entity.Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DreamDto {
@@ -26,6 +27,8 @@ public class DreamDto {
         this.dreamDescription = dreamDescription;
         this.hashtags = hashtags;
         this.image = image;
+        this.dreamStatus = DreamStatus.PRESENTING;
+        this.comments = new ArrayList<>();
     }
 
     public Long getId() {
