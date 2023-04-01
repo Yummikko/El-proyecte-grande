@@ -4,14 +4,13 @@ import com.codecool.elproyectegrande1.dto.DreamDto;
 import com.codecool.elproyectegrande1.dto.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.DreamStatus;
+import com.codecool.elproyectegrande1.exceptions.DreamNotFoundException;
 import com.codecool.elproyectegrande1.mapper.DreamMapper;
 import com.codecool.elproyectegrande1.repository.DreamRepository;
 import com.codecool.elproyectegrande1.repository.DreamerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +76,7 @@ public class DreamService {
 
     public DreamDto getDreamById(Long id) {
         Dream dream = dreamRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dream not found"));
+                .orElseThrow(() -> new DreamNotFoundException(id));
         return dreamMapper.mapEntityToDreamDto(dream);
     }
 
