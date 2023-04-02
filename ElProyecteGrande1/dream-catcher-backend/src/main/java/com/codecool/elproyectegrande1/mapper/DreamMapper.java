@@ -13,7 +13,9 @@ public class DreamMapper {
                 entity.getDreamTitle(),
                 entity.getDreamDescription(),
                 entity.getHashtags(),
-                entity.getImage()
+                entity.getImage(),
+                entity.getLikes(),
+                entity.getViews()
         );
     }
 
