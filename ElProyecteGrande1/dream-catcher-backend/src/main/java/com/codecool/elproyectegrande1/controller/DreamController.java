@@ -44,6 +44,7 @@ public class DreamController {
 
     @GetMapping("/{id}")
     public DreamDto getDreamById(@PathVariable("id") Long id) {
+        dreamService.viewsDream(id);
         return dreamService.getDreamById(id);
     }
 

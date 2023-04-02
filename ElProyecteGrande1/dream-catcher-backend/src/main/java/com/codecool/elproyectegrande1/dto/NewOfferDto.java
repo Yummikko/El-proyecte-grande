@@ -13,16 +13,18 @@ public class NewOfferDto {
     private BigDecimal price;
     private LocalDate date;
     private Image image;
+    private String imageName;
 
     public NewOfferDto() {
     }
 
-    public NewOfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date) {
+    public NewOfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, String imageName) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.price = price;
         this.date = date;
+        this.imageName = imageName;
     }
 
     public EOffer getType() {
@@ -71,5 +73,13 @@ public class NewOfferDto {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

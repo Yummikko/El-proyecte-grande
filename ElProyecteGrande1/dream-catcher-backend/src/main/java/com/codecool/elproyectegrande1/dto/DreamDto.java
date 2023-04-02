@@ -20,12 +20,14 @@ public class DreamDto {
     public DreamDto() {
     }
 
-    public DreamDto(Long id, String dreamTitle, String dreamDescription, List<String> hashtags, Image image) {
+    public DreamDto(Long id, String dreamTitle, String dreamDescription, List<String> hashtags, Image image, int likes, int views) {
         this.id = id;
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.hashtags = hashtags;
         this.image = image;
+        this.likes = likes;
+        this.views = views;
     }
 
     public Long getId() {
