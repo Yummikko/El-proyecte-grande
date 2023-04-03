@@ -16,7 +16,8 @@ public class OfferMapper {
                 entity.getPrice(),
                 entity.getDate(),
                 entity.getImage(),
-                entity.getLikes()
+                entity.getLikes(),
+                entity.getViews()
         );
     }
 
@@ -27,8 +28,7 @@ public class OfferMapper {
                 dto.getDescription(),
                 dto.getPrice(),
                 dto.getDate(),
-                dto.getImage(),
-                dto.getLikes()
+                dto.getImage()
         );
     }
 }

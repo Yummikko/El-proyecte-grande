@@ -14,11 +14,12 @@ public class OfferDto {
     private LocalDate date;
     private Image image;
     private int likes = 0;
+    private int views = 0;
 
     public OfferDto() {
     }
 
-    public OfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, int likes) {
+    public OfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, int likes, int views) {
         this.type = type;
         this.title = title;
         this.description = description;
@@ -26,6 +27,7 @@ public class OfferDto {
         this.date = date;
         this.image = image;
         this.likes = likes;
+        this.views = views;
     }
 
     public EOffer getType() {
@@ -82,5 +84,13 @@ public class OfferDto {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
     }
 }

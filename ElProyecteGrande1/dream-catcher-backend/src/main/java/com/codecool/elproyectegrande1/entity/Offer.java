@@ -36,17 +36,21 @@ public class Offer {
     @Column(name = "likes", columnDefinition = "INT DEFAULT 0")
     private int likes;
 
+    @Column(name = "views", columnDefinition = "INT DEFAULT 0")
+    private int views;
+
     public Offer() {
     }
 
-    public Offer(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, int likes) {
+    public Offer(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.price = price;
         this.date = date;
         this.image = image;
-        this.likes = likes;
+        this.likes = 0;
+        this.views = 0;
     }
 
 
@@ -120,5 +124,13 @@ public class Offer {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
     }
 }

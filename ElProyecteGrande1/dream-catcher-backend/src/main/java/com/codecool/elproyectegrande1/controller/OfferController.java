@@ -21,6 +21,7 @@ public class OfferController {
 
     @GetMapping("/{id}")
     public OfferDto getOfferById(@PathVariable("id") Long id) {
+        offerService.viewsOffer(id);
         return offerService.getOfferById(id);
     }
 
@@ -32,6 +33,11 @@ public class OfferController {
     @PutMapping("/{id}/like")
     public void likeOffer(@PathVariable Long id) {
         offerService.likeOffer(id);
+    }
+
+    @GetMapping("/{id}/offer")
+    public void viewOffer(@PathVariable Long id) {
+        offerService.viewsOffer(id);
     }
 }
 

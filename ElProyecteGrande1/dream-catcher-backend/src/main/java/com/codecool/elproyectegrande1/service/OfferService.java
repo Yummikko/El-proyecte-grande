@@ -46,4 +46,10 @@ public class OfferService {
         offer.setLikes(offer.getLikes() + 1);
         offerRepository.save(offer);
     }
+
+    public void viewsOffer(Long offerId) {
+        Offer offer = offerRepository.findById(offerId).orElseThrow();
+        offer.setViews(offer.getViews() + 1);
+        offerRepository.save(offer);
+    }
 }
