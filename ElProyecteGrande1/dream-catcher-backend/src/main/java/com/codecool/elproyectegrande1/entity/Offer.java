@@ -33,16 +33,20 @@ public class Offer {
     @ManyToOne(fetch = FetchType.LAZY)
     private Image image;
 
+    @Column(name = "likes", columnDefinition = "INT DEFAULT 0")
+    private int likes;
+
     public Offer() {
     }
 
-    public Offer(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image) {
+    public Offer(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, int likes) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.price = price;
         this.date = date;
         this.image = image;
+        this.likes = likes;
     }
 
 
@@ -108,5 +112,13 @@ public class Offer {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 }

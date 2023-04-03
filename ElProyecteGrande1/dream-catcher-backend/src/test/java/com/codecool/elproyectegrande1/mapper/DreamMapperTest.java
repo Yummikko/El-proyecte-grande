@@ -2,6 +2,7 @@ package com.codecool.elproyectegrande1.mapper;
 
 
 import com.codecool.elproyectegrande1.dto.DreamDto;
+import com.codecool.elproyectegrande1.dto.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Image;
 import org.junit.jupiter.api.Assertions;
@@ -35,7 +36,6 @@ class DreamMapperTest {
         Assertions.assertEquals(dream.getDreamDescription(), actual.getDreamDescription());
         Assertions.assertEquals(dream.getHashtags(), actual.getHashtags());
         Assertions.assertEquals(dream.getImage(), actual.getImage());
-
 
     }
 }

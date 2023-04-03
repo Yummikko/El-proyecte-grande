@@ -3,6 +3,7 @@ package com.codecool.elproyectegrande1.service;
 
 import com.codecool.elproyectegrande1.dto.DreamDto;
 import com.codecool.elproyectegrande1.dto.OfferDto;
+import com.codecool.elproyectegrande1.entity.Comment;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.mapper.OfferMapper;
@@ -38,5 +39,11 @@ public class OfferService {
         return offers.stream()
                 .map(offerMapper::mapEntityToOfferDto)
                 .collect(Collectors.toList());
+    }
+
+    public void likeOffer(Long offerId) {
+        Offer offer = offerRepository.findById(offerId).orElseThrow();
+        offer.setLikes(offer.getLikes() + 1);
+        offerRepository.save(offer);
     }
 }
