@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Offer {
@@ -39,10 +40,13 @@ public class Offer {
     @Column(name = "views", columnDefinition = "INT DEFAULT 0")
     private int views;
 
+    @ElementCollection
+    private List<String> comments;
+
     public Offer() {
     }
 
-    public Offer(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image) {
+    public Offer(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, List<String> comments) {
         this.type = type;
         this.title = title;
         this.description = description;
@@ -51,6 +55,7 @@ public class Offer {
         this.image = image;
         this.likes = 0;
         this.views = 0;
+        this.comments = comments;
     }
 
 
@@ -132,5 +137,13 @@ public class Offer {
 
     public void setViews(int views) {
         this.views = views;
+    }
+
+    public List<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
     }
 }
