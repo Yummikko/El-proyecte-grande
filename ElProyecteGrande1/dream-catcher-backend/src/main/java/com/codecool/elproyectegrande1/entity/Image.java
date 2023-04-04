@@ -16,7 +16,7 @@ public class Image {
     private String name;
     private String type;
     @Lob
-    @Column(name = "imagedata", columnDefinition = "BLOB")
+    @Column(name = "imagedata")
     private byte[] imageData;
     public Long getId() {
         return id;
