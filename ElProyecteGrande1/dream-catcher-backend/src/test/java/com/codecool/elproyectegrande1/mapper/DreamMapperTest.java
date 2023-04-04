@@ -40,7 +40,7 @@ class DreamMapperTest {
     @Test
     void shouldMapDreamDtoToEntity() {
 
-        NewDreamDto dreamDto = new NewDreamDto("test", "test", new ArrayList<>(), "image.jpg");
+        NewDreamDto dreamDto = new NewDreamDto("test", "test", new ArrayList<>(), new ArrayList<>(), "image.jpg");
 
         List<String> hashtags = new ArrayList<>();
         hashtags.add("test");

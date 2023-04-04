@@ -15,7 +15,9 @@ public class OfferMapper {
                 entity.getDescription(),
                 entity.getPrice(),
                 entity.getDate(),
-                entity.getImage()
+                entity.getImage(),
+                entity.getLikes(),
+                entity.getViews()
         );
     }
 

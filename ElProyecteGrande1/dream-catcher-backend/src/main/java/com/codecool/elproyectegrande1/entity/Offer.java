@@ -33,6 +33,12 @@ public class Offer {
     @ManyToOne(fetch = FetchType.LAZY)
     private Image image;
 
+    @Column(name = "likes", columnDefinition = "INT DEFAULT 0")
+    private int likes;
+
+    @Column(name = "views", columnDefinition = "INT DEFAULT 0")
+    private int views;
+
     public Offer() {
     }
 
@@ -43,6 +49,8 @@ public class Offer {
         this.price = price;
         this.date = date;
         this.image = image;
+        this.likes = 0;
+        this.views = 0;
     }
 
 
@@ -108,5 +116,21 @@ public class Offer {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
     }
 }
