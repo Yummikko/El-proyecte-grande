@@ -13,6 +13,7 @@ public class DreamMapper {
                 entity.getDreamTitle(),
                 entity.getDreamDescription(),
                 entity.getHashtags(),
+                entity.getComments(),
                 entity.getImage(),
                 entity.getLikes(),
                 entity.getViews()

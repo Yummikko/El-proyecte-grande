@@ -46,6 +46,12 @@ public class DreamService {
         dreamRepository.save(dream);
     }
 
+    public void dislikeDream(Long dreamId) {
+        Dream dream = dreamRepository.findById(dreamId).orElseThrow();
+        dream.setLikes(dream.getLikes() - 1);
+        dreamRepository.save(dream);
+    }
+
 
     public List<DreamDto> getAllDreams() {
         List<Dream> dreams = dreamRepository.findAll();

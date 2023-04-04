@@ -22,7 +22,7 @@ public class NewDreamDto {
     public NewDreamDto() {
     }
 
-    public NewDreamDto(String dreamTitle, String dreamDescription, List<String> hashtags, String imageName) {
+    public NewDreamDto(String dreamTitle, String dreamDescription, List<String> hashtags, List<String> comments, String imageName) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.dreamStatus = DreamStatus.PRESENTING;
