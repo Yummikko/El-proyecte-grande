@@ -65,7 +65,7 @@ public class DreamController {
 
     @PutMapping("/{id}/dislike")
     public void dislikeDream(@PathVariable Long id) {
-        dreamService.likeDream(id);
+        dreamService.dislikeDream(id);
     }
 
     @GetMapping("/most-liked")
