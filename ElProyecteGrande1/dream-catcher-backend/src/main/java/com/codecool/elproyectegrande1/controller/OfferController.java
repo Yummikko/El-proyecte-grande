@@ -42,6 +42,11 @@ public class OfferController {
         offerService.likeOffer(id);
     }
 
+    @PutMapping("/{id}/dislike")
+    public void dislikeOffer(@PathVariable Long id) {
+        offerService.dislikeOffer(id);
+    }
+
     @GetMapping("/{id}/offer")
     public void viewOffer(@PathVariable Long id) {
         offerService.viewsOffer(id);
