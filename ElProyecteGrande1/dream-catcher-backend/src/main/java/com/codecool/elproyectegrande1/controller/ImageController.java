@@ -30,7 +30,7 @@ public class ImageController {
         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(image);
     }
 
-    @GetMapping(value ="/image/display/{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value ="/image/display/{id}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
     @ResponseBody
     public String showImage(@PathVariable("id") Long id) {
         byte[] image = imageService.getImageById(id);
