@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.config;
+package com.codecool.elproyectegrande1.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

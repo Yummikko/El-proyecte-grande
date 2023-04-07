@@ -3,20 +3,20 @@ package com.codecool.elproyectegrande1.service;
 import com.codecool.elproyectegrande1.dto.CommentDto;
 import com.codecool.elproyectegrande1.entity.Comment;
 import com.codecool.elproyectegrande1.mapper.CommentMapper;
-import com.codecool.elproyectegrande1.repository.CommentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 
+@ExtendWith(MockitoExtension.class)
 class CommentServiceTest {
 
     @Mock
     private CommentMapper commentMapper;
-    @Mock
-    private CommentRepository commentRepository;
     @Mock
     private CommentService commentService;
 

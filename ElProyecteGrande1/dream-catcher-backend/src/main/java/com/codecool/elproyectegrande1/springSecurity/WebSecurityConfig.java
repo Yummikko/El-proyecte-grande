@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.config.springSecurity;
+package com.codecool.elproyectegrande1.springSecurity;
 
 import com.codecool.elproyectegrande1.jwt.AuthEntryPointJwt;
 import com.codecool.elproyectegrande1.jwt.AuthTokenFilter;
