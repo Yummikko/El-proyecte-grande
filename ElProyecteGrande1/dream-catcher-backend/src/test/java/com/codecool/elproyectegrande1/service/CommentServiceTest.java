@@ -3,15 +3,23 @@ package com.codecool.elproyectegrande1.service;
 import com.codecool.elproyectegrande1.dto.CommentDto;
 import com.codecool.elproyectegrande1.entity.Comment;
 import com.codecool.elproyectegrande1.mapper.CommentMapper;
+import com.codecool.elproyectegrande1.repository.CommentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 
 class CommentServiceTest {
 
-    private final CommentMapper commentMapper = new CommentMapper();
+    @Mock
+    private CommentMapper commentMapper;
+    @Mock
+    private CommentRepository commentRepository;
+    @Mock
+    private CommentService commentService;
+
 
     @Test
     void shouldMapEntityToCommentDto() {
@@ -29,4 +37,11 @@ class CommentServiceTest {
         Assertions.assertEquals(comment.getUsername(), actual.getUsername());
         Assertions.assertEquals(comment.getTimeUpdated(), actual.getUpdatedDate());
     }
+
+    @Test
+    void shouldAddComment() {
+        //given
+
+    }
+
 }

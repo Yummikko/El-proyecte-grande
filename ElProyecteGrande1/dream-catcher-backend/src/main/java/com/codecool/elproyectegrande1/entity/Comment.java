@@ -10,6 +10,7 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //Sequence
     private Long id;
 
     @NotBlank
