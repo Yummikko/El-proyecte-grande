@@ -31,4 +31,14 @@ class CommentRepositoryTest {
         Assertions.assertNotNull(foundEntity);
         Assertions.assertEquals(comment.getCommentText(), foundEntity.getCommentText());
     }
+
+    @Test
+    void shouldLikeCommentWhenRetrievedFromRepository() {
+        Comment comment = commentRepository.save(new Comment("testing new comment", 0, "test"));
+        comment.setId(1L);
+        Comment actual = commentRepository.findById(comment.getId()).orElse(null);
+        actual.setLikes(comment.getLikes() + 1);
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(actual.getLikes(), 1);
+    }
 }
