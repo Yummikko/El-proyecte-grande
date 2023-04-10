@@ -5,6 +5,8 @@ import com.codecool.elproyectegrande1.entity.Image;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewOfferDto {
     private EOffer type;
@@ -14,17 +16,21 @@ public class NewOfferDto {
     private LocalDate date;
     private Image image;
     private String imageName;
+    private int likes = 0;
+    private List<String> comments;
 
     public NewOfferDto() {
     }
 
-    public NewOfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, String imageName) {
+    public NewOfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, String imageName, int likes, List<String> comments) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.price = price;
         this.date = date;
         this.imageName = imageName;
+        this.likes = likes;
+        this.comments = comments;
     }
 
     public EOffer getType() {
@@ -81,5 +87,21 @@ public class NewOfferDto {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public List<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
     }
 }

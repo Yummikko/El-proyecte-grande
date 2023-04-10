@@ -8,7 +8,7 @@ public class NewLetterDto {
 
     }
 
-    NewLetterDto(String content) {
+    public NewLetterDto(String content) {
         this.content = content;
     }
 
