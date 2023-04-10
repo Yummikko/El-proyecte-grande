@@ -14,6 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = { ElProyecteGrande1.class, H2TestProfileJPAConfig.class })
 @ActiveProfiles("test")
@@ -37,8 +40,33 @@ class CommentRepositoryTest {
         Comment comment = commentRepository.save(new Comment("testing new comment", 0, "test"));
         comment.setId(1L);
         Comment actual = commentRepository.findById(comment.getId()).orElse(null);
-        actual.setLikes(comment.getLikes() + 1);
         Assertions.assertNotNull(actual);
+        actual.setLikes(comment.getLikes() + 1);
         Assertions.assertEquals(actual.getLikes(), 1);
+    }
+
+    @Test
+    void shouldUpdateCommentWhenRetrievedFromRepository() {
+        Comment comment = commentRepository.save(new Comment("testing new comment", 0, "test"));
+        comment.setId(1L);
+        Comment actual = commentRepository.findById(comment.getId()).orElse(null);
+        Assertions.assertNotNull(actual);
+        LocalDateTime rightNow = LocalDateTime.now();
+        String newDesc = "new testing description";
+        actual.setComment(newDesc);
+        actual.setTimeUpdated(rightNow);
+        Assertions.assertEquals(actual.getComment(), newDesc);
+        Assertions.assertEquals(actual.getTimeUpdated(), rightNow);
+    }
+
+    @Test
+    void shouldDeleteComment() {
+        Comment comment = commentRepository.save(new Comment("testing new comment", 0, "test"));
+        comment.setId(1L);
+        Comment newComment = commentRepository.findById(comment.getId()).orElse(null);
+        Long commentId = newComment.getId();
+        commentRepository.delete(newComment);
+        Comment testComment = commentRepository.findById(commentId).orElse(null);
+        Assertions.assertNull(testComment);
     }
 }
