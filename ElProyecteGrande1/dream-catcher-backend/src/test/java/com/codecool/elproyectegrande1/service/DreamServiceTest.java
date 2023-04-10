@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 class DreamServiceTest {
 
@@ -42,6 +44,8 @@ class DreamServiceTest {
         List<DreamDto> expected = List.of(dreamDto, dreamDto2);
 
         Mockito.when(dreamRepository.findAll()).thenReturn(dreams);
+        when(dreamMapper.mapEntityToDreamDto(dream)).thenReturn(dreamDto);
+        when(dreamMapper.mapEntityToDreamDto(dream2)).thenReturn(dreamDto2);
 
         List<DreamDto> actual = dreamService.getAllDreams();
 
