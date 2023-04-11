@@ -22,14 +22,14 @@ public class NewDreamerMapper {
         );
     }
 
-    public Dreamer mapDreamerDtoToEntity(DreamerDto dto) {
-        return new Dreamer(
-                dto.getNickname(),
-                dto.getEmail(),
-                dto.getUser(),
-                dto.getLetters()
-        );
-    }
+//    public Dreamer mapDreamerDtoToEntity(DreamerDto dto) {
+//        return new Dreamer(
+//                dto.getNickname(),
+//                dto.getEmail(),
+//                dto.getUser(),
+//                dto.getLetters()
+//        );
+//    }
 
     public Dreamer mapNewDreamerDtoToEntity(NewDreamerDto dto) {
         return new Dreamer(dto.getNickname(), dto.getEmail(), dto.getUser(), dto.getLetters());
