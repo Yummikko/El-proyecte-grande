@@ -1,6 +1,6 @@
 package com.codecool.elproyectegrande1.util;
 
-import com.codecool.elproyectegrande1.dto.UserDto;
+import com.codecool.elproyectegrande1.dto.user.UserDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

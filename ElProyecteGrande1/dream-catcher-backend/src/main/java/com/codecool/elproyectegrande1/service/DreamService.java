@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.service;
 
-import com.codecool.elproyectegrande1.dto.DreamDto;
-import com.codecool.elproyectegrande1.dto.NewDreamDto;
+import com.codecool.elproyectegrande1.dto.dream.DreamDto;
+import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.DreamStatus;
 import com.codecool.elproyectegrande1.exceptions.DreamNotFoundException;

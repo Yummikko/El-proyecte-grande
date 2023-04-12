@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.dto;
+package com.codecool.elproyectegrande1.dto.offer;
 
 import com.codecool.elproyectegrande1.entity.EOffer;
 import com.codecool.elproyectegrande1.entity.Image;
@@ -8,29 +8,28 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OfferDto {
+public class NewOfferDto {
     private EOffer type;
     private String title;
     private String description;
     private BigDecimal price;
     private LocalDate date;
     private Image image;
+    private String imageName;
     private int likes = 0;
-    private int views = 0;
     private List<String> comments;
 
-    public OfferDto() {
+    public NewOfferDto() {
     }
 
-    public OfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, int likes, int views, List<String> comments) {
+    public NewOfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, String imageName, int likes, List<String> comments) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.price = price;
         this.date = date;
-        this.image = image;
+        this.imageName = imageName;
         this.likes = likes;
-        this.views = views;
         this.comments = comments;
     }
 
@@ -82,20 +81,20 @@ public class OfferDto {
         this.image = image;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
     public int getLikes() {
         return likes;
     }
 
     public void setLikes(int likes) {
         this.likes = likes;
-    }
-
-    public int getViews() {
-        return views;
-    }
-
-    public void setViews(int views) {
-        this.views = views;
     }
 
     public List<String> getComments() {

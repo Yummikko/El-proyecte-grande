@@ -1,14 +1,13 @@
 package com.codecool.elproyectegrande1.mapper;
 
 
-import com.codecool.elproyectegrande1.dto.DreamDto;
-import com.codecool.elproyectegrande1.dto.NewDreamDto;
+import com.codecool.elproyectegrande1.dto.dream.DreamDto;
+import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Image;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
 import java.util.List;
 

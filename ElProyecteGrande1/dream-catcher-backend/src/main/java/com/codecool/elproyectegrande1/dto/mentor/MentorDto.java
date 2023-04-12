@@ -1,33 +1,30 @@
-package com.codecool.elproyectegrande1.dto;
+package com.codecool.elproyectegrande1.dto.mentor;
 
+import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.entity.User;
 
-import java.math.BigDecimal;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DreamerDto {
+public class MentorDto {
     private Long id;
     private String nickname;
     private String email;
+    private String password;
     private int followers = 0;
-
-    private BigDecimal funds;
-
+    private List<Offer> offers = new ArrayList<>();
     private User user;
 
-    private Set<String> letters;
-
-    public DreamerDto() {
+    public MentorDto() {
     }
 
-    public DreamerDto(Long id, String nickname, String email, int followers, User user, Set<String> letters) {
+    public MentorDto(Long id, String nickname, String email, int followers, List<Offer> offers, User user) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
         this.followers = followers;
-        this.funds = new BigDecimal(0);
+        this.offers = offers;
         this.user = user;
-        this.letters = letters;
     }
 
     public Long getId() {
@@ -40,6 +37,10 @@ public class DreamerDto {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public int getFollowers() {
@@ -58,13 +59,20 @@ public class DreamerDto {
         this.email = email;
     }
 
-
-    public BigDecimal getFunds() {
-        return funds;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setFunds(BigDecimal funds) {
-        this.funds = funds;
+    public void setFollowers(int followers) {
+        this.followers = followers;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 
     public User getUser() {
@@ -73,13 +81,5 @@ public class DreamerDto {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Set<String> getLetters() {
-        return letters;
-    }
-
-    public void setLetters(Set<String> letters) {
-        this.letters = letters;
     }
 }

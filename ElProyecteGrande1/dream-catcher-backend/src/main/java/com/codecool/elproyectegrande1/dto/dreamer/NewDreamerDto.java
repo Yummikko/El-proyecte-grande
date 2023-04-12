@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.dto;
+package com.codecool.elproyectegrande1.dto.dreamer;
 
 import com.codecool.elproyectegrande1.entity.User;
 

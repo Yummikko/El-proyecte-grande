@@ -1,30 +1,33 @@
-package com.codecool.elproyectegrande1.dto;
+package com.codecool.elproyectegrande1.dto.dreamer;
 
-import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.entity.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Set;
 
-public class MentorDto {
+public class DreamerDto {
     private Long id;
     private String nickname;
     private String email;
-    private String password;
     private int followers = 0;
-    private List<Offer> offers = new ArrayList<>();
+
+    private BigDecimal funds;
+
     private User user;
 
-    public MentorDto() {
+    private Set<String> letters;
+
+    public DreamerDto() {
     }
 
-    public MentorDto(Long id, String nickname, String email, int followers, List<Offer> offers, User user) {
+    public DreamerDto(Long id, String nickname, String email, int followers, User user, Set<String> letters) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
         this.followers = followers;
-        this.offers = offers;
+        this.funds = new BigDecimal(0);
         this.user = user;
+        this.letters = letters;
     }
 
     public Long getId() {
@@ -37,10 +40,6 @@ public class MentorDto {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public int getFollowers() {
@@ -59,20 +58,13 @@ public class MentorDto {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+
+    public BigDecimal getFunds() {
+        return funds;
     }
 
-    public void setFollowers(int followers) {
-        this.followers = followers;
-    }
-
-    public List<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
+    public void setFunds(BigDecimal funds) {
+        this.funds = funds;
     }
 
     public User getUser() {
@@ -81,5 +73,13 @@ public class MentorDto {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<String> getLetters() {
+        return letters;
+    }
+
+    public void setLetters(Set<String> letters) {
+        this.letters = letters;
     }
 }
