@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.dto;
+package com.codecool.elproyectegrande1.dto.offer;
 
 import com.codecool.elproyectegrande1.entity.EOffer;
 import com.codecool.elproyectegrande1.entity.Image;

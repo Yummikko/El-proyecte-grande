@@ -1,6 +1,6 @@
 package com.codecool.elproyectegrande1.service;
 
-import com.codecool.elproyectegrande1.dto.CommentDto;
+import com.codecool.elproyectegrande1.dto.comment.CommentDto;
 import com.codecool.elproyectegrande1.entity.Comment;
 import com.codecool.elproyectegrande1.mapper.CommentMapper;
 import org.junit.jupiter.api.Assertions;
@@ -36,12 +36,6 @@ class CommentServiceTest {
         Assertions.assertEquals(comment.getLikes(), actual.getLikes());
         Assertions.assertEquals(comment.getUsername(), actual.getUsername());
         Assertions.assertEquals(comment.getTimeUpdated(), actual.getUpdatedDate());
-    }
-
-    @Test
-    void shouldAddComment() {
-        //given
-
     }
 
 }

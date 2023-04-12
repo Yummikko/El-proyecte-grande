@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.mapper;
 
-import com.codecool.elproyectegrande1.dto.LetterDto;
-import com.codecool.elproyectegrande1.dto.NewLetterDto;
+import com.codecool.elproyectegrande1.dto.letter.LetterDto;
+import com.codecool.elproyectegrande1.dto.letter.NewLetterDto;
 import com.codecool.elproyectegrande1.entity.Letter;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.dto.DreamerDto;
-import com.codecool.elproyectegrande1.dto.NewDreamerDto;
+import com.codecool.elproyectegrande1.dto.dreamer.DreamerDto;
+import com.codecool.elproyectegrande1.dto.dreamer.NewDreamerDto;
 import com.codecool.elproyectegrande1.entity.Dreamer;
 import com.codecool.elproyectegrande1.service.DreamerService;
 import org.springframework.beans.factory.annotation.Autowired;

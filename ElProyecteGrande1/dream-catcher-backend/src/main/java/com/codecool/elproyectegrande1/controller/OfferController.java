@@ -1,6 +1,6 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.dto.OfferDto;
+import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

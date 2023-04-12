@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.dto;
+package com.codecool.elproyectegrande1.dto.user;
 
 import com.codecool.elproyectegrande1.util.PasswordMatches;
 import com.codecool.elproyectegrande1.util.ValidEmail;

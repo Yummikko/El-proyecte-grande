@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.dto.NewOfferDto;
-import com.codecool.elproyectegrande1.dto.OfferDto;
+import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
+import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.service.ImageService;
 import com.codecool.elproyectegrande1.service.MentorService;

@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.service;
 
-import com.codecool.elproyectegrande1.dto.CommentDto;
-import com.codecool.elproyectegrande1.dto.NewCommentDto;
+import com.codecool.elproyectegrande1.dto.comment.CommentDto;
+import com.codecool.elproyectegrande1.dto.comment.NewCommentDto;
 import com.codecool.elproyectegrande1.entity.Comment;
 import com.codecool.elproyectegrande1.mapper.CommentMapper;
 import com.codecool.elproyectegrande1.repository.CommentRepository;

@@ -1,9 +1,9 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.dto.CommentDto;
-import com.codecool.elproyectegrande1.dto.DreamDto;
-import com.codecool.elproyectegrande1.dto.NewCommentDto;
-import com.codecool.elproyectegrande1.dto.NewDreamDto;
+import com.codecool.elproyectegrande1.dto.comment.CommentDto;
+import com.codecool.elproyectegrande1.dto.dream.DreamDto;
+import com.codecool.elproyectegrande1.dto.comment.NewCommentDto;
+import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.payload.response.MessageResponse;
