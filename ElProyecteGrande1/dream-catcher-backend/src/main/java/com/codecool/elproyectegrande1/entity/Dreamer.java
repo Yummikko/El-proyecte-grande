@@ -37,9 +37,6 @@ public class Dreamer {
     @ElementCollection
     private Set<String> letters;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Image profilePicture;
-
     @OneToMany(mappedBy = "dreamer", cascade = CascadeType.ALL)
     private List<Dream> dreams = new ArrayList<>();
 
@@ -107,14 +104,6 @@ public class Dreamer {
 
     public void setLetters(Set<String> letters) {
         this.letters = letters;
-    }
-
-    public Image getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(Image profilePicture) {
-        this.profilePicture = profilePicture;
     }
 
     public List<Dream> getDreams() {

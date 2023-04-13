@@ -52,6 +52,10 @@ public class AuthController {
     private final DreamerService dreamerService;
     private final MentorService mentorService;
 
+    private final String DREAMER = "dreamer";
+    private final String MENTOR = "mentor";
+    private final String ADMIN = "admin";
+
     @Autowired
     public AuthController(DreamerService dreamerService, MentorService mentorService) {
         this.dreamerService = dreamerService;
@@ -110,13 +114,13 @@ public class AuthController {
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "admin":
+                    case ADMIN:
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
 
                         break;
-                    case "mentor":
+                    case MENTOR:
                         Role mentorRole = roleRepository.findByName(ERole.ROLE_MENTOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(mentorRole);
@@ -131,16 +135,16 @@ public class AuthController {
         }
 
         for (String entry:strRoles) {
-            if (!"dreamer".equals(entry) && !"mentor".equals(entry)) {
+            if (!DREAMER.equals(entry) && !MENTOR.equals(entry)) {
                 return ResponseEntity.internalServerError().body(new MessageResponse("There's no such role."));
             }
         }
 
         user.setRoles(roles);
         userRepository.save(user);
-        if (strRoles.contains("dreamer"))
+        if (strRoles.contains(DREAMER))
             dreamerService.createDreamerFromUser(user);
-        if (strRoles.contains("mentor"))
+        if (strRoles.contains(MENTOR))
             mentorService.createMentorFromUser(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

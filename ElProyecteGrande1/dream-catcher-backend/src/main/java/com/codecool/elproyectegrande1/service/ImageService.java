@@ -30,18 +30,13 @@ public class ImageService {
     }
 
     public Image getImageFromDb(String fileName) {
-        System.out.println(System.currentTimeMillis());
         Image image = imageRepo.findImageByName(fileName);
-        System.out.println(System.currentTimeMillis());
         return image;
     }
 
     public byte[] getImageById(Long id) {
-        System.out.println("Before Find By ID " + System.currentTimeMillis());
         Image image = imageRepo.findImageByID(id);
-        System.out.println("Before decompress " + System.currentTimeMillis());
         byte [] imageData = ImageUtil.decompressImage(image.getImageData());
-        System.out.println("After decompress " + System.currentTimeMillis());
         return imageData;
     }
 }
