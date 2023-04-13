@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,6 +36,12 @@ public class Dreamer {
 
     @ElementCollection
     private Set<String> letters;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Image profilePicture;
+
+    @OneToMany(mappedBy = "dreamer", cascade = CascadeType.ALL)
+    private List<Dream> dreams = new ArrayList<>();
 
     public Dreamer() {
     }
@@ -99,5 +107,21 @@ public class Dreamer {
 
     public void setLetters(Set<String> letters) {
         this.letters = letters;
+    }
+
+    public Image getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public List<Dream> getDreams() {
+        return dreams;
+    }
+
+    public void setDreams(List<Dream> dreams) {
+        this.dreams = dreams;
     }
 }

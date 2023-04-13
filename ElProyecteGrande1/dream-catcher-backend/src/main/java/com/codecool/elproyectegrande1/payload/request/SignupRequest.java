@@ -1,5 +1,7 @@
 package com.codecool.elproyectegrande1.payload.request;
 
+import com.codecool.elproyectegrande1.entity.Image;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -20,6 +22,8 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+
+    private Image profilePicture;
 
     public String getUsername() {
         return username;
@@ -51,5 +55,13 @@ public class SignupRequest {
 
     public void setRole(Set<String> role) {
         this.role = role;
+    }
+
+    public Image getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }
