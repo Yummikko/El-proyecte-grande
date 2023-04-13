@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.mapper;
 
-import com.codecool.elproyectegrande1.dto.CommentDto;
-import com.codecool.elproyectegrande1.dto.NewCommentDto;
+import com.codecool.elproyectegrande1.dto.comment.CommentDto;
+import com.codecool.elproyectegrande1.dto.comment.NewCommentDto;
 import com.codecool.elproyectegrande1.entity.Comment;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

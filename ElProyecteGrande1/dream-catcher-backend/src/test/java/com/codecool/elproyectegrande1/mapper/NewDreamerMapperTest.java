@@ -1,6 +1,7 @@
 package com.codecool.elproyectegrande1.mapper;
 
-import com.codecool.elproyectegrande1.dto.*;
+import com.codecool.elproyectegrande1.dto.dreamer.DreamerDto;
+import com.codecool.elproyectegrande1.dto.dreamer.NewDreamerDto;
 import com.codecool.elproyectegrande1.entity.Dreamer;
 import com.codecool.elproyectegrande1.entity.User;
 import org.junit.jupiter.api.Assertions;

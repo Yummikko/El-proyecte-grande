@@ -1,6 +1,6 @@
 package com.codecool.elproyectegrande1.service;
 
-import com.codecool.elproyectegrande1.dto.DreamDto;
+import com.codecool.elproyectegrande1.dto.dream.DreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.mapper.DreamMapper;
 import com.codecool.elproyectegrande1.repository.DreamRepository;

@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.mapper;
 
-import com.codecool.elproyectegrande1.dto.NewOfferDto;
-import com.codecool.elproyectegrande1.dto.OfferDto;
+import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
+import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.entity.Offer;
 import org.junit.jupiter.api.Assertions;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static com.codecool.elproyectegrande1.entity.EOffer.*;
+import static com.codecool.elproyectegrande1.entity.EOffer.PRIVATE_LESSON;
 
 class OfferMapperTest {
 
