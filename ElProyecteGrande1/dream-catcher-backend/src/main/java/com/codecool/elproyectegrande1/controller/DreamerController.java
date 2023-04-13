@@ -3,11 +3,14 @@ package com.codecool.elproyectegrande1.controller;
 import com.codecool.elproyectegrande1.dto.dreamer.DreamerDto;
 import com.codecool.elproyectegrande1.dto.dreamer.NewDreamerDto;
 import com.codecool.elproyectegrande1.entity.Dreamer;
+import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.service.DreamerService;
+import com.codecool.elproyectegrande1.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 

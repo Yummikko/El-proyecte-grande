@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.dto.mentor;
 
+import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.entity.User;
 
@@ -14,6 +15,7 @@ public class MentorDto {
     private int followers = 0;
     private List<Offer> offers = new ArrayList<>();
     private User user;
+    private Image profilePicture;
 
     public MentorDto() {
     }

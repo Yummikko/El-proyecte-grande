@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -36,10 +37,11 @@ public class DreamController {
     }
 
     @PostMapping("/create")
-    public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto) {
+    public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto, HttpSession session) {
+        Long id = (Long) session.getAttribute("id");
         Image imageData = imageService.getImageFromDb(newDreamDto.getImageName());
         newDreamDto.setImage(imageData);
-        return dreamService.addDream(newDreamDto);
+        return dreamService.addDream(id, newDreamDto);
     }
 
     @GetMapping("/{id}")
@@ -114,4 +116,8 @@ public class DreamController {
         String username = authentication.getName();
         return commentService.addComment(newCommentDto, username);
     }
-}
+
+    @GetMapping("/dreamer/{id}")
+    public List<DreamDto> getAllDreamsByDreamerId(@PathVariable("id") Long id) {
+        return dreamService.getAllDreamsByDreamerId(id);
+    }}
