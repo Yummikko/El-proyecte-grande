@@ -38,6 +38,9 @@ public class Dream {
     @ManyToOne(fetch = FetchType.LAZY)
     private Image image;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Dreamer dreamer;
+
     public Dream() {
     }
 
@@ -122,5 +125,13 @@ public class Dream {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public Dreamer getDreamer() {
+        return dreamer;
+    }
+
+    public void setDreamer(Dreamer dreamer) {
+        this.dreamer = dreamer;
     }
 }

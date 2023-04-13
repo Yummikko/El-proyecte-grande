@@ -18,18 +18,10 @@ public class NewDreamerMapper {
                 entity.getEmail(),
                 entity.getFollowers(),
                 entity.getUser(),
-                entity.getLetters()
+                entity.getLetters(),
+                entity.getDreams()
         );
     }
-
-//    public Dreamer mapDreamerDtoToEntity(DreamerDto dto) {
-//        return new Dreamer(
-//                dto.getNickname(),
-//                dto.getEmail(),
-//                dto.getUser(),
-//                dto.getLetters()
-//        );
-//    }
 
     public Dreamer mapNewDreamerDtoToEntity(NewDreamerDto dto) {
         return new Dreamer(dto.getNickname(), dto.getEmail(), dto.getUser(), dto.getLetters());
