@@ -1,6 +1,6 @@
 package com.codecool.elproyectegrande1.security;
 
-import com.codecool.marwin1991.config.AppConfig;
+import com.codecool.elproyectegrande1.config.AppConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
