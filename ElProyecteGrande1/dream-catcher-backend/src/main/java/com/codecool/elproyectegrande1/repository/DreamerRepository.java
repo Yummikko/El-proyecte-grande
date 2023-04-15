@@ -13,6 +13,8 @@ public interface DreamerRepository extends JpaRepository<Dreamer, Long> {
 
     Optional<Dreamer> findByUserId(Long user_id);
 
+    Optional<Dreamer> findByNickname(String name);
+
     Dreamer findTopByOrderByFollowersDesc();
 
 }

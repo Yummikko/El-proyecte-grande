@@ -29,7 +29,7 @@ public class MentorService {
     }
 
     public OfferDto addOffer(Long id, NewOfferDto offerDto) {
-        Mentor mentor = mentorRepository.findById(id)
+        Mentor mentor = mentorRepository.findByUserId(id)
                 .orElseThrow(() -> new IllegalArgumentException("Mentor with id " + id + " not found"));
 
         Offer offer = offerMapper.mapOfferDtoToEntity(offerDto);
