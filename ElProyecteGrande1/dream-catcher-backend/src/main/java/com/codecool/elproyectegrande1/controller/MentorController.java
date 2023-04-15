@@ -8,6 +8,8 @@ import com.codecool.elproyectegrande1.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/api/mentors")
 public class MentorController {
@@ -22,9 +24,9 @@ public class MentorController {
         this.imageService = imageService;
     }
 
-    @PostMapping("/{id}/offer")
-    public OfferDto addOffer(@PathVariable Long id, @RequestBody NewOfferDto offerDto) {
-
+    @PostMapping("/offer")
+    public OfferDto addOffer(@RequestBody NewOfferDto offerDto, HttpSession session) {
+        Long id = (Long) session.getAttribute("id");
         Image imageData = imageService.getImageFromDb(offerDto.getImageName());
         offerDto.setImage(imageData);
         return mentorService.addOffer(id, offerDto);
