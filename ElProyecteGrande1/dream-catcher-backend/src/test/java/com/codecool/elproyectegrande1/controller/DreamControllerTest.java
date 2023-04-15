@@ -61,7 +61,7 @@ class DreamControllerTest {
 
         NewDreamDto newDreamDto = new NewDreamDto("test", "test", new ArrayList<>(), new ArrayList<>(), "image.jpg");
 
-        Mockito.when(dreamService.addDream(10L, newDreamDto)).thenReturn((dreamDto));
+        Mockito.when(dreamService.addDream("10L", newDreamDto)).thenReturn((dreamDto));
 
         //when:
         ResultActions response = mockMvc.perform(post("/api/v1/dreams/create")
