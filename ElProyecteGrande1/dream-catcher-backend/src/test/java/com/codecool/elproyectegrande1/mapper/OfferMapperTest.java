@@ -35,7 +35,7 @@ class OfferMapperTest {
 
     @Test
     void shouldMapOfferDtoToEntity() {
-        NewOfferDto offerDto = new NewOfferDto(PRIVATE_LESSON, "Test123", "Test description", BigDecimal.valueOf(15.0), LocalDate.parse("2023-04-05"), "Test name photo", 5, new ArrayList<>());
+        NewOfferDto offerDto = new NewOfferDto(PRIVATE_LESSON, "Test123", "Test description", BigDecimal.valueOf(15.0), LocalDate.parse("2023-04-05"), "Test name photo");
 
         Offer actual = offerMapper.mapOfferDtoToEntity(offerDto);
 

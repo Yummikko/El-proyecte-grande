@@ -1,8 +1,8 @@
 package com.codecool.elproyectegrande1.controller;
 
 import com.codecool.elproyectegrande1.dto.comment.CommentDto;
-import com.codecool.elproyectegrande1.dto.dream.DreamDto;
 import com.codecool.elproyectegrande1.dto.comment.NewCommentDto;
+import com.codecool.elproyectegrande1.dto.dream.DreamDto;
 import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Image;
@@ -17,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 
@@ -48,6 +47,8 @@ public class DreamController {
     @GetMapping("/{id}")
     public DreamDto getDreamById(@PathVariable("id") Long id) {
         dreamService.viewsDream(id);
+        DreamDto dreamDto = dreamService.getDreamById(id);
+        dreamDto.setComments(commentService.getAllCommentsByDreamId(id));
         return dreamService.getDreamById(id);
     }
 

@@ -10,6 +10,7 @@ public class OfferMapper {
 
     public OfferDto mapEntityToOfferDto(Offer entity) {
         return new OfferDto(
+                entity.getId(),
                 entity.getType(),
                 entity.getTitle(),
                 entity.getDescription(),

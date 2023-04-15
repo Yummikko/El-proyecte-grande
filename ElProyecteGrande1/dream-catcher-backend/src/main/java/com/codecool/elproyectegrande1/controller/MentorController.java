@@ -6,9 +6,12 @@ import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.service.ImageService;
 import com.codecool.elproyectegrande1.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/mentors")
@@ -25,11 +28,11 @@ public class MentorController {
     }
 
     @PostMapping("/offer")
-    public OfferDto addOffer(@RequestBody NewOfferDto offerDto, HttpSession session) {
-        Long id = (Long) session.getAttribute("id");
+    public OfferDto addOffer(@RequestBody NewOfferDto offerDto, Principal principal) {
+        String name = principal.getName();
         Image imageData = imageService.getImageFromDb(offerDto.getImageName());
         offerDto.setImage(imageData);
-        return mentorService.addOffer(id, offerDto);
+        return mentorService.addOffer(name, offerDto);
     }
 
 }

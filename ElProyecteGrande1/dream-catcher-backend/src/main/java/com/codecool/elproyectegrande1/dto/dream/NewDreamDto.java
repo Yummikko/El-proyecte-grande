@@ -1,11 +1,13 @@
 package com.codecool.elproyectegrande1.dto.dream;
 
+import com.codecool.elproyectegrande1.entity.Comment;
 import com.codecool.elproyectegrande1.entity.DreamStatus;
 import com.codecool.elproyectegrande1.entity.Image;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class NewDreamDto {
@@ -14,7 +16,7 @@ public class NewDreamDto {
     private String dreamDescription;
     private DreamStatus dreamStatus;
     private List<String> hashtags;
-    private List<String> comments;
+    private Set<Comment> comments;
 
     private String imageName;
     private Image image;
@@ -22,12 +24,12 @@ public class NewDreamDto {
     public NewDreamDto() {
     }
 
-    public NewDreamDto(String dreamTitle, String dreamDescription, List<String> hashtags, List<String> comments, String imageName) {
+    public NewDreamDto(String dreamTitle, String dreamDescription, List<String> hashtags, String imageName) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.dreamStatus = DreamStatus.PRESENTING;
         this.hashtags = hashtags;
-        this.comments = new ArrayList<>();
+        this.comments = new HashSet<>();
         this.imageName = imageName;
     }
 
@@ -63,7 +65,7 @@ public class NewDreamDto {
         this.hashtags = hashtags;
     }
 
-    public List<String> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 

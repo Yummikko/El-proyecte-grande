@@ -28,9 +28,9 @@ public class MentorService {
         this.offerMapper = offerMapper;
     }
 
-    public OfferDto addOffer(Long id, NewOfferDto offerDto) {
-        Mentor mentor = mentorRepository.findByUserId(id)
-                .orElseThrow(() -> new IllegalArgumentException("Mentor with id " + id + " not found"));
+    public OfferDto addOffer(String name, NewOfferDto offerDto) {
+        Mentor mentor = mentorRepository.findByNickname(name)
+                .orElseThrow(() -> new IllegalArgumentException("Mentor with nickname " + name + " not found"));
 
         Offer offer = offerMapper.mapOfferDtoToEntity(offerDto);
         offer.setMentor(mentor);

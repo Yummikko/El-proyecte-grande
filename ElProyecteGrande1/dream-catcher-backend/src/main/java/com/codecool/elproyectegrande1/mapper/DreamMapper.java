@@ -3,17 +3,28 @@ package com.codecool.elproyectegrande1.mapper;
 import com.codecool.elproyectegrande1.dto.dream.DreamDto;
 import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class DreamMapper {
+
+    @Autowired
+    private CommentMapper commentMapper;
+
     public DreamDto mapEntityToDreamDto(Dream entity) {
         return new DreamDto(
                 entity.getId(),
                 entity.getDreamTitle(),
                 entity.getDreamDescription(),
                 entity.getHashtags(),
-                entity.getImage()
+                entity.getImage(),
+                entity.getComments()
+                        .stream()
+                        .map(commentMapper::mapEntityToCommentDto)
+                        .collect(Collectors.toSet())
         );
     }
 
