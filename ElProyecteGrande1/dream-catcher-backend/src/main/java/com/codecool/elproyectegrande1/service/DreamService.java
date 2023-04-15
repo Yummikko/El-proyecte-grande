@@ -33,9 +33,9 @@ public class DreamService {
         this.dreamerRepository = dreamerRepository;
     }
 
-    public DreamDto addDream(Long id, NewDreamDto newDream) {
-        Dreamer dreamer = dreamerRepository.findByUserId(id)
-                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + id + " not found"));
+    public DreamDto addDream(String name, NewDreamDto newDream) {
+        Dreamer dreamer = dreamerRepository.findByNickname(name)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + name + " not found"));
         Dream toBeSaved = dreamMapper.mapNewDreamDtoToEntity(newDream);
         toBeSaved.setDreamer(dreamer);
         Dream savedDream = dreamRepository.save(toBeSaved);

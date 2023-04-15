@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -37,11 +38,11 @@ public class DreamController {
     }
 
     @PostMapping("/create")
-    public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto, HttpSession session) {
-        Long id = (Long) session.getAttribute("id");
+    public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto, Principal principal) {
+        String name = principal.getName();
         Image imageData = imageService.getImageFromDb(newDreamDto.getImageName());
         newDreamDto.setImage(imageData);
-        return dreamService.addDream(id, newDreamDto);
+        return dreamService.addDream(name, newDreamDto);
     }
 
     @GetMapping("/{id}")
