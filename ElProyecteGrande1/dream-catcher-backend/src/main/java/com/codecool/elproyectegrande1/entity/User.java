@@ -54,6 +54,7 @@ public class User implements UserDetails {
     private Set<Role> roles = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
+
     private Avatar profilePicture;
 
 //    @OneToMany(

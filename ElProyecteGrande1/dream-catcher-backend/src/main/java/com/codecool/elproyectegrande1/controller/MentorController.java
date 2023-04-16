@@ -6,20 +6,17 @@ import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.service.ImageService;
 import com.codecool.elproyectegrande1.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/mentors")
 public class MentorController {
 
     private final MentorService mentorService;
     private final ImageService imageService;
-    private boolean isLoggedIn = false;
 
     @Autowired
     public MentorController(MentorService mentorService, ImageService imageService) {
@@ -31,6 +28,7 @@ public class MentorController {
     public OfferDto addOffer(@RequestBody NewOfferDto offerDto, Principal principal) {
         String name = principal.getName();
         Image imageData = imageService.getImageFromDb(offerDto.getImageName());
+        System.out.println(imageData);
         offerDto.setImage(imageData);
         return mentorService.addOffer(name, offerDto);
     }
