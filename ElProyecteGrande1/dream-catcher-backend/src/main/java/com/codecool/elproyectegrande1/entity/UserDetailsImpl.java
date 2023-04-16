@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Column;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +20,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private String email;
 
+    @Column(columnDefinition = "long default 3")
     private Long profilePictureId;
 
     @JsonIgnore
@@ -61,6 +63,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getEmail() {
         return email;
+    }
+
+    public Long getProfilePictureId() {
+        return profilePictureId;
     }
 
     @Override
