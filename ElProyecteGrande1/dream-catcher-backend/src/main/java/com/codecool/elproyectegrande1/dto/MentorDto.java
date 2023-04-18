@@ -14,17 +14,19 @@ public class MentorDto {
     private int followers = 0;
     private List<Offer> offers = new ArrayList<>();
     private User user;
+    private boolean isVerified = false;
 
     public MentorDto() {
     }
 
-    public MentorDto(Long id, String nickname, String email, int followers, List<Offer> offers, User user) {
+    public MentorDto(Long id, String nickname, String email, int followers, List<Offer> offers, User user, boolean isVerified) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
         this.followers = followers;
         this.offers = offers;
         this.user = user;
+        this.isVerified = isVerified;
     }
 
     public Long getId() {
@@ -81,5 +83,13 @@ public class MentorDto {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 }

@@ -32,6 +32,9 @@ public class Mentor {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    @Column(name = "isVerified")
+    private boolean isVerified = false;
+
     public Mentor() {
     }
 
@@ -39,6 +42,7 @@ public class Mentor {
         this.nickname = nickname;
         this.email = email;
         this.user = user;
+        this.isVerified = isVerified();
     }
 
     public Long getId() {
@@ -88,4 +92,14 @@ public class Mentor {
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
     }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
+
+
 }

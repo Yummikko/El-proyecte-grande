@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.service;
 
+import com.codecool.elproyectegrande1.dto.MentorDto;
 import com.codecool.elproyectegrande1.dto.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.OfferDto;
 import com.codecool.elproyectegrande1.entity.Mentor;
@@ -11,6 +12,9 @@ import com.codecool.elproyectegrande1.repository.MentorRepository;
 import com.codecool.elproyectegrande1.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MentorService {
@@ -47,4 +51,10 @@ public class MentorService {
         mentorRepository.save(mentor);
     }
 
+    public List<MentorDto> getAllMentors() {
+        List<Mentor> mentors = mentorRepository.findAll();
+        return mentors.stream()
+                .map(mentorMapper::mapEntityToMentorDto)
+                .collect(Collectors.toList());
+    }
 }
