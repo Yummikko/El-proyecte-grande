@@ -3,7 +3,9 @@ package com.codecool.elproyectegrande1.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Dream {
@@ -32,16 +34,23 @@ public class Dream {
     @ElementCollection
     private List<String> hashtags;
 
-    @ElementCollection
-    private List<String> comments;
+    @OneToMany(
+            mappedBy = "dream",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Comment> comments = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Image image;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Dreamer dreamer;
+
     public Dream() {
     }
 
-    public Dream(String dreamTitle, String dreamDescription, List<String> hashtags, List<String> comments, Image image) {
+    public Dream(String dreamTitle, String dreamDescription, List<String> hashtags, Set<Comment> comments, Image image) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = 0;
@@ -108,11 +117,11 @@ public class Dream {
         this.hashtags = hashtags;
     }
 
-    public List<String> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<String> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
@@ -122,5 +131,13 @@ public class Dream {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public Dreamer getDreamer() {
+        return dreamer;
+    }
+
+    public void setDreamer(Dreamer dreamer) {
+        this.dreamer = dreamer;
     }
 }

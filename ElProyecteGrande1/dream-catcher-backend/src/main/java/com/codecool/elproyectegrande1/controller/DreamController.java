@@ -1,9 +1,9 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.dto.CommentDto;
-import com.codecool.elproyectegrande1.dto.DreamDto;
-import com.codecool.elproyectegrande1.dto.NewCommentDto;
-import com.codecool.elproyectegrande1.dto.NewDreamDto;
+import com.codecool.elproyectegrande1.dto.comment.CommentDto;
+import com.codecool.elproyectegrande1.dto.comment.NewCommentDto;
+import com.codecool.elproyectegrande1.dto.dream.DreamDto;
+import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.payload.response.MessageResponse;
@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -36,15 +37,18 @@ public class DreamController {
     }
 
     @PostMapping("/create")
-    public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto) {
+    public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto, Principal principal) {
+        String name = principal.getName();
         Image imageData = imageService.getImageFromDb(newDreamDto.getImageName());
         newDreamDto.setImage(imageData);
-        return dreamService.addDream(newDreamDto);
+        return dreamService.addDream(name, newDreamDto);
     }
 
     @GetMapping("/{id}")
     public DreamDto getDreamById(@PathVariable("id") Long id) {
         dreamService.viewsDream(id);
+        DreamDto dreamDto = dreamService.getDreamById(id);
+        dreamDto.setComments(commentService.getAllCommentsByDreamId(id));
         return dreamService.getDreamById(id);
     }
 
@@ -114,4 +118,8 @@ public class DreamController {
         String username = authentication.getName();
         return commentService.addComment(newCommentDto, username);
     }
-}
+
+    @GetMapping("/dreamer/{id}")
+    public List<DreamDto> getAllDreamsByDreamerId(@PathVariable("id") Long id) {
+        return dreamService.getAllDreamsByDreamerId(id);
+    }}

@@ -1,10 +1,6 @@
 package com.codecool.elproyectegrande1.service;
 
-
-import com.codecool.elproyectegrande1.dto.DreamDto;
-import com.codecool.elproyectegrande1.dto.OfferDto;
-import com.codecool.elproyectegrande1.entity.Comment;
-import com.codecool.elproyectegrande1.entity.Dream;
+import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.mapper.OfferMapper;
 import com.codecool.elproyectegrande1.repository.OfferRepository;

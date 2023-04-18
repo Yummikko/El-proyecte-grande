@@ -1,8 +1,15 @@
-package com.codecool.elproyectegrande1.dto;
+package com.codecool.elproyectegrande1.dto.dreamer;
 
+import com.codecool.elproyectegrande1.entity.Dream;
+import com.codecool.elproyectegrande1.entity.Image;
+import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.entity.User;
 
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class DreamerDto {
@@ -10,17 +17,16 @@ public class DreamerDto {
     private String nickname;
     private String email;
     private int followers = 0;
-
     private BigDecimal funds;
-
     private User user;
-
     private Set<String> letters;
+    private Image profilePicture;
+    private List<Dream> dreams = new ArrayList<>();
 
     public DreamerDto() {
     }
 
-    public DreamerDto(Long id, String nickname, String email, int followers, User user, Set<String> letters) {
+    public DreamerDto(Long id, String nickname, String email, int followers, User user, Set<String> letters, List<Dream> dreams) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
@@ -28,6 +34,7 @@ public class DreamerDto {
         this.funds = new BigDecimal(0);
         this.user = user;
         this.letters = letters;
+        this.dreams = dreams;
     }
 
     public Long getId() {
@@ -81,5 +88,25 @@ public class DreamerDto {
 
     public void setLetters(Set<String> letters) {
         this.letters = letters;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
+    }
+
+    public Image getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public List<Dream> getDreams() {
+        return dreams;
+    }
+
+    public void setDreams(List<Dream> dreams) {
+        this.dreams = dreams;
     }
 }

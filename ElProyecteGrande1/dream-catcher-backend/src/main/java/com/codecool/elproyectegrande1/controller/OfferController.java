@@ -1,8 +1,8 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.dto.CommentDto;
-import com.codecool.elproyectegrande1.dto.NewCommentDto;
-import com.codecool.elproyectegrande1.dto.OfferDto;
+import com.codecool.elproyectegrande1.dto.comment.CommentDto;
+import com.codecool.elproyectegrande1.dto.comment.NewCommentDto;
+import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.service.OfferService;
 import com.codecool.elproyectegrande1.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/offers")
 public class OfferController {

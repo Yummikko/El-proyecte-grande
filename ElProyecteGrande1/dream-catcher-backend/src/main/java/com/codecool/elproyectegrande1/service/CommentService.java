@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.service;
 
-import com.codecool.elproyectegrande1.dto.CommentDto;
-import com.codecool.elproyectegrande1.dto.NewCommentDto;
+import com.codecool.elproyectegrande1.dto.comment.CommentDto;
+import com.codecool.elproyectegrande1.dto.comment.NewCommentDto;
 import com.codecool.elproyectegrande1.entity.Comment;
 import com.codecool.elproyectegrande1.mapper.CommentMapper;
 import com.codecool.elproyectegrande1.repository.CommentRepository;
@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -46,5 +50,12 @@ public class CommentService {
     public void deleteComment(Long commentId) {
         Comment comment = commentRepository.findById(commentId).orElseThrow();
         commentRepository.delete(comment);
+    }
+
+    public Set<CommentDto> getAllCommentsByDreamId(Long dreamId) {
+        List<Comment> comments = commentRepository.findAllById(Collections.singleton(dreamId));
+        return comments.stream()
+                .map(commentMapper::mapEntityToCommentDto)
+                .collect(Collectors.toSet());
     }
 }

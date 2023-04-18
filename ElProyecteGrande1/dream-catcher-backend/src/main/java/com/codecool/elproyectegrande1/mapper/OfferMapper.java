@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.mapper;
 
-import com.codecool.elproyectegrande1.dto.NewOfferDto;
-import com.codecool.elproyectegrande1.dto.OfferDto;
+import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
+import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.entity.Offer;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +10,7 @@ public class OfferMapper {
 
     public OfferDto mapEntityToOfferDto(Offer entity) {
         return new OfferDto(
+                entity.getId(),
                 entity.getType(),
                 entity.getTitle(),
                 entity.getDescription(),

@@ -1,15 +1,15 @@
 package com.codecool.elproyectegrande1.mapper;
 
 
-import com.codecool.elproyectegrande1.dto.DreamDto;
-import com.codecool.elproyectegrande1.dto.NewDreamDto;
+import com.codecool.elproyectegrande1.dto.dream.DreamDto;
+import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Image;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 class DreamMapperTest {
@@ -18,7 +18,7 @@ class DreamMapperTest {
 
     @Test
     void shouldMapEntityToDreamDto() {
-        Dream dream = new Dream("Test", "test", new ArrayList<>(), new ArrayList<>(), new Image());
+        Dream dream = new Dream("Test", "test", new ArrayList<>(), new HashSet<>(), new Image());
         dream.setId(1L);
         dream.setLikes(10);
         dream.setViews(200);
@@ -40,7 +40,7 @@ class DreamMapperTest {
     @Test
     void shouldMapDreamDtoToEntity() {
 
-        NewDreamDto dreamDto = new NewDreamDto("test", "test", new ArrayList<>(), new ArrayList<>(), "image.jpg");
+        NewDreamDto dreamDto = new NewDreamDto("test", "test", new ArrayList<>(), "image.jpg");
 
         List<String> hashtags = new ArrayList<>();
         hashtags.add("test");

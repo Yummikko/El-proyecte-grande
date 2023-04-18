@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.dto.LetterDto;
-import com.codecool.elproyectegrande1.dto.NewLetterDto;
+import com.codecool.elproyectegrande1.dto.letter.LetterDto;
+import com.codecool.elproyectegrande1.dto.letter.NewLetterDto;
 import com.codecool.elproyectegrande1.entity.Letter;
 import com.codecool.elproyectegrande1.service.LetterService;
 import org.springframework.beans.factory.annotation.Autowired;

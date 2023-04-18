@@ -19,18 +19,21 @@ public class UserDetailsImpl implements UserDetails {
 
     private String email;
 
+    private Long profilePictureId;
+
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(Long id, String username, String email, String password,
-                           Collection<? extends GrantedAuthority> authorities) {
+                           Collection<? extends GrantedAuthority> authorities, Long profilePictureId) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.profilePictureId = profilePictureId;
     }
 
     public static UserDetailsImpl build(User user) {
@@ -38,12 +41,22 @@ public class UserDetailsImpl implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
 
+        if (user.getProfilePicture() != null)
+            return new UserDetailsImpl(
+                    user.getId(),
+                    user.getUsername(),
+                    user.getEmail(),
+                    user.getPassword(),
+                    authorities,
+                    user.getProfilePicture().getId());
+
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities);
+                authorities,
+                3L);
     }
 
     @Override
@@ -57,6 +70,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getEmail() {
         return email;
+    }
+
+    public Long getProfilePictureId() {
+        return profilePictureId;
     }
 
     @Override

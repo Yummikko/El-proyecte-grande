@@ -1,9 +1,10 @@
 package com.codecool.elproyectegrande1.service;
 
-import com.codecool.elproyectegrande1.dto.DreamDto;
-import com.codecool.elproyectegrande1.dto.NewDreamDto;
+import com.codecool.elproyectegrande1.dto.dream.DreamDto;
+import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.DreamStatus;
+import com.codecool.elproyectegrande1.entity.*;
 import com.codecool.elproyectegrande1.exceptions.DreamNotFoundException;
 import com.codecool.elproyectegrande1.mapper.DreamMapper;
 import com.codecool.elproyectegrande1.repository.DreamRepository;
@@ -32,11 +33,28 @@ public class DreamService {
         this.dreamerRepository = dreamerRepository;
     }
 
-    public DreamDto addDream(NewDreamDto newDream) {
+    public DreamDto addDream(String name, NewDreamDto newDream) {
+        Dreamer dreamer = dreamerRepository.findByNickname(name)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + name + " not found"));
         Dream toBeSaved = dreamMapper.mapNewDreamDtoToEntity(newDream);
+        toBeSaved.setDreamer(dreamer);
         Dream savedDream = dreamRepository.save(toBeSaved);
+        dreamer.getDreams().add(savedDream);
         dreams.add(savedDream);
         return dreamMapper.mapEntityToDreamDto(savedDream);
+    }
+
+    public List<DreamDto> getAllDreamsByDreamerId(Long id) {
+        List<Dream> dreams = dreamRepository.findByDreamerId(id);
+
+        List<DreamDto> dreamDtos = new ArrayList<>();
+
+        for (int i = 0; i < 8 && i < dreams.size(); i++) {
+            DreamDto dto = dreamMapper.mapEntityToDreamDto(dreams.get(i));
+            dreamDtos.add(dto);
+        }
+
+        return dreamDtos;
     }
 
     public void likeDream(Long dreamId) {

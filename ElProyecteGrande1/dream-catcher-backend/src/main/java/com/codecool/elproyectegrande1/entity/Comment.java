@@ -26,8 +26,8 @@ public class Comment {
 
     private String username;
 
-//    @ManyToOne
-//    private Dreamer dreamer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Dream dream;
 
 
     public Comment(String commentText, int likes, String username) {
@@ -102,7 +102,7 @@ public class Comment {
         this.username = username;
     }
 
-    //    public void setDreamer(Dreamer dreamer) {
-//        this.dreamer = dreamer;
-//    }
+    public void setDream(Dream dream) {
+        this.dream = dream;
+    }
 }

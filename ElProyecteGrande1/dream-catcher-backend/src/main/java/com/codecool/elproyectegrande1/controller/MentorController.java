@@ -3,6 +3,8 @@ package com.codecool.elproyectegrande1.controller;
 import com.codecool.elproyectegrande1.dto.MentorDto;
 import com.codecool.elproyectegrande1.dto.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.OfferDto;
+import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
+import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.service.ImageService;
 import com.codecool.elproyectegrande1.service.MentorService;
@@ -11,13 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import java.security.Principal;
+
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/mentors")
 public class MentorController {
 
     private final MentorService mentorService;
     private final ImageService imageService;
-    private boolean isLoggedIn = false;
 
     @Autowired
     public MentorController(MentorService mentorService, ImageService imageService) {
@@ -25,12 +29,13 @@ public class MentorController {
         this.imageService = imageService;
     }
 
-    @PostMapping("/{id}/offer")
-    public OfferDto addOffer(@PathVariable Long id, @RequestBody NewOfferDto offerDto) {
-
+    @PostMapping("/offer")
+    public OfferDto addOffer(@RequestBody NewOfferDto offerDto, Principal principal) {
+        String name = principal.getName();
         Image imageData = imageService.getImageFromDb(offerDto.getImageName());
+        System.out.println(imageData);
         offerDto.setImage(imageData);
-        return mentorService.addOffer(id, offerDto);
+        return mentorService.addOffer(name, offerDto);
     }
 
     @GetMapping("/all")

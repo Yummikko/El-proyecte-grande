@@ -1,14 +1,15 @@
-package com.codecool.elproyectegrande1.dto;
+package com.codecool.elproyectegrande1.dto.offer;
 
 import com.codecool.elproyectegrande1.entity.EOffer;
 import com.codecool.elproyectegrande1.entity.Image;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OfferDto {
+
+    private Long id;
     private EOffer type;
     private String title;
     private String description;
@@ -22,7 +23,8 @@ public class OfferDto {
     public OfferDto() {
     }
 
-    public OfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, int likes, int views, List<String> comments) {
+    public OfferDto(Long id, EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, int likes, int views, List<String> comments) {
+        this.id = id;
         this.type = type;
         this.title = title;
         this.description = description;
@@ -32,6 +34,14 @@ public class OfferDto {
         this.likes = likes;
         this.views = views;
         this.comments = comments;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public EOffer getType() {

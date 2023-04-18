@@ -28,12 +28,14 @@ public class Mentor {
     @OneToMany(mappedBy = "mentor", cascade = CascadeType.ALL)
     private List<Offer> offers = new ArrayList<>();
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @Column(name = "isVerified")
     private boolean isVerified = false;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Image profilePicture;
 
     public Mentor() {
     }
@@ -102,4 +104,12 @@ public class Mentor {
     }
 
 
+
+    public Image getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 }

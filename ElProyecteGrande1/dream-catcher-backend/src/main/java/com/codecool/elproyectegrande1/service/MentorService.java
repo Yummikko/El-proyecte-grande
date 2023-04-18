@@ -3,6 +3,8 @@ package com.codecool.elproyectegrande1.service;
 import com.codecool.elproyectegrande1.dto.MentorDto;
 import com.codecool.elproyectegrande1.dto.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.OfferDto;
+import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
+import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.entity.Mentor;
 import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.entity.User;
@@ -32,9 +34,9 @@ public class MentorService {
         this.offerMapper = offerMapper;
     }
 
-    public OfferDto addOffer(Long id, NewOfferDto offerDto) {
-        Mentor mentor = mentorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Mentor with id " + id + " not found"));
+    public OfferDto addOffer(String name, NewOfferDto offerDto) {
+        Mentor mentor = mentorRepository.findByNickname(name)
+                .orElseThrow(() -> new IllegalArgumentException("Mentor with nickname " + name + " not found"));
 
         Offer offer = offerMapper.mapOfferDtoToEntity(offerDto);
         offer.setMentor(mentor);

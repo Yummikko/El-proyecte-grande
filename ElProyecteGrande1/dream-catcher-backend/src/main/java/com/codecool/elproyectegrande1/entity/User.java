@@ -53,6 +53,10 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    private Avatar profilePicture;
+
 //    @OneToMany(
 //            mappedBy = "user",
 //            cascade = CascadeType.ALL,
@@ -135,7 +139,15 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-//    public Set<Letter> getLetters() {
+    public Avatar getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Avatar profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    //    public Set<Letter> getLetters() {
 //        return letters;
 //    }
 //
