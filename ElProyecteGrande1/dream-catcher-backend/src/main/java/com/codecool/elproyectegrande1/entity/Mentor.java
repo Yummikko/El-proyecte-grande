@@ -44,7 +44,6 @@ public class Mentor {
         this.nickname = nickname;
         this.email = email;
         this.user = user;
-        this.isVerified = isVerified();
     }
 
     public Long getId() {
@@ -102,8 +101,6 @@ public class Mentor {
     public void setVerified(boolean verified) {
         isVerified = verified;
     }
-
-
 
     public Image getProfilePicture() {
         return profilePicture;

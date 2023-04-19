@@ -1,8 +1,6 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.dto.MentorDto;
-import com.codecool.elproyectegrande1.dto.NewOfferDto;
-import com.codecool.elproyectegrande1.dto.OfferDto;
+import com.codecool.elproyectegrande1.dto.mentor.MentorDto;
 import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.entity.Image;
@@ -41,6 +39,11 @@ public class MentorController {
     @GetMapping("/all")
     public List<MentorDto> getAllMentors() {
         return mentorService.getAllMentors();
+    }
+
+    @GetMapping("/{id}")
+    public MentorDto getMentor(@PathVariable("id") String id) {
+        return mentorService.getMentor(id);
     }
 
 }

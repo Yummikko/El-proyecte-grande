@@ -21,14 +21,13 @@ public class MentorDto {
     public MentorDto() {
     }
 
-    public MentorDto(Long id, String nickname, String email, int followers, List<Offer> offers, User user, boolean isVerified) {
+    public MentorDto(Long id, String nickname, String email, int followers, List<Offer> offers, User user) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
         this.followers = followers;
         this.offers = offers;
         this.user = user;
-        this.isVerified = isVerified;
     }
 
     public Long getId() {

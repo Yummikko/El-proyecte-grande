@@ -1,7 +1,9 @@
 package com.codecool.elproyectegrande1.service;
 
+import com.codecool.elproyectegrande1.entity.Mentor;
 import com.codecool.elproyectegrande1.mapper.MentorMapper;
 import com.codecool.elproyectegrande1.repository.MentorRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,12 +17,9 @@ public class AdminService {
         this.mentorRepository = mentorRepository;
     }
 
-//    public void approveMentor(Mentor mentor, User admin) {
-//        if (admin != null && admin.isAdmin()) {
-//            mentor.setVerified(true);
-//            System.out.println("Mentor " + mentor.getNickname() + " został zatwierdzony przez administratora.");
-//        } else {
-//            System.out.println("Brak uprawnień administratora do zatwierdzenia mentora.");
-//        }
-//    }
+    public void approveMentor(String mentorName) {
+        Mentor mentor = mentorRepository.findByNickname(mentorName).orElseThrow(()-> new UsernameNotFoundException("Mentor not found"));
+        mentor.setVerified(true);
+        mentorRepository.save(mentor);
+    }
 }

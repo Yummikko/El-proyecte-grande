@@ -15,8 +15,7 @@ public class MentorMapper {
             entity.getEmail(),
             entity.getFollowers(),
             entity.getOffers(),
-            entity.getUser(),
-            entity.isVerified()
+            entity.getUser()
         );
     }
 
