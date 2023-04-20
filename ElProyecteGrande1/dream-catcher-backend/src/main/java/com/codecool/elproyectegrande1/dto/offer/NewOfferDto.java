@@ -2,10 +2,10 @@ package com.codecool.elproyectegrande1.dto.offer;
 
 import com.codecool.elproyectegrande1.entity.EOffer;
 import com.codecool.elproyectegrande1.entity.Image;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewOfferDto {
@@ -14,23 +14,25 @@ public class NewOfferDto {
     private String description;
     private BigDecimal price;
     private LocalDate date;
+    @JsonIgnore
     private Image image;
     private String imageName;
     private int likes = 0;
     private List<String> comments;
 
+    private Long userId;
+
     public NewOfferDto() {
     }
 
-    public NewOfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, String imageName, int likes, List<String> comments) {
+    public NewOfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, String imageName, Long userId) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.price = price;
         this.date = date;
         this.imageName = imageName;
-        this.likes = likes;
-        this.comments = comments;
+        this.userId = userId;
     }
 
     public EOffer getType() {
@@ -103,5 +105,13 @@ public class NewOfferDto {
 
     public void setComments(List<String> comments) {
         this.comments = comments;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

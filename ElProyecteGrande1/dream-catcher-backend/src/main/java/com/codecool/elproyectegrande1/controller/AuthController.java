@@ -1,14 +1,12 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.entity.ERole;
-import com.codecool.elproyectegrande1.entity.Role;
-import com.codecool.elproyectegrande1.entity.User;
-import com.codecool.elproyectegrande1.entity.UserDetailsImpl;
+import com.codecool.elproyectegrande1.entity.*;
 import com.codecool.elproyectegrande1.jwt.JwtUtils;
 import com.codecool.elproyectegrande1.payload.request.LoginRequest;
 import com.codecool.elproyectegrande1.payload.request.SignupRequest;
 import com.codecool.elproyectegrande1.payload.response.JwtResponse;
 import com.codecool.elproyectegrande1.payload.response.MessageResponse;
+import com.codecool.elproyectegrande1.repository.MentorRepository;
 import com.codecool.elproyectegrande1.repository.RoleRepository;
 import com.codecool.elproyectegrande1.repository.UserRepository;
 import com.codecool.elproyectegrande1.service.DreamerService;
@@ -16,9 +14,11 @@ import com.codecool.elproyectegrande1.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,11 +55,14 @@ public class AuthController {
     private final String DREAMER = "dreamer";
     private final String MENTOR = "mentor";
     private final String ADMIN = "admin";
+    private final MentorRepository mentorRepository;
 
     @Autowired
-    public AuthController(DreamerService dreamerService, MentorService mentorService) {
+    public AuthController(DreamerService dreamerService, MentorService mentorService,
+                          MentorRepository mentorRepository) {
         this.dreamerService = dreamerService;
         this.mentorService = mentorService;
+        this.mentorRepository = mentorRepository;
     }
 
     @PostMapping("/signin")
@@ -70,6 +73,13 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
+        User user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        if(user.getRoles().iterator().next().getName()==ERole.ROLE_MENTOR){
+            Mentor mentor = mentorRepository.findByNickname(loginRequest.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            if (!mentor.isVerified()) {
+                throw new BadCredentialsException("User not verified!");
+            }
+        }
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
@@ -82,7 +92,8 @@ public class AuthController {
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                roles));
+                roles,
+                userDetails.getProfilePictureId()));
     }
 
     @PostMapping("/signup")
@@ -135,7 +146,7 @@ public class AuthController {
         }
 
         for (String entry:strRoles) {
-            if (!DREAMER.equals(entry) && !MENTOR.equals(entry)) {
+            if (!DREAMER.equals(entry) && !MENTOR.equals(entry) && !ADMIN.equals(entry)) {
                 return ResponseEntity.internalServerError().body(new MessageResponse("There's no such role."));
             }
         }

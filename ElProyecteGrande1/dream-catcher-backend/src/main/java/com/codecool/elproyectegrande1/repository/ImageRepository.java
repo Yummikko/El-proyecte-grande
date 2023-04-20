@@ -15,4 +15,9 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 
     @Query("SELECT i FROM Image i WHERE i.name = :fileName AND i.id = (SELECT max(id) from Image)")
     Image findImageByName(String fileName);
+
+    @Query("SELECT i FROM Image i JOIN Dream d ON d.id = :dreamId WHERE i.name = :fileName")
+    Image findImageByNameAndDreamId(String fileName, Long dreamId);
+    @Query("SELECT i FROM Image i JOIN Offer o ON  o.id = :offerId WHERE i.name = :imageName")
+    Image findImageByNameAndOfferId(String imageName, Long offerId);
 }

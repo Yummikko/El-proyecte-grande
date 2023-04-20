@@ -1,9 +1,13 @@
 package com.codecool.elproyectegrande1.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Dream {
@@ -32,11 +36,24 @@ public class Dream {
     @ElementCollection
     private List<String> hashtags;
 
-    @ElementCollection
-    private List<String> comments;
+    @OneToMany(
+            mappedBy = "dream",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Comment> comments;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Image image;
+//    @OneToMany(
+//            mappedBy = "dream",
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true
+//    )
+//    @JsonManagedReference
+//    private List<Image> images;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference("dream-image")
+    private Image mainImage;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Dreamer dreamer;
@@ -44,15 +61,15 @@ public class Dream {
     public Dream() {
     }
 
-    public Dream(String dreamTitle, String dreamDescription, List<String> hashtags, List<String> comments, Image image) {
+    public Dream(String dreamTitle, String dreamDescription, List<String> hashtags, Image mainImage) {
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
         this.likes = 0;
         this.views = 0;
         this.dreamStatus = DreamStatus.PRESENTING;
         this.hashtags = hashtags;
-        this.comments = comments;
-        this.image = image;
+        this.comments = new HashSet<>();
+        this.mainImage = mainImage;
     }
 
     public Long getId() {
@@ -111,21 +128,21 @@ public class Dream {
         this.hashtags = hashtags;
     }
 
-    public List<String> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<String> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
+//    public List<Image> getImages() {
+//        return images;
+//    }
+//
+//    public void setImages(List<Image> images) {
+//        this.images = images;
+//    }
 
     public Dreamer getDreamer() {
         return dreamer;
@@ -133,5 +150,13 @@ public class Dream {
 
     public void setDreamer(Dreamer dreamer) {
         this.dreamer = dreamer;
+    }
+
+    public Image getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(Image mainImage) {
+        this.mainImage = mainImage;
     }
 }

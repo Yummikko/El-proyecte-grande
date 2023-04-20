@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -57,9 +58,9 @@ class DreamControllerTest {
     void shouldReturnDreamJson() throws Exception {
 
         //given:
-        DreamDto dreamDto = new DreamDto(10L, "test", "test", new ArrayList<>(), new Image());
+        DreamDto dreamDto = new DreamDto(10L, "test", "test", new ArrayList<>(), new Image(), new HashSet<>());
 
-        NewDreamDto newDreamDto = new NewDreamDto("test", "test", new ArrayList<>(), new ArrayList<>(), "image.jpg");
+        NewDreamDto newDreamDto = new NewDreamDto("test", "test", new ArrayList<>(), "image.jpg");
 
         Mockito.when(dreamService.addDream("10L", newDreamDto)).thenReturn((dreamDto));
 

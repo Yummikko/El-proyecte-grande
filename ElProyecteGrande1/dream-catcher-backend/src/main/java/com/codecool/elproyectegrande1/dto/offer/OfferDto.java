@@ -1,14 +1,16 @@
 package com.codecool.elproyectegrande1.dto.offer;
 
+import com.codecool.elproyectegrande1.dto.comment.CommentDto;
 import com.codecool.elproyectegrande1.entity.EOffer;
 import com.codecool.elproyectegrande1.entity.Image;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 public class OfferDto {
+
+    private Long id;
     private EOffer type;
     private String title;
     private String description;
@@ -17,12 +19,13 @@ public class OfferDto {
     private Image image;
     private int likes = 0;
     private int views = 0;
-    private List<String> comments;
+    private Set<CommentDto> comments;
 
     public OfferDto() {
     }
 
-    public OfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, int likes, int views, List<String> comments) {
+    public OfferDto(Long id, EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, int likes, int views, Set<CommentDto> comments) {
+        this.id = id;
         this.type = type;
         this.title = title;
         this.description = description;
@@ -32,6 +35,14 @@ public class OfferDto {
         this.likes = likes;
         this.views = views;
         this.comments = comments;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public EOffer getType() {
@@ -98,11 +109,11 @@ public class OfferDto {
         this.views = views;
     }
 
-    public List<String> getComments() {
+    public Set<CommentDto> getComments() {
         return comments;
     }
 
-    public void setComments(List<String> comments) {
+    public void setComments(Set<CommentDto> comments) {
         this.comments = comments;
     }
 }

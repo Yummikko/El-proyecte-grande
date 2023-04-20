@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -7,7 +8,10 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.time.Instant;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users",
@@ -45,6 +49,13 @@ public class User implements UserDetails {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    private Set<Admin> admins = new HashSet<>();
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private Set<Mentor> mentors = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -52,6 +63,9 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @CreationTimestamp
+    private Instant createdOn;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Avatar profilePicture;
@@ -146,7 +160,15 @@ public class User implements UserDetails {
         this.profilePicture = profilePicture;
     }
 
-    //    public Set<Letter> getLetters() {
+    public Instant getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Instant createdOn) {
+        this.createdOn = createdOn;
+    }
+
+//    public Set<Letter> getLetters() {
 //        return letters;
 //    }
 //

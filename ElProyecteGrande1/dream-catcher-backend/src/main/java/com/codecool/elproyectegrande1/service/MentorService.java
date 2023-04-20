@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.service;
 
+import com.codecool.elproyectegrande1.dto.mentor.MentorDto;
 import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.entity.Mentor;
@@ -7,10 +8,14 @@ import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.entity.User;
 import com.codecool.elproyectegrande1.mapper.MentorMapper;
 import com.codecool.elproyectegrande1.mapper.OfferMapper;
+import com.codecool.elproyectegrande1.repository.ImageRepository;
 import com.codecool.elproyectegrande1.repository.MentorRepository;
 import com.codecool.elproyectegrande1.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MentorService {
@@ -19,24 +24,29 @@ public class MentorService {
     private final OfferRepository offerRepository;
     private final MentorMapper mentorMapper;
     private final OfferMapper offerMapper;
+    private final ImageRepository imageRepository;
 
     @Autowired
-    public MentorService(MentorRepository mentorRepository, OfferRepository offerRepository, MentorMapper mentorMapper, OfferMapper offerMapper) {
+    public MentorService(MentorRepository mentorRepository, OfferRepository offerRepository, MentorMapper mentorMapper, OfferMapper offerMapper, ImageRepository imageRepository) {
         this.mentorRepository = mentorRepository;
         this.offerRepository = offerRepository;
         this.mentorMapper = mentorMapper;
         this.offerMapper = offerMapper;
+        this.imageRepository = imageRepository;
     }
 
-    public OfferDto addOffer(Long id, NewOfferDto offerDto) {
-        Mentor mentor = mentorRepository.findByUserId(id)
-                .orElseThrow(() -> new IllegalArgumentException("Mentor with id " + id + " not found"));
+    public OfferDto addOffer(String name, NewOfferDto offerDto) {
+        Mentor mentor = mentorRepository.findByNickname(name)
+                .orElseThrow(() -> new IllegalArgumentException("Mentor with nickname " + name + " not found"));
 
         Offer offer = offerMapper.mapOfferDtoToEntity(offerDto);
         offer.setMentor(mentor);
+
         Offer savedOffer = offerRepository.save(offer);
 
-        mentor.getOffers().add(savedOffer);
+        List<Offer> updatedOffers = mentor.getOffers();
+        updatedOffers.add(savedOffer);
+//        mentorRepository.updateOffers(mentor.getId(), updatedOffers);
         mentorRepository.save(mentor);
 
         return offerMapper.mapEntityToOfferDto(savedOffer);
@@ -47,4 +57,17 @@ public class MentorService {
         mentorRepository.save(mentor);
     }
 
+    public List<MentorDto> getAllMentors() {
+        List<Mentor> mentors = mentorRepository.findAll();
+        return mentors.stream()
+                .map(mentorMapper::mapEntityToMentorDto)
+                .collect(Collectors.toList());
+    }
+
+    public MentorDto getMentor(String user_id) {
+        Mentor mentor = mentorRepository.findByNickname(user_id)
+                .orElseThrow(() -> new IllegalArgumentException("Mentor with nickname " + user_id + " not found"));
+        System.out.println(mentor.isVerified());
+        return null;
+    }
 }
