@@ -49,6 +49,13 @@ public class User implements UserDetails {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    private Set<Admin> admins = new HashSet<>();
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private Set<Mentor> mentors = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)

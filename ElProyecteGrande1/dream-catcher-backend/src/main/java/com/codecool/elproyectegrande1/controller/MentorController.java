@@ -1,11 +1,14 @@
 package com.codecool.elproyectegrande1.controller;
 
+import com.codecool.elproyectegrande1.dto.mentor.MentorDto;
 import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.service.ImageService;
 import com.codecool.elproyectegrande1.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import java.security.Principal;
 
@@ -27,6 +30,16 @@ public class MentorController {
     public OfferDto addOffer(@RequestBody NewOfferDto offerDto, Principal principal) {
         String name = principal.getName();
         return mentorService.addOffer(name, offerDto);
+    }
+
+    @GetMapping("/all")
+    public List<MentorDto> getAllMentors() {
+        return mentorService.getAllMentors();
+    }
+
+    @GetMapping("/{id}")
+    public MentorDto getMentor(@PathVariable("id") String id) {
+        return mentorService.getMentor(id);
     }
 
 }

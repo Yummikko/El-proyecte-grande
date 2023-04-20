@@ -30,6 +30,9 @@ public class Mentor {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    @Column(name = "isVerified")
+    private boolean isVerified = false;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Image profilePicture;
 
@@ -88,6 +91,14 @@ public class Mentor {
 
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 
     public Image getProfilePicture() {

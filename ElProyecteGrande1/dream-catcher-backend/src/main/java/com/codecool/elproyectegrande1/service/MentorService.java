@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.service;
 
+import com.codecool.elproyectegrande1.dto.mentor.MentorDto;
 import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.entity.Mentor;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MentorService {
@@ -55,4 +57,17 @@ public class MentorService {
         mentorRepository.save(mentor);
     }
 
+    public List<MentorDto> getAllMentors() {
+        List<Mentor> mentors = mentorRepository.findAll();
+        return mentors.stream()
+                .map(mentorMapper::mapEntityToMentorDto)
+                .collect(Collectors.toList());
+    }
+
+    public MentorDto getMentor(String user_id) {
+        Mentor mentor = mentorRepository.findByNickname(user_id)
+                .orElseThrow(() -> new IllegalArgumentException("Mentor with nickname " + user_id + " not found"));
+        System.out.println(mentor.isVerified());
+        return null;
+    }
 }
