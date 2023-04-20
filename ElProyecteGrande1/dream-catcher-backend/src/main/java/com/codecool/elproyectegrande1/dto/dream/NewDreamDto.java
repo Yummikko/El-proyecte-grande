@@ -3,6 +3,7 @@ package com.codecool.elproyectegrande1.dto.dream;
 import com.codecool.elproyectegrande1.entity.Comment;
 import com.codecool.elproyectegrande1.entity.DreamStatus;
 import com.codecool.elproyectegrande1.entity.Image;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.HashSet;
@@ -17,10 +18,10 @@ public class NewDreamDto {
     private DreamStatus dreamStatus;
     private List<String> hashtags;
     private Set<Comment> comments;
-
     private String imageName;
-    private Image image;
 
+    @JsonIgnore
+    private Image image;
 
     public NewDreamDto() {
     }

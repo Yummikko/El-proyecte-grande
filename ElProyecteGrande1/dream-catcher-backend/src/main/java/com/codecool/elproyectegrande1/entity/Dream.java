@@ -52,7 +52,7 @@ public class Dream {
 //    private List<Image> images;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference("dream-image")
     private Image mainImage;
 
     @ManyToOne(fetch = FetchType.LAZY)

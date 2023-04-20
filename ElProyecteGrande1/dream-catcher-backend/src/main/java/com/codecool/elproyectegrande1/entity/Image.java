@@ -17,14 +17,14 @@ public class Image {
     private String type;
     @Column(name = "imagedata")
     private byte[] imageData;
-    @ManyToOne
+    @OneToOne
     (fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonBackReference("offer-image")
     private Offer offer;
 
-    @ManyToOne
+    @OneToOne
     (fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonBackReference("dream-image")
     private Dream dream;
 
     public Long getId() {

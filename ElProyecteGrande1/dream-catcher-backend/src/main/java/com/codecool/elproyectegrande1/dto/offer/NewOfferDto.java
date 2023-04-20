@@ -2,6 +2,7 @@ package com.codecool.elproyectegrande1.dto.offer;
 
 import com.codecool.elproyectegrande1.entity.EOffer;
 import com.codecool.elproyectegrande1.entity.Image;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class NewOfferDto {
     private String description;
     private BigDecimal price;
     private LocalDate date;
+    @JsonIgnore
     private Image image;
     private String imageName;
     private int likes = 0;

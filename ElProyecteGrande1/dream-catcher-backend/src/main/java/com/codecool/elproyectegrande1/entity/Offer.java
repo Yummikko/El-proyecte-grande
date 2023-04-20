@@ -43,7 +43,7 @@ public class Offer {
 //    private List<Image> images;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference("offer-image")
     private Image mainImage;
 
     @Column(name = "likes", columnDefinition = "INT DEFAULT 0")
