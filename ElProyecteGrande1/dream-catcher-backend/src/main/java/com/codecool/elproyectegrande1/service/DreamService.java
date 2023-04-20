@@ -9,6 +9,7 @@ import com.codecool.elproyectegrande1.exceptions.DreamNotFoundException;
 import com.codecool.elproyectegrande1.mapper.DreamMapper;
 import com.codecool.elproyectegrande1.repository.DreamRepository;
 import com.codecool.elproyectegrande1.repository.DreamerRepository;
+import com.codecool.elproyectegrande1.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -24,22 +25,31 @@ public class DreamService {
     private final DreamMapper dreamMapper;
     private final DreamerRepository dreamerRepository;
     private final List<Dream> dreams = new ArrayList<>();
+    private final ImageRepository imageRepository;
 
 
     @Autowired
-    public DreamService(DreamRepository dreamRepository, DreamMapper dreamMapper, DreamerRepository dreamerRepository) {
+    public DreamService(DreamRepository dreamRepository, DreamMapper dreamMapper, DreamerRepository dreamerRepository,
+                        ImageRepository imageRepository) {
         this.dreamRepository = dreamRepository;
         this.dreamMapper = dreamMapper;
         this.dreamerRepository = dreamerRepository;
+        this.imageRepository = imageRepository;
     }
 
     public DreamDto addDream(String name, NewDreamDto newDream) {
         Dreamer dreamer = dreamerRepository.findByNickname(name)
                 .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + name + " not found"));
+
         Dream toBeSaved = dreamMapper.mapNewDreamDtoToEntity(newDream);
         toBeSaved.setDreamer(dreamer);
+
+
         Dream savedDream = dreamRepository.save(toBeSaved);
-        dreamer.getDreams().add(savedDream);
+
+        List<Dream> updatedDreams = dreamer.getDreams();
+        updatedDreams.add(savedDream);
+//        dreamerRepository.updateDreams(dreamer.getId(), updatedDreams);
         dreams.add(savedDream);
         return dreamMapper.mapEntityToDreamDto(savedDream);
     }

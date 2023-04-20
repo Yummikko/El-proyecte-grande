@@ -5,7 +5,6 @@ import com.codecool.elproyectegrande1.dto.comment.NewCommentDto;
 import com.codecool.elproyectegrande1.dto.dream.DreamDto;
 import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
-import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.payload.response.MessageResponse;
 import com.codecool.elproyectegrande1.service.CommentService;
 import com.codecool.elproyectegrande1.service.DreamService;
@@ -39,8 +38,6 @@ public class DreamController {
     @PostMapping("/create")
     public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto, Principal principal) {
         String name = principal.getName();
-        Image imageData = imageService.getImageFromDb(newDreamDto.getImageName());
-        newDreamDto.setImage(imageData);
         return dreamService.addDream(name, newDreamDto);
     }
 

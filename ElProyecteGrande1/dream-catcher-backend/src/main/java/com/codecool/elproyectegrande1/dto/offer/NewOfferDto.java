@@ -18,16 +18,19 @@ public class NewOfferDto {
     private int likes = 0;
     private List<String> comments;
 
+    private Long userId;
+
     public NewOfferDto() {
     }
 
-    public NewOfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, String imageName) {
+    public NewOfferDto(EOffer type, String title, String description, BigDecimal price, LocalDate date, String imageName, Long userId) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.price = price;
         this.date = date;
         this.imageName = imageName;
+        this.userId = userId;
     }
 
     public EOffer getType() {
@@ -100,5 +103,13 @@ public class NewOfferDto {
 
     public void setComments(List<String> comments) {
         this.comments = comments;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

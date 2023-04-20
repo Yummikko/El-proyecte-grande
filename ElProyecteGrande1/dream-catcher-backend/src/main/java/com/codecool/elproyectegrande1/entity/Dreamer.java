@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -38,7 +37,7 @@ public class Dreamer {
     private Set<String> letters;
 
     @OneToMany(mappedBy = "dreamer", cascade = CascadeType.ALL)
-    private List<Dream> dreams = new ArrayList<>();
+    private List<Dream> dreams;
 
     public Dreamer() {
     }

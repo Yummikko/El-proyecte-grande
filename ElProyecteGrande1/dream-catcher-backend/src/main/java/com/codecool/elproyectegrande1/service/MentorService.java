@@ -7,10 +7,13 @@ import com.codecool.elproyectegrande1.entity.Offer;
 import com.codecool.elproyectegrande1.entity.User;
 import com.codecool.elproyectegrande1.mapper.MentorMapper;
 import com.codecool.elproyectegrande1.mapper.OfferMapper;
+import com.codecool.elproyectegrande1.repository.ImageRepository;
 import com.codecool.elproyectegrande1.repository.MentorRepository;
 import com.codecool.elproyectegrande1.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MentorService {
@@ -19,13 +22,15 @@ public class MentorService {
     private final OfferRepository offerRepository;
     private final MentorMapper mentorMapper;
     private final OfferMapper offerMapper;
+    private final ImageRepository imageRepository;
 
     @Autowired
-    public MentorService(MentorRepository mentorRepository, OfferRepository offerRepository, MentorMapper mentorMapper, OfferMapper offerMapper) {
+    public MentorService(MentorRepository mentorRepository, OfferRepository offerRepository, MentorMapper mentorMapper, OfferMapper offerMapper, ImageRepository imageRepository) {
         this.mentorRepository = mentorRepository;
         this.offerRepository = offerRepository;
         this.mentorMapper = mentorMapper;
         this.offerMapper = offerMapper;
+        this.imageRepository = imageRepository;
     }
 
     public OfferDto addOffer(String name, NewOfferDto offerDto) {
@@ -34,9 +39,12 @@ public class MentorService {
 
         Offer offer = offerMapper.mapOfferDtoToEntity(offerDto);
         offer.setMentor(mentor);
+
         Offer savedOffer = offerRepository.save(offer);
 
-        mentor.getOffers().add(savedOffer);
+        List<Offer> updatedOffers = mentor.getOffers();
+        updatedOffers.add(savedOffer);
+//        mentorRepository.updateOffers(mentor.getId(), updatedOffers);
         mentorRepository.save(mentor);
 
         return offerMapper.mapEntityToOfferDto(savedOffer);

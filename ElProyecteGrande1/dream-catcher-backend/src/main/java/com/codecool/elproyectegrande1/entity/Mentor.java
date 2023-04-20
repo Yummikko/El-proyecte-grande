@@ -3,7 +3,6 @@ package com.codecool.elproyectegrande1.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +25,7 @@ public class Mentor {
     private int followers;
 
     @OneToMany(mappedBy = "mentor", cascade = CascadeType.ALL)
-    private List<Offer> offers = new ArrayList<>();
+    private List<Offer> offers;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;

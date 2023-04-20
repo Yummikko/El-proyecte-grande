@@ -2,7 +2,6 @@ package com.codecool.elproyectegrande1.controller;
 
 import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.offer.OfferDto;
-import com.codecool.elproyectegrande1.entity.Image;
 import com.codecool.elproyectegrande1.service.ImageService;
 import com.codecool.elproyectegrande1.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,6 @@ public class MentorController {
     @PostMapping("/offer")
     public OfferDto addOffer(@RequestBody NewOfferDto offerDto, Principal principal) {
         String name = principal.getName();
-        Image imageData = imageService.getImageFromDb(offerDto.getImageName());
-        System.out.println(imageData);
-        offerDto.setImage(imageData);
         return mentorService.addOffer(name, offerDto);
     }
 

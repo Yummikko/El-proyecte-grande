@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -12,12 +13,20 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String type;
-
     @Column(name = "imagedata")
     private byte[] imageData;
+    @ManyToOne
+    (fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Offer offer;
+
+    @ManyToOne
+    (fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Dream dream;
+
     public Long getId() {
         return id;
     }
@@ -43,4 +52,19 @@ public class Image {
         this.imageData = imageData;
     }
 
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
+    }
+
+    public Dream getDream() {
+        return dream;
+    }
+
+    public void setDream(Dream dream) {
+        this.dream = dream;
+    }
 }

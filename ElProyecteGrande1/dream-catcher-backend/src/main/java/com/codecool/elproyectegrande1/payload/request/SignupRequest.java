@@ -1,7 +1,10 @@
 package com.codecool.elproyectegrande1.payload.request;
 
 import com.codecool.elproyectegrande1.entity.Image;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -23,6 +26,9 @@ public class SignupRequest {
     @Size(min = 6, max = 40)
     private String password;
 
+    @ManyToOne
+    (fetch = FetchType.LAZY)
+    @JsonIgnore
     private Image profilePicture;
 
     public String getUsername() {

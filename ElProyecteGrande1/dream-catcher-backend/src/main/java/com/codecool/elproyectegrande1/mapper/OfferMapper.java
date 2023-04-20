@@ -3,10 +3,15 @@ package com.codecool.elproyectegrande1.mapper;
 import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.offer.OfferDto;
 import com.codecool.elproyectegrande1.entity.Offer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class OfferMapper {
+    @Autowired
+    private CommentMapper commentMapper;
 
     public OfferDto mapEntityToOfferDto(Offer entity) {
         return new OfferDto(
@@ -16,10 +21,13 @@ public class OfferMapper {
                 entity.getDescription(),
                 entity.getPrice(),
                 entity.getDate(),
-                entity.getImage(),
+                entity.getMainImage(),
                 entity.getLikes(),
                 entity.getViews(),
                 entity.getComments()
+                .stream()
+                .map(commentMapper::mapEntityToCommentDto)
+                .collect(Collectors.toSet())
         );
     }
 
@@ -30,8 +38,7 @@ public class OfferMapper {
                 dto.getDescription(),
                 dto.getPrice(),
                 dto.getDate(),
-                dto.getImage(),
-                dto.getComments()
+                dto.getImage()
         );
     }
 }

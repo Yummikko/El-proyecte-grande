@@ -21,6 +21,7 @@ public class NewDreamDto {
     private String imageName;
     private Image image;
 
+
     public NewDreamDto() {
     }
 

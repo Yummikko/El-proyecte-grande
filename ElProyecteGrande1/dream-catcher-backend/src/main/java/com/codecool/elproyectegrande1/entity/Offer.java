@@ -1,10 +1,13 @@
 package com.codecool.elproyectegrande1.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Offer {
@@ -31,8 +34,17 @@ public class Offer {
     @NotNull
     private LocalDate date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Image image;
+//    @OneToMany(
+//            mappedBy = "offer",
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true
+//    )
+//    @JsonManagedReference
+//    private List<Image> images;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Image mainImage;
 
     @Column(name = "likes", columnDefinition = "INT DEFAULT 0")
     private int likes;
@@ -40,22 +52,26 @@ public class Offer {
     @Column(name = "views", columnDefinition = "INT DEFAULT 0")
     private int views;
 
-    @ElementCollection
-    private List<String> comments;
+    @OneToMany(
+            mappedBy = "dream",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Comment> comments;
 
     public Offer() {
     }
 
-    public Offer(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image image, List<String> comments) {
+    public Offer(EOffer type, String title, String description, BigDecimal price, LocalDate date, Image mainImage) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.price = price;
         this.date = date;
-        this.image = image;
+        this.mainImage = mainImage;
         this.likes = 0;
         this.views = 0;
-        this.comments = comments;
+        this.comments = new HashSet<>();
     }
 
 
@@ -115,13 +131,13 @@ public class Offer {
         this.date = date;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
+//    public List<Image> getImages() {
+//        return images;
+//    }
+//
+//    public void setImages(List<Image> images) {
+//        this.images = images;
+//    }
 
     public int getLikes() {
         return likes;
@@ -139,11 +155,19 @@ public class Offer {
         this.views = views;
     }
 
-    public List<String> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<String> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Image getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(Image mainImage) {
+        this.mainImage = mainImage;
     }
 }

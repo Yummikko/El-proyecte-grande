@@ -20,7 +20,7 @@ public class DreamMapper {
                 entity.getDreamTitle(),
                 entity.getDreamDescription(),
                 entity.getHashtags(),
-                entity.getImage(),
+                entity.getMainImage(),
                 entity.getComments()
                         .stream()
                         .map(commentMapper::mapEntityToCommentDto)
@@ -33,7 +33,6 @@ public class DreamMapper {
                 dto.getDreamTitle(),
                 dto.getDreamDescription(),
                 dto.getHashtags(),
-                dto.getComments(),
                 dto.getImage()
         );
     }
