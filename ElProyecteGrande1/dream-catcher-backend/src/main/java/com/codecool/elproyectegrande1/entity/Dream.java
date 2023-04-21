@@ -1,5 +1,7 @@
 package com.codecool.elproyectegrande1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -45,6 +47,7 @@ public class Dream {
     private Image image;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("dreams")
     private Dreamer dreamer;
 
     public Dream() {

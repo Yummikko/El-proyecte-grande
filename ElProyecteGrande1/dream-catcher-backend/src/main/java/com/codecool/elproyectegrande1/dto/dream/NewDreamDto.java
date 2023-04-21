@@ -29,7 +29,7 @@ public class NewDreamDto {
         this.dreamDescription = dreamDescription;
         this.dreamStatus = DreamStatus.PRESENTING;
         this.hashtags = hashtags;
-        this.comments = new HashSet<>();
+//        this.comments = new HashSet<>();
         this.imageName = imageName;
     }
 

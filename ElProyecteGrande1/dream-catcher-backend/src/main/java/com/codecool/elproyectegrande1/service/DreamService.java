@@ -23,8 +23,6 @@ public class DreamService {
     private final DreamRepository dreamRepository;
     private final DreamMapper dreamMapper;
     private final DreamerRepository dreamerRepository;
-    private final List<Dream> dreams = new ArrayList<>();
-
 
     @Autowired
     public DreamService(DreamRepository dreamRepository, DreamMapper dreamMapper, DreamerRepository dreamerRepository) {
@@ -40,22 +38,9 @@ public class DreamService {
         toBeSaved.setDreamer(dreamer);
         Dream savedDream = dreamRepository.save(toBeSaved);
         dreamer.getDreams().add(savedDream);
-        dreams.add(savedDream);
         return dreamMapper.mapEntityToDreamDto(savedDream);
     }
 
-    public List<DreamDto> getAllDreamsByDreamerId(Long id) {
-        List<Dream> dreams = dreamRepository.findByDreamerId(id);
-
-        List<DreamDto> dreamDtos = new ArrayList<>();
-
-        for (int i = 0; i < 8 && i < dreams.size(); i++) {
-            DreamDto dto = dreamMapper.mapEntityToDreamDto(dreams.get(i));
-            dreamDtos.add(dto);
-        }
-
-        return dreamDtos;
-    }
 
     public void likeDream(Long dreamId) {
         Dream dream = dreamRepository.findById(dreamId).orElseThrow();
