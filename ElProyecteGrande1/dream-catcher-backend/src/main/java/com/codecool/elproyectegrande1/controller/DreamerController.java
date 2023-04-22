@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.controller;
 
+import com.codecool.elproyectegrande1.dto.dream.DreamDto;
 import com.codecool.elproyectegrande1.dto.dreamer.DreamerDto;
 import com.codecool.elproyectegrande1.dto.dreamer.NewDreamerDto;
 import com.codecool.elproyectegrande1.entity.Dreamer;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -33,9 +35,9 @@ public class DreamerController {
         return dreamerService.createDreamer(newDreamerDto);
     }
 
-    @GetMapping("/{id}")
-    public DreamerDto getDreamerById(@PathVariable("id") Long id) {
-        return dreamerService.getDreamerById(id);
+    @GetMapping("/{nickname}")
+    public DreamerDto getDreamerByNickname(@PathVariable("nickname") String nickname) {
+        return dreamerService.getDreamerByNickname(nickname);
     }
 
 
@@ -64,5 +66,10 @@ public class DreamerController {
     public ResponseEntity<String> donateDreamer(@PathVariable Long id, @PathVariable BigDecimal amount) {
         dreamerService.donateDreamer(id, amount);
         return new ResponseEntity<>("You have donated to this dreamer", HttpStatus.OK);
+    }
+
+    @GetMapping("/{nickname}/dreams")
+    public List<DreamDto> getAllDreamsByDreamerId(@PathVariable("nickname") String nickname) {
+        return dreamerService.getAllDreamsByDreamerNickname(nickname);
     }
 }

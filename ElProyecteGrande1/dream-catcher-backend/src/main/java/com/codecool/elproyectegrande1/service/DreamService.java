@@ -43,29 +43,16 @@ public class DreamService {
 
         Dream toBeSaved = dreamMapper.mapNewDreamDtoToEntity(newDream);
         toBeSaved.setDreamer(dreamer);
-
-
         Dream savedDream = dreamRepository.save(toBeSaved);
 
         List<Dream> updatedDreams = dreamer.getDreams();
         updatedDreams.add(savedDream);
 //        dreamerRepository.updateDreams(dreamer.getId(), updatedDreams);
         dreams.add(savedDream);
+        dreamer.getDreams().add(savedDream);
         return dreamMapper.mapEntityToDreamDto(savedDream);
     }
 
-    public List<DreamDto> getAllDreamsByDreamerId(Long id) {
-        List<Dream> dreams = dreamRepository.findByDreamerId(id);
-
-        List<DreamDto> dreamDtos = new ArrayList<>();
-
-        for (int i = 0; i < 8 && i < dreams.size(); i++) {
-            DreamDto dto = dreamMapper.mapEntityToDreamDto(dreams.get(i));
-            dreamDtos.add(dto);
-        }
-
-        return dreamDtos;
-    }
 
     public void likeDream(Long dreamId) {
         Dream dream = dreamRepository.findById(dreamId).orElseThrow();

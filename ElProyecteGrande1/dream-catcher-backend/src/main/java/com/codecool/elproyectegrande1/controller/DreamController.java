@@ -115,8 +115,4 @@ public class DreamController {
         String username = authentication.getName();
         return commentService.addComment(newCommentDto, username);
     }
-
-    @GetMapping("/dreamer/{id}")
-    public List<DreamDto> getAllDreamsByDreamerId(@PathVariable("id") Long id) {
-        return dreamService.getAllDreamsByDreamerId(id);
-    }}
+}

@@ -16,7 +16,7 @@ public interface DreamRepository extends JpaRepository<Dream, Long> {
     Dream findTopByOrderByLikesDesc();
     Dream findTopByOrderByViewsDesc();
     List<Dream> findTop3ByOrderByLikesDesc();
-    List<Dream> findByDreamerId(Long id);
+    List<Dream> findByDreamerNickname(String nickname);
 
    @Query("SELECT d FROM Dream d JOIN d.hashtags h WHERE h = :hashtag")
    List<Dream> findByHashtagsContaining(String hashtag);
