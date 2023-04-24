@@ -4,6 +4,7 @@ spring:
       client:
         registration:
           google:
+            clientAuthenticationMethod: client_secret_post
             client-id: 447591984423-sgnb61ldpi4u9l2fjjv606eeda48sp9p.apps.googleusercontent.com
             client-secret: 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
             redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
