@@ -1,5 +1,8 @@
 package com.codecool.elproyectegrande1.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -28,6 +31,7 @@ public class Mentor {
     private List<Offer> offers;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     private User user;
 
     @Column(name = "isVerified")

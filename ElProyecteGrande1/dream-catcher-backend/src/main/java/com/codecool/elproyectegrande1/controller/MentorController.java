@@ -48,10 +48,10 @@ public class MentorController {
         return mentorService.getMentorByNickname(nickname);
     }
 
-    @GetMapping("/{id}")
-    public MentorDto getMentor(@PathVariable("id") String id) {
-        return mentorService.getMentor(id);
-    }
+//    @GetMapping("/{id}")
+//    public MentorDto getMentor(@PathVariable("id") String id) {
+//        return mentorService.getMentor(id);
+//    }
 
     @GetMapping("/{nickname}/offers")
     public List<OfferDto> getAllOffersByMentorNickname(@PathVariable("nickname") String nickname) {
