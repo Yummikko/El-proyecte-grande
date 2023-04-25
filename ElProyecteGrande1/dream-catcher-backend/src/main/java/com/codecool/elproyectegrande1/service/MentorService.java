@@ -1,11 +1,11 @@
 package com.codecool.elproyectegrande1.service;
 
+import com.codecool.elproyectegrande1.dto.dream.DreamDto;
+import com.codecool.elproyectegrande1.dto.dreamer.DreamerDto;
 import com.codecool.elproyectegrande1.dto.mentor.MentorDto;
 import com.codecool.elproyectegrande1.dto.offer.NewOfferDto;
 import com.codecool.elproyectegrande1.dto.offer.OfferDto;
-import com.codecool.elproyectegrande1.entity.Mentor;
-import com.codecool.elproyectegrande1.entity.Offer;
-import com.codecool.elproyectegrande1.entity.User;
+import com.codecool.elproyectegrande1.entity.*;
 import com.codecool.elproyectegrande1.mapper.MentorMapper;
 import com.codecool.elproyectegrande1.mapper.OfferMapper;
 import com.codecool.elproyectegrande1.repository.ImageRepository;
@@ -14,6 +14,7 @@ import com.codecool.elproyectegrande1.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,4 +71,46 @@ public class MentorService {
         System.out.println(mentor.isVerified());
         return null;
     }
+
+    public List<OfferDto> getAllOffersByMentorNickname(String nickname) {
+            List<Offer> offers = offerRepository.findByMentorNickname(nickname);
+
+            List<OfferDto> offerDtos = new ArrayList<>();
+
+            for (int i = 0; i < 8 && i < offers.size(); i++) {
+                OfferDto dto = offerMapper.mapEntityToOfferDto(offers.get(i));
+                offerDtos.add(dto);
+            }
+
+            return offerDtos;
+        }
+
+    public MentorDto getMentorByNickname(String nickname) {
+            Mentor mentor = mentorRepository.findByNickname(nickname)
+                    .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + nickname + " not found"));
+            return mentorMapper.mapEntityToMentorDto(mentor);
+    }
+
+    public void followMentor(Long mentorId) {
+        Mentor mentor = mentorRepository.findById(mentorId)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + mentorId + " not found"));
+        mentor.setFollowers(mentor.getFollowers() + 1);
+        mentorRepository.save(mentor);
+    }
+
+    public void unfollowMentor(Long mentorId) {
+        Mentor mentor = mentorRepository.findById(mentorId)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + mentorId + " not found"));
+        mentor.setFollowers(mentor.getFollowers() - 1);
+        mentorRepository.save(mentor);
+    }
+
+    public List<MentorDto> getAllUnverifiedMentors() {
+        List<Mentor> mentors = mentorRepository.findAll();
+        return mentors.stream()
+                .filter(mentor -> !mentor.isVerified())
+                .map(mentorMapper::mapEntityToMentorDto)
+                .collect(Collectors.toList());
+    }
 }
+

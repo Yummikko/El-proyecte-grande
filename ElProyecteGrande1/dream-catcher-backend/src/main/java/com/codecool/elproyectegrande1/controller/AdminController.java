@@ -1,8 +1,12 @@
 package com.codecool.elproyectegrande1.controller;
 
 import com.codecool.elproyectegrande1.repository.AdminRepository;
+import com.codecool.elproyectegrande1.repository.RoleRepository;
 import com.codecool.elproyectegrande1.service.AdminService;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
+import java.nio.file.AccessDeniedException;
 
 
 @RestController
@@ -11,20 +15,16 @@ public class AdminController {
 
     private AdminService adminService;
     private AdminRepository adminRepository;
+    private final RoleRepository roleRepository;
 
-    public AdminController(AdminService adminService) { this.adminService = adminService;}
+    public AdminController(AdminService adminService, RoleRepository roleRepository) {
+        this.adminService = adminService;
+        this.roleRepository = roleRepository;
+    }
 
+    @RolesAllowed("ROLE_ADMIN")
     @PostMapping("/{mentorNickname}/approve")
-    public void approveMentor(@PathVariable("mentorNickname") String mentorNickname) {
-          adminService.approveMentor(mentorNickname);
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String adminName = authentication.getName();
-//        System.out.println(adminName);
-//        if (adminRepository.existsByNickname(adminName)) {
-//            adminService.approveMentor(mentorNickname);
-//        } else {
-//            return "Dupa";
-//        }
-//        return "dupa2";
+    public void approveMentor(@PathVariable("mentorNickname") String mentorNickname) throws AccessDeniedException {
+        adminService.approveMentor(mentorNickname, "admin");
     };
 }
