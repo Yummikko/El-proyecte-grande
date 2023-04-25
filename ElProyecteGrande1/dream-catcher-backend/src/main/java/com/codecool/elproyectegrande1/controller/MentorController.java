@@ -43,6 +43,11 @@ public class MentorController {
         return mentorService.getAllMentors();
     }
 
+    @GetMapping("/unverified")
+    public List<MentorDto> getAllUnverifiedMentors() {
+        return mentorService.getAllUnverifiedMentors();
+    }
+
     @GetMapping("/{nickname}")
     public MentorDto getMentorByNickname(@PathVariable("nickname") String nickname) {
         return mentorService.getMentorByNickname(nickname);

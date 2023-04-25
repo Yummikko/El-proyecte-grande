@@ -105,5 +105,12 @@ public class MentorService {
         mentorRepository.save(mentor);
     }
 
+    public List<MentorDto> getAllUnverifiedMentors() {
+        List<Mentor> mentors = mentorRepository.findAll();
+        return mentors.stream()
+                .filter(mentor -> !mentor.isVerified())
+                .map(mentorMapper::mapEntityToMentorDto)
+                .collect(Collectors.toList());
+    }
 }
 
