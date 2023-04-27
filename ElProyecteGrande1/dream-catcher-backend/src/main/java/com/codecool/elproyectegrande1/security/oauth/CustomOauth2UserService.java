@@ -49,7 +49,11 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
         User user;
         if (userOptional.isPresent()) {
             user = userOptional.get();
-            //TODO check provider if equals
+            if(!user.getProvider().equals(AuthProvider.valueOf(userRequest.getClientRegistration().getRegistrationId()))) {
+                throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
+                        user.getProvider() + " account. Please use your " + user.getProvider() +
+                        " account to login.");
+            }
             user = update(user, oAuth2UserInfo);
         } else {
             user = register(userRequest, oAuth2UserInfo);

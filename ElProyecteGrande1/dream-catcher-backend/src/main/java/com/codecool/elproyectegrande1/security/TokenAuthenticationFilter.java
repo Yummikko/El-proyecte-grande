@@ -43,7 +43,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            log.error("Cloud not authenticate user", e);
+            log.error("Could not authenticate user", e);
         }
 
         filterChain.doFilter(request, response);

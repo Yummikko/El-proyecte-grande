@@ -46,12 +46,12 @@ public class User implements UserDetails {
     )
     private Set<Dreamer> dreamers = new HashSet<>();
 
-    @OneToMany(
+    @OneToOne(
             mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private Set<Admin> admins = new HashSet<>();
+    private Admin admin;
 
     @OneToMany(
             mappedBy = "user",

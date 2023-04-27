@@ -41,6 +41,6 @@ public class UserController {
     @GetMapping("/profile")
     @RolesAllowed({"ROLE_DREAMER", "ROLE_MENTOR", "ROLE_ADMIN"})
     public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal){
-        return userService.findUserById(userPrincipal.getId(), userPrincipal);
+        return userService.findUserById(String.valueOf(userPrincipal.getId()), userPrincipal);
     }
 }

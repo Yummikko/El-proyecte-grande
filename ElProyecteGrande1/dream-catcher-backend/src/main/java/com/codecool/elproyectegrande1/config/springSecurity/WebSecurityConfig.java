@@ -1,9 +1,7 @@
 package com.codecool.elproyectegrande1.config.springSecurity;
 
 import com.codecool.elproyectegrande1.jwt.AuthEntryPointJwt;
-import com.codecool.elproyectegrande1.jwt.AuthTokenFilter;
 import com.codecool.elproyectegrande1.security.RestAuthenticationEntryPoint;
-import com.codecool.elproyectegrande1.security.TokenAuthenticationFilter;
 import com.codecool.elproyectegrande1.security.oauth.CustomOauth2UserService;
 import com.codecool.elproyectegrande1.security.oauth.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.codecool.elproyectegrande1.security.oauth.OAuth2AuthenticationFailureHandler;
@@ -24,7 +22,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -50,10 +47,10 @@ public class WebSecurityConfig {
     @Autowired
     private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
-    @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
-    }
+//    @Bean
+//    public AuthTokenFilter authenticationJwtTokenFilter() {
+//        return new AuthTokenFilter();
+//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -75,10 +72,10 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public TokenAuthenticationFilter tokenAuthenticationFilter() {
-        return new TokenAuthenticationFilter();
-    }
+//    @Bean
+//    public TokenAuthenticationFilter tokenAuthenticationFilter() {
+//        return new TokenAuthenticationFilter();
+//    }
 
 
     /*
@@ -141,10 +138,10 @@ public class WebSecurityConfig {
 
         http.authenticationProvider(authenticationProvider());
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         // Add our custom Token based authentication filter
-        http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

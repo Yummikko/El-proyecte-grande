@@ -20,7 +20,7 @@ public class Admin {
     @Column(name = "email", unique = true)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
     public Admin(String nickname, String email, User user) {
