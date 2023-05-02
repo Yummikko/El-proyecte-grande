@@ -39,13 +39,6 @@ public class DreamerService {
         return dreamerMapper.mapEntityToDreamerDto(savedDreamer);
     }
 
-    public void followDreamer(Long dreamerId) {
-        Dreamer dreamer = dreamerRepository.findById(dreamerId)
-                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + dreamerId + " not found"));
-        dreamer.setFollowers(dreamer.getFollowers() + 1);
-        dreamerRepository.save(dreamer);
-    }
-
     public Dreamer getDreamerWithMostFollowers() {
         return dreamerRepository.findTopByOrderByFollowersDesc();
     }
@@ -57,9 +50,32 @@ public class DreamerService {
         return dreamerMapper.mapEntityToDreamerDto(dreamer);
     }
 
-    public void unfollowDreamer(Long dreamerId) {
-        Dreamer dreamer = dreamerRepository.findById(dreamerId)
-                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + dreamerId + " not found"));
+    public void followDreamer(String nickname, String name) {
+        Dreamer toBeFollowed = dreamerRepository.findByNickname(nickname)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + nickname + " not found"));
+
+        Dreamer dreamer = dreamerRepository.findByNickname(name)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + name + " not found"));
+
+
+        if (dreamer.getFollowed().contains(nickname)) {
+            throw new IllegalArgumentException("You are already following this dreamer");
+        }
+        dreamer.getFollowed().add(nickname);
+        toBeFollowed.setFollowers(toBeFollowed.getFollowers() + 1);
+        dreamerRepository.save(dreamer);
+    }
+
+
+    public void unfollowDreamer(String nickname) {
+        Dreamer dreamer = dreamerRepository.findByNickname(nickname)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + nickname + " not found"));
+
+        if (!dreamer.getFollowed().contains(nickname)) {
+            throw new IllegalArgumentException("You are not following this dreamer");
+        }
+
+        dreamer.getFollowed().remove(nickname);
         dreamer.setFollowers(dreamer.getFollowers() - 1);
         dreamerRepository.save(dreamer);
     }

@@ -63,19 +63,19 @@ public class MentorController {
         return mentorService.getAllOffersByMentorNickname(nickname);
     }
 
-    @PutMapping("/{id}/follow")
-    public ResponseEntity<String> followMentor(@PathVariable("id") Long id, Principal principal) {
+    @PutMapping("/{nickname}/follow")
+    public ResponseEntity<String> followMentor(@PathVariable("nickname") String nickname, Principal principal) {
 //        if (!Objects.equals(principal.getName(), "")) {
-            mentorService.followMentor(id);
+            mentorService.followMentor(nickname);
             return new ResponseEntity<>("Followed successfully!", HttpStatus.OK);
 //        } else {
 //            return new ResponseEntity<>("Please log in to follow the dreamer.", HttpStatus.BAD_REQUEST);
 //        }
     }
 
-    @PutMapping("/{id}/unfollow")
-    public ResponseEntity<String> unfollowMentor(@PathVariable Long id) {
-        mentorService.unfollowMentor(id);
+    @PutMapping("/{nickname}/unfollow")
+    public ResponseEntity<String> unfollowMentor(@PathVariable String nickname) {
+        mentorService.unfollowMentor(nickname);
         return new ResponseEntity<>("You have unfollowed this dreamer", HttpStatus.OK);
     }
 

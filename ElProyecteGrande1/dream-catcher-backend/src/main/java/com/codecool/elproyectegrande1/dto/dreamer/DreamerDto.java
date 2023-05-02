@@ -22,11 +22,12 @@ public class DreamerDto {
     private Set<String> letters;
     private Image profilePicture;
     private List<Dream> dreams = new ArrayList<>();
+    private Set<String> followed;
 
     public DreamerDto() {
     }
 
-    public DreamerDto(Long id, String nickname, String email, int followers, User user, Set<String> letters, List<Dream> dreams) {
+    public DreamerDto(Long id, String nickname, String email, int followers, User user, Set<String> letters, List<Dream> dreams, Set<String> followed) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
@@ -35,6 +36,7 @@ public class DreamerDto {
         this.user = user;
         this.letters = letters;
         this.dreams = dreams;
+        this.followed = followed;
     }
 
     public Long getId() {
@@ -108,5 +110,13 @@ public class DreamerDto {
 
     public void setDreams(List<Dream> dreams) {
         this.dreams = dreams;
+    }
+
+    public Set<String> getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(Set<String> followed) {
+        this.followed = followed;
     }
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "mentors")
@@ -40,13 +41,17 @@ public class Mentor {
     @ManyToOne(fetch = FetchType.LAZY)
     private Image profilePicture;
 
+    @ElementCollection
+    private Set<String> followed;
+
     public Mentor() {
     }
 
-    public Mentor(String nickname, String email, User user) {
+    public Mentor(String nickname, String email, User user, Set<String> followed) {
         this.nickname = nickname;
         this.email = email;
         this.user = user;
+        this.followed = followed;
     }
 
     public Long getId() {
@@ -111,5 +116,13 @@ public class Mentor {
 
     public void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public Set<String> getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(Set<String> followed) {
+        this.followed = followed;
     }
 }

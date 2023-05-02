@@ -19,13 +19,14 @@ public class NewDreamerDto {
     private String imageName;
     private Image image;
     private List<Dream> dreams = new ArrayList<>();
+    private Set<String> followed;
 
 
-    public NewDreamerDto(String nickname, String email, User user, Set<String> letters) {
+
+    public NewDreamerDto(String nickname, String email, User user) {
         this.nickname = nickname;
         this.email = email;
         this.user = user;
-        this.letters = letters;
     }
 
     public String getNickname() {
@@ -90,5 +91,13 @@ public class NewDreamerDto {
 
     public void setDreams(List<Dream> dreams) {
         this.dreams = dreams;
+    }
+
+    public Set<String> getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(Set<String> followed) {
+        this.followed = followed;
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -41,19 +42,20 @@ public class DreamerController {
     }
 
 
-    @PutMapping("/{id}/follow")
-    public ResponseEntity<String> followDreamer(@PathVariable("id") Long id) {
-        if (isLoggedIn) {
-            dreamerService.followDreamer(id);
+    @PutMapping("/{nickname}/follow")
+    public ResponseEntity<String> followDreamer(@PathVariable("nickname") String nickname, Principal principal) {
+//        if (isLoggedIn) {
+        String name = principal.getName();
+        dreamerService.followDreamer(nickname, name);
             return new ResponseEntity<>("Followed successfully!", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Please log in to follow the dreamer.", HttpStatus.BAD_REQUEST);
-        }
+//        } else {
+//            return new ResponseEntity<>("Please log in to follow the dreamer.", HttpStatus.BAD_REQUEST);
+//        }
     }
 
-    @PutMapping("/{id}/unfollow")
-    public ResponseEntity<String> unfollowDreamer(@PathVariable Long id) {
-        dreamerService.unfollowDreamer(id);
+    @PutMapping("/{nickname}/unfollow")
+    public ResponseEntity<String> unfollowDreamer(@PathVariable String nickname) {
+        dreamerService.unfollowDreamer(nickname);
         return new ResponseEntity<>("You have unfollowed this dreamer", HttpStatus.OK);
     }
 

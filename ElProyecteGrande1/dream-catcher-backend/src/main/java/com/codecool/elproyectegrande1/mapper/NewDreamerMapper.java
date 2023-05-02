@@ -19,12 +19,14 @@ public class NewDreamerMapper {
                 entity.getFollowers(),
                 entity.getUser(),
                 entity.getLetters(),
-                entity.getDreams()
-        );
+                entity.getDreams(),
+                entity.getFollowed()
+
+                );
     }
 
     public Dreamer mapNewDreamerDtoToEntity(NewDreamerDto dto) {
-        return new Dreamer(dto.getNickname(), dto.getEmail(), dto.getUser(), dto.getLetters());
+        return new Dreamer(dto.getNickname(), dto.getEmail(), dto.getUser(), dto.getLetters(), dto.getFollowed());
     }
 
     public Dreamer mapUserToDreamer(User user) {
@@ -32,6 +34,7 @@ public class NewDreamerMapper {
                 user.getUsername(),
                 user.getEmail(),
                 user,
+                new HashSet<>(),
                 new HashSet<>()
         );
     }

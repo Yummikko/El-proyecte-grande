@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -44,14 +45,19 @@ public class Dreamer {
     @OneToMany(mappedBy = "dreamer", cascade = CascadeType.ALL)
     private List<Dream> dreams;
 
+    @ElementCollection
+    private Set<String> followed;
+
+
     public Dreamer() {
     }
 
-    public Dreamer(String nickname, String email, User user, Set<String> letters) {
+    public Dreamer(String nickname, String email, User user, Set<String> letters, Set<String> followed) {
         this.nickname = nickname;
         this.email = email;
         this.user = user;
         this.letters = letters;
+        this.followed = followed;
     }
 
     public Long getId() {
@@ -116,5 +122,13 @@ public class Dreamer {
 
     public void setDreams(List<Dream> dreams) {
         this.dreams = dreams;
+    }
+
+    public Set<String> getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(Set<String> followed) {
+        this.followed = followed;
     }
 }
