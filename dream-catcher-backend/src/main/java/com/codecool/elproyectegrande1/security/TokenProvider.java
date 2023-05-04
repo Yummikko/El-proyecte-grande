@@ -18,7 +18,6 @@ public class TokenProvider {
 
     public String createToken(Authentication authentication) {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-        System.out.println(userPrincipal);
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + appConfig.getTokenExpirationMsec());
 

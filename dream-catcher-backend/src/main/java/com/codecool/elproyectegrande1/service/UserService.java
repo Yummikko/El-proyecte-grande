@@ -1,8 +1,10 @@
 package com.codecool.elproyectegrande1.service;
 
+import com.codecool.elproyectegrande1.dto.user.UserDto;
 import com.codecool.elproyectegrande1.entity.Avatar;
 import com.codecool.elproyectegrande1.entity.User;
 import com.codecool.elproyectegrande1.exceptions.ResourceNotFoundException;
+import com.codecool.elproyectegrande1.mapper.UserMapper;
 import com.codecool.elproyectegrande1.repository.AvatarRepository;
 import com.codecool.elproyectegrande1.repository.UserRepository;
 import com.codecool.elproyectegrande1.security.UserPrincipal;
@@ -21,6 +23,16 @@ import java.util.Map;
 @Service
 public class UserService {
 
+    private final UserRepository userRepository;
+    private final AvatarRepository avatarRepository;
+    private final UserMapper userMapper;
+
+    public UserService(UserRepository userRepository, AvatarRepository avatarRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.avatarRepository = avatarRepository;
+        this.userMapper = userMapper;
+    }
+
     public Map<String, Object> getUserClaims() {
         Authentication authentication = SecurityContextHolder.getContext()
                 .getAuthentication();
@@ -29,13 +41,6 @@ public class UserService {
             return principal.getClaims();
         }
         return Collections.emptyMap();
-    }
-    private final UserRepository userRepository;
-    private final AvatarRepository avatarRepository;
-
-    public UserService(UserRepository userRepository, AvatarRepository avatarRepository) {
-        this.userRepository = userRepository;
-        this.avatarRepository = avatarRepository;
     }
 
     public Avatar uploadAvatar(MultipartFile file) throws IOException {
@@ -59,6 +64,11 @@ public class UserService {
 
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+    }
+
+    public UserDto findUserDtoById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+        return userMapper.mapEntityToDto(user);
     }
 
     public UserDetails loadUserById(String id) {

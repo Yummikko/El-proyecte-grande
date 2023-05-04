@@ -1,6 +1,9 @@
 package com.codecool.elproyectegrande1.jwt;
 
+import com.codecool.elproyectegrande1.security.TokenProvider;
 import com.codecool.elproyectegrande1.service.UserDetailsServiceImpl;
+import com.codecool.elproyectegrande1.service.UserService;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +26,13 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     public static final String BEARER = "Bearer ";
     @Autowired
     private JwtUtils jwtUtils;
+    @Autowired
+    private TokenProvider tokenProvider;
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private UserService userService;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
@@ -36,8 +43,13 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
+                UserDetails userDetails;
 
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                if (!NumberUtils.isCreatable(username))
+                    userDetails = userDetailsService.loadUserByUsername(username);
+                else
+                    userDetails = userService.loadUserById(username);
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
                         userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

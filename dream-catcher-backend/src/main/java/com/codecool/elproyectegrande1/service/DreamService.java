@@ -47,7 +47,6 @@ public class DreamService {
 
         List<Dream> updatedDreams = dreamer.getDreams();
         updatedDreams.add(savedDream);
-//        dreamerRepository.updateDreams(dreamer.getId(), updatedDreams);
         dreams.add(savedDream);
         dreamer.getDreams().add(savedDream);
         return dreamMapper.mapEntityToDreamDto(savedDream);

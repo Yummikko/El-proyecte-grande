@@ -72,10 +72,10 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
         user.setUsername(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
+        User savedUser = userRepository.save(user);
+        dreamerService.createDreamerFromUser(savedUser);
 
-        dreamerService.createDreamerFromUser(user);
-
-        return userRepository.save(user);
+        return savedUser;
     }
 
     private User update(User user, OAuth2UserInfo oAuth2UserInfo) {

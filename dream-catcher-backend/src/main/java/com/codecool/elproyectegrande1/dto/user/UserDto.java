@@ -1,20 +1,19 @@
 package com.codecool.elproyectegrande1.dto.user;
 
+import com.codecool.elproyectegrande1.entity.Role;
 import com.codecool.elproyectegrande1.util.PasswordMatches;
 import com.codecool.elproyectegrande1.util.ValidEmail;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.Set;
 
 @PasswordMatches
 public class UserDto {
     @NotNull
-    @Size(min = 1, message = "{Size.userDto.firstName}")
-    private String firstName;
-
-    @NotNull
-    @Size(min = 1, message = "{Size.userDto.lastName}")
-    private String lastName;
+    @Size(min = 1)
+    private String username;
 
     private String password;
 
@@ -28,39 +27,50 @@ public class UserDto {
     private String email;
 
     private boolean isUsing2FA;
+    private String profileImgUrl;
+    private List<String> roles;
 
     public String getEmail() {
         return email;
+    }
+
+    public String getProfileImgUrl() {
+        return profileImgUrl;
+    }
+
+    public void setProfileImgUrl(String profileImgUrl) {
+        this.profileImgUrl = profileImgUrl;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public UserDto(String username, String email, String profileImgUrl, List<String> roles) {
+        this.username = username;
+        this.email = email;
+        this.profileImgUrl = profileImgUrl;
+        this.roles = roles;
     }
 
     public void setEmail(final String email) {
         this.email = email;
     }
 
-    private Integer role;
-
-    public Integer getRole() {
-        return role;
+    public List<String> getRole() {
+        return roles;
     }
 
-    public void setRole(final Integer role) {
-        this.role = role;
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(final String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(final String lastName) {
-        this.lastName = lastName;
+    public void setUsername(final String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -85,22 +95,6 @@ public class UserDto {
 
     public void setUsing2FA(boolean isUsing2FA) {
         this.isUsing2FA = isUsing2FA;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("UserDto [firstName=")
-                .append(firstName)
-                .append(", lastName=")
-                .append(lastName)
-                .append(", email=")
-                .append(email)
-                .append(", isUsing2FA=")
-                .append(isUsing2FA)
-                .append(", role=")
-                .append(role).append("]");
-        return builder.toString();
     }
 
 }

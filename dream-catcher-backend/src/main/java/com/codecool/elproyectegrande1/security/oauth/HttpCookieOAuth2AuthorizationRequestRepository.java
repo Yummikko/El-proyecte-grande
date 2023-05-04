@@ -5,6 +5,7 @@ import org.springframework.security.oauth2.client.web.AuthorizationRequestReposi
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,6 +28,8 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
             removeCookies(request, response);
             return;
         }
+
+        response.addCookie(new Cookie("cookie", "dupa"));
 
         CookieUtils.addCookie(response, OAUTH2_AUTH_REQUEST_COOKIE_NAME, CookieUtils.serialize(authorizationRequest), COOKIE_EXPIRE_SEC);
         String redirectUriAfterLogin = request.getParameter(REDIRECT_URI_COOKIE_NAME);

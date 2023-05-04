@@ -47,7 +47,6 @@ public class MentorService {
 
         List<Offer> updatedOffers = mentor.getOffers();
         updatedOffers.add(savedOffer);
-//        mentorRepository.updateOffers(mentor.getId(), updatedOffers);
         mentorRepository.save(mentor);
 
         return offerMapper.mapEntityToOfferDto(savedOffer);

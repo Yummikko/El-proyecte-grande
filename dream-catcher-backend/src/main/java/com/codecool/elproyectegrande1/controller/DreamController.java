@@ -82,7 +82,8 @@ public class DreamController {
     }
 
     @GetMapping("/most-popular")
-    public List<DreamDto> getMostPopularDreams() {
+    public List<DreamDto> getMostPopularDreams(Principal principal) {
+        System.out.println(principal);
         return dreamService.getTop3DreamsByLikes();
     }
 

@@ -1,5 +1,8 @@
 package com.codecool.elproyectegrande1.security;
 
+import com.codecool.elproyectegrande1.jwt.JwtUtils;
+import com.codecool.elproyectegrande1.service.UserDetailsService;
+import com.codecool.elproyectegrande1.service.UserDetailsServiceImpl;
 import com.codecool.elproyectegrande1.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,19 @@ import java.io.IOException;
 @Slf4j
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String BEARER = "Bearer ";
+
     @Autowired
     private TokenProvider tokenProvider;
 
     @Autowired
+    private JwtUtils jwtUtils;
+
+    @Autowired
     private UserService userService;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -33,8 +44,12 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
             if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)){
                 String userId = tokenProvider.getUserIdFromToken(jwt);
+                String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
                 UserDetails userDetails = userService.loadUserById(userId);
+                if(userDetails == null) {
+                    userDetails = userDetailsService.loadUserByUsername(username);
+                }
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
@@ -50,8 +65,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String getJwtFromRequest(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        if(token.startsWith("Bearer ")){
+        String token = request.getHeader(AUTHORIZATION);
+        if(token.startsWith(BEARER)){
             return token.substring(7);
         }
         return "";
