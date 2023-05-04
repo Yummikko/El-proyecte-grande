@@ -33,7 +33,6 @@ public class ImageController {
 
         System.out.println("DreamId " + dId + " Mentor " + oId);
         imageService.uploadImage(file, drId, ofId);
-
     }
 
     @GetMapping("/download/{fileName}")

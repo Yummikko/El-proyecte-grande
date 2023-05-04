@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,8 +35,8 @@ public class User implements UserDetails {
     @Email
     private String email;
 
-    @NotBlank
     @Size(max = 120)
+    @JsonIgnore
     private String password;
 
     @OneToMany(
@@ -45,12 +46,12 @@ public class User implements UserDetails {
     )
     private Set<Dreamer> dreamers = new HashSet<>();
 
-    @OneToMany(
+    @OneToOne(
             mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private Set<Admin> admins = new HashSet<>();
+    private Admin admin;
 
     @OneToMany(
             mappedBy = "user",
@@ -70,6 +71,16 @@ public class User implements UserDetails {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Avatar profilePicture;
+
+
+    @Size(max = 120)
+    private String imageUrl;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 24)
+    private AuthProvider provider;
+
+    private String providerId;
 
 //    @OneToMany(
 //            mappedBy = "user",
@@ -169,7 +180,31 @@ public class User implements UserDetails {
         this.createdOn = createdOn;
     }
 
-//    public Set<Letter> getLetters() {
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public AuthProvider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(AuthProvider provider) {
+        this.provider = provider;
+    }
+
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
+    }
+
+    //    public Set<Letter> getLetters() {
 //        return letters;
 //    }
 //
