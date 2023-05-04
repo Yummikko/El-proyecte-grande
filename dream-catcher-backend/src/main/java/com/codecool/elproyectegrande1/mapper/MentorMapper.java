@@ -5,6 +5,8 @@ import com.codecool.elproyectegrande1.entity.Mentor;
 import com.codecool.elproyectegrande1.entity.User;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+
 @Component
 public class MentorMapper {
 
@@ -15,7 +17,8 @@ public class MentorMapper {
             entity.getEmail(),
             entity.getFollowers(),
             entity.getOffers(),
-            entity.getUser()
+            entity.getUser(),
+            entity.getFollowed()
         );
     }
 
@@ -23,7 +26,9 @@ public class MentorMapper {
         return new Mentor(
                 user.getUsername(),
                 user.getEmail(),
-                user
+                user,
+                new HashSet<>()
+
         );
     }
 }

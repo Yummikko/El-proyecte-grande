@@ -5,17 +5,20 @@ import com.codecool.elproyectegrande1.dto.dreamer.DreamerDto;
 import com.codecool.elproyectegrande1.dto.dreamer.NewDreamerDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Dreamer;
+import com.codecool.elproyectegrande1.entity.Mentor;
 import com.codecool.elproyectegrande1.entity.User;
 import com.codecool.elproyectegrande1.mapper.DreamMapper;
 import com.codecool.elproyectegrande1.mapper.NewDreamerMapper;
 import com.codecool.elproyectegrande1.repository.DreamRepository;
 import com.codecool.elproyectegrande1.repository.DreamerRepository;
+import com.codecool.elproyectegrande1.repository.MentorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DreamerService {
@@ -24,26 +27,22 @@ public class DreamerService {
     private final DreamRepository dreamRepository;
     private final NewDreamerMapper dreamerMapper;
     private final DreamMapper dreamMapper;
+    private final MentorRepository mentorRepository;
 
     @Autowired
-    public DreamerService(DreamerRepository dreamerRepository, DreamRepository dreamRepository, NewDreamerMapper dreamerMapper, DreamMapper dreamMapper) {
+    public DreamerService(DreamerRepository dreamerRepository, DreamRepository dreamRepository, NewDreamerMapper dreamerMapper, DreamMapper dreamMapper,
+                          MentorRepository mentorRepository) {
         this.dreamerRepository = dreamerRepository;
         this.dreamRepository = dreamRepository;
         this.dreamerMapper = dreamerMapper;
         this.dreamMapper = dreamMapper;
+        this.mentorRepository = mentorRepository;
     }
 
     public DreamerDto createDreamer(NewDreamerDto newDreamerDto) {
         Dreamer dreamer = dreamerMapper.mapNewDreamerDtoToEntity(newDreamerDto);
         Dreamer savedDreamer = dreamerRepository.save(dreamer);
         return dreamerMapper.mapEntityToDreamerDto(savedDreamer);
-    }
-
-    public void followDreamer(Long dreamerId) {
-        Dreamer dreamer = dreamerRepository.findById(dreamerId)
-                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + dreamerId + " not found"));
-        dreamer.setFollowers(dreamer.getFollowers() + 1);
-        dreamerRepository.save(dreamer);
     }
 
     public Dreamer getDreamerWithMostFollowers() {
@@ -57,9 +56,47 @@ public class DreamerService {
         return dreamerMapper.mapEntityToDreamerDto(dreamer);
     }
 
-    public void unfollowDreamer(Long dreamerId) {
-        Dreamer dreamer = dreamerRepository.findById(dreamerId)
-                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + dreamerId + " not found"));
+    public void followDreamer(String nickname, String name) {
+        Dreamer toBeFollowed = dreamerRepository.findByNickname(nickname)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + nickname + " not found"));
+
+        Optional<Dreamer> dreamer = dreamerRepository.findByNickname(name);
+
+        Optional<Mentor> mentor = mentorRepository.findByNickname(name);
+
+        if (dreamer.isPresent()) {
+            if (dreamer.get().getFollowed().contains(nickname)) {
+                throw new IllegalArgumentException("You are already following this dreamer");
+            } else {
+                dreamer.get().getFollowed().add(nickname);
+                toBeFollowed.setFollowers(toBeFollowed.getFollowers() + 1);
+                dreamerRepository.save(toBeFollowed);
+
+            }
+        } else if (mentor.isPresent()) {
+            if (mentor.get().getFollowed().contains(nickname)) {
+                throw new IllegalArgumentException("You are already following this dreamer");
+            } else {
+                mentor.get().getFollowed().add(nickname);
+                toBeFollowed.setFollowers(toBeFollowed.getFollowers() + 1);
+                dreamerRepository.save(toBeFollowed);
+            }
+        } else {
+            throw new IllegalArgumentException("Log in to follow");
+        }
+
+    }
+
+
+    public void unfollowDreamer(String nickname) {
+        Dreamer dreamer = dreamerRepository.findByNickname(nickname)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + nickname + " not found"));
+
+        if (!dreamer.getFollowed().contains(nickname)) {
+            throw new IllegalArgumentException("You are not following this dreamer");
+        }
+
+        dreamer.getFollowed().remove(nickname);
         dreamer.setFollowers(dreamer.getFollowers() - 1);
         dreamerRepository.save(dreamer);
     }

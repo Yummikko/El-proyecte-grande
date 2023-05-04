@@ -6,6 +6,7 @@ import com.codecool.elproyectegrande1.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MentorDto {
     private Long id;
@@ -17,17 +18,19 @@ public class MentorDto {
     private User user;
     private boolean isVerified = false;
     private Image profilePicture;
+    private Set<String> followed;
 
     public MentorDto() {
     }
 
-    public MentorDto(Long id, String nickname, String email, int followers, List<Offer> offers, User user) {
+    public MentorDto(Long id, String nickname, String email, int followers, List<Offer> offers, User user, Set<String> followed) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
         this.followers = followers;
         this.offers = offers;
         this.user = user;
+        this.followed = followed;
     }
 
     public Long getId() {
@@ -92,5 +95,21 @@ public class MentorDto {
 
     public void setVerified(boolean verified) {
         isVerified = verified;
+    }
+
+    public Image getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public Set<String> getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(Set<String> followed) {
+        this.followed = followed;
     }
 }

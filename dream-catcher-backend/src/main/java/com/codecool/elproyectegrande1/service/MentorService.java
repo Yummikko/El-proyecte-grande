@@ -90,16 +90,28 @@ public class MentorService {
             return mentorMapper.mapEntityToMentorDto(mentor);
     }
 
-    public void followMentor(Long mentorId) {
-        Mentor mentor = mentorRepository.findById(mentorId)
-                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + mentorId + " not found"));
+    public void followMentor(String nickname) {
+        Mentor mentor = mentorRepository.findByNickname(nickname)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + nickname + " not found"));
+
+        if (mentor.getFollowed().contains(nickname)) {
+            throw new IllegalArgumentException("You are already following this dreamer");
+        }
+
+        mentor.getFollowed().add(nickname);
         mentor.setFollowers(mentor.getFollowers() + 1);
         mentorRepository.save(mentor);
     }
 
-    public void unfollowMentor(Long mentorId) {
-        Mentor mentor = mentorRepository.findById(mentorId)
-                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + mentorId + " not found"));
+    public void unfollowMentor(String nickname) {
+        Mentor mentor = mentorRepository.findByNickname(nickname)
+                .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + nickname + " not found"));
+
+        if (!mentor.getFollowed().contains(nickname)) {
+            throw new IllegalArgumentException("You are not following this dreamer");
+        }
+
+        mentor.getFollowed().remove(nickname);
         mentor.setFollowers(mentor.getFollowers() - 1);
         mentorRepository.save(mentor);
     }

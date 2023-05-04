@@ -22,7 +22,7 @@ public class AdminController {
         this.roleRepository = roleRepository;
     }
 
-    @RolesAllowed("ROLE_ADMIN")
+    @RolesAllowed("admin")
     @PostMapping("/{mentorNickname}/approve")
     public void approveMentor(@PathVariable("mentorNickname") String mentorNickname) throws AccessDeniedException {
         adminService.approveMentor(mentorNickname, "admin");
