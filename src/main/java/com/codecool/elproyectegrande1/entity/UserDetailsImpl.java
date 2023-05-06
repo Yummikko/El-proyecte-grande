@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private java.lang.Long id;
 
     private String username;
 
@@ -28,7 +28,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private String imageUrl;
 
-    public UserDetailsImpl(Long id, String username, String email, String password,
+    public UserDetailsImpl(java.lang.Long id, String username, String email, String password,
                            Collection<? extends GrantedAuthority> authorities, Long profilePictureId, String imageUrl) {
         this.id = id;
         this.username = username;
@@ -69,7 +69,7 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
-    public Long getId() {
+    public java.lang.Long getId() {
         return id;
     }
 

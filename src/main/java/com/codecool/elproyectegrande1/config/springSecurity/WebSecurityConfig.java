@@ -94,14 +94,11 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChainSecured(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-//                .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**", "/auth/**", "/oauth2/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/api/**", "/image/**", "/update/profile-image").permitAll()
                 .antMatchers(h2ConsolePath + "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -128,9 +125,6 @@ public class WebSecurityConfig {
         http.authenticationProvider(authenticationProvider());
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
-        // Add our custom Token based authentication filter
-//        http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

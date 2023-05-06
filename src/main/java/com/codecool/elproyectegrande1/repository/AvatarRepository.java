@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AvatarRepository extends JpaRepository<Avatar, Long> {
+public interface AvatarRepository extends JpaRepository<Avatar, java.lang.Long> {
     @Query("SELECT a FROM Avatar a WHERE a.name = :fileName AND a.id = (SELECT max(id) from Avatar)")
     Avatar findAvatarByName(String fileName);
     @Query("SELECT a FROM Avatar a WHERE a.id = :id")

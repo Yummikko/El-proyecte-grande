@@ -31,7 +31,6 @@ public class ImageController {
         if(oId != null)
             ofId = Long.valueOf(oId);
 
-        System.out.println("DreamId " + dId + " Mentor " + oId);
         imageService.uploadImage(file, drId, ofId);
     }
 
@@ -47,5 +46,12 @@ public class ImageController {
         byte[] image = imageService.getImageById(id);
         String encodedString = Base64.getEncoder().encodeToString(image);
         return encodedString;
+    }
+
+    @ResponseStatus(value = HttpStatus.OK)
+    @PutMapping(value="/update/profile-image", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadImage(@RequestParam("image") MultipartFile file, @RequestParam String userId) throws IOException {
+        Long userIdLong = Long.valueOf(userId);
+        imageService.updateProfileImage(file, userIdLong);
     }
 }

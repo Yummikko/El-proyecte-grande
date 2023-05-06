@@ -1,11 +1,7 @@
 package com.codecool.elproyectegrande1.service;
 
-import com.codecool.elproyectegrande1.entity.Dream;
-import com.codecool.elproyectegrande1.entity.Image;
-import com.codecool.elproyectegrande1.entity.Offer;
-import com.codecool.elproyectegrande1.repository.DreamRepository;
-import com.codecool.elproyectegrande1.repository.ImageRepository;
-import com.codecool.elproyectegrande1.repository.OfferRepository;
+import com.codecool.elproyectegrande1.entity.*;
+import com.codecool.elproyectegrande1.repository.*;
 import com.codecool.elproyectegrande1.util.ImageUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,15 +13,20 @@ import java.util.Optional;
 public class ImageService {
 
     private final ImageRepository imageRepo;
+    private final AvatarRepository avatarRepo;
     private final OfferRepository offerRepository;
     private final DreamRepository dreamRepository;
 
+    private final UserRepository userRepository;
+
     public ImageService(ImageRepository imageRepo,
-                        OfferRepository offerRepository,
-                        DreamRepository dreamRepository) {
+                        AvatarRepository avatarRepo, OfferRepository offerRepository,
+                        DreamRepository dreamRepository, UserRepository userRepository) {
         this.imageRepo = imageRepo;
+        this.avatarRepo = avatarRepo;
         this.offerRepository = offerRepository;
         this.dreamRepository = dreamRepository;
+        this.userRepository = userRepository;
     }
 
     public Image uploadImage(MultipartFile file, Long dreamId, Long offerId) throws IOException {
@@ -77,5 +78,16 @@ public class ImageService {
                 offerRepository.update(offer, offerId);
             }
         }
+    }
+
+    public void updateProfileImage(MultipartFile file, Long userId) throws IOException {
+        Avatar pAvatar = new Avatar();
+        pAvatar.setName(file.getOriginalFilename());
+        pAvatar.setType(file.getContentType());
+        pAvatar.setImageData(ImageUtil.compressImage(file.getBytes()));
+        Avatar savedImage = avatarRepo.save(pAvatar);
+        User user = userRepository.findById(userId).orElse(null);
+        user.setProfilePicture(savedImage);
+        userRepository.update(user, userId);
     }
 }

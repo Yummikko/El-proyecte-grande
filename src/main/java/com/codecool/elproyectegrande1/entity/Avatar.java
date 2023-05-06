@@ -15,6 +15,7 @@ public class Avatar {
     private String type;
     @Column(name = "imagedata")
     private byte[] imageData;
+
     public Long getId() {
         return id;
     }

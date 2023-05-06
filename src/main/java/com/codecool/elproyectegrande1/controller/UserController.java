@@ -45,11 +45,7 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public UserDto getCurrentUser(@CurrentUser UserPrincipal userPrincipal, HttpServletResponse response){
-        Cookie cookie = new Cookie("cookie", "dupa");
-        cookie.setMaxAge(3600);
-//        cookie.setDomain("localhost:8081");
-        response.addCookie(cookie);
+    public UserDto getCurrentUser(@CurrentUser UserPrincipal userPrincipal){
         UserDto user = userService.findUserDtoById(userPrincipal.getId());
         List<String> roles = new ArrayList<>();
         roles.add("ROLE_DREAMER");
