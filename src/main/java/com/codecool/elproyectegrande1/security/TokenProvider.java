@@ -34,7 +34,7 @@ public class TokenProvider {
                 .setSigningKey(appConfig.getTokenSecret())
                 .parseClaimsJws(token)
                 .getBody();
-
+        System.out.println(token);
         return claims.getSubject();
     }
 

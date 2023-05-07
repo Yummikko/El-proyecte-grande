@@ -94,11 +94,16 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChainSecured(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
+                .httpBasic()
+                .disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**", "/auth/**", "/oauth2/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
-                .antMatchers("/api/**", "/image/**", "/update/profile-image").permitAll()
+                .antMatchers("/api/**", "/image/**", "/update/profile-image", "/upload").permitAll()
                 .antMatchers(h2ConsolePath + "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

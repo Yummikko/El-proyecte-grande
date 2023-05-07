@@ -35,7 +35,6 @@ public class DreamController {
         this.commentService = commentService;
     }
 
-    @RolesAllowed({"ROLE_DREAMER", "ROLE_ADMIN"})
     @PostMapping("/create")
     public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto, Principal principal) {
         String name = principal.getName();

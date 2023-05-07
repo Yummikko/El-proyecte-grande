@@ -14,6 +14,7 @@ import java.util.Date;
 
 @Component
 public class JwtUtils {
+
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
     @Autowired
@@ -30,7 +31,6 @@ public class JwtUtils {
     }
 
     public String getUserNameFromJwtToken(String token) {
-        System.out.println(token);
         return Jwts.parser().setSigningKey(appConfig.getTokenSecret()).parseClaimsJws(token).getBody().getSubject();
     }
 
