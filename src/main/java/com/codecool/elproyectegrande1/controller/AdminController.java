@@ -24,7 +24,7 @@ public class AdminController {
 
     @RolesAllowed("admin")
     @PostMapping("/{mentorNickname}/approve")
-    public void approveMentor(@PathVariable("mentorNickname") String mentorNickname) throws AccessDeniedException {
-        adminService.approveMentor(mentorNickname, "admin");
+    public void approveMentor(@PathVariable("mentorNickname") String mentorNickname){
+        adminService.approveMentor(mentorNickname);
     };
 }

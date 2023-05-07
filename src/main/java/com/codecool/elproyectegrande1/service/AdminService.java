@@ -1,6 +1,7 @@
 package com.codecool.elproyectegrande1.service;
 
 import com.codecool.elproyectegrande1.entity.Mentor;
+import com.codecool.elproyectegrande1.exceptions.MentorNotFoundException;
 import com.codecool.elproyectegrande1.mapper.MentorMapper;
 import com.codecool.elproyectegrande1.repository.MentorRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,14 +20,9 @@ public class AdminService {
         this.mentorRepository = mentorRepository;
     }
 
-    public void approveMentor(String mentorName, String role) throws AccessDeniedException {
-        if (!"admin".equals(role)) {
-            throw new AccessDeniedException("Only administrators can approve mentors");
-        } else {
-            Mentor mentor = mentorRepository.findByNickname(mentorName).orElseThrow(()-> new UsernameNotFoundException("Mentor not found"));
+    public void approveMentor(String mentorName){
+            Mentor mentor = mentorRepository.findByNickname(mentorName).orElseThrow(()-> new MentorNotFoundException("Mentor not found"));
             mentor.setVerified(true);
             mentorRepository.save(mentor);
         }
-
-    }
 }
