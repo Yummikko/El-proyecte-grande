@@ -10,10 +10,12 @@ import com.codecool.elproyectegrande1.mapper.DreamMapper;
 import com.codecool.elproyectegrande1.repository.DreamRepository;
 import com.codecool.elproyectegrande1.repository.DreamerRepository;
 import com.codecool.elproyectegrande1.repository.ImageRepository;
+import com.codecool.elproyectegrande1.util.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,8 +40,13 @@ public class DreamService {
     }
 
     public DreamDto addDream(String name, NewDreamDto newDream) {
-        Dreamer dreamer = dreamerRepository.findByNickname(name)
+        EmailValidator emailValidator = new EmailValidator();
+        Dreamer dreamer;
+        if (!emailValidator.isValid(name, null))
+            dreamer = dreamerRepository.findByNickname(name)
                 .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + name + " not found"));
+        else
+            dreamer = dreamerRepository.findByEmail(name);
 
         Dream toBeSaved = dreamMapper.mapNewDreamDtoToEntity(newDream);
         toBeSaved.setDreamer(dreamer);

@@ -6,7 +6,6 @@ import com.codecool.elproyectegrande1.service.UserService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,25 +23,33 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
     public static final String AUTHORIZATION = "Authorization";
     public static final String BEARER = "Bearer ";
-    @Autowired
-    private JwtUtils jwtUtils;
-    @Autowired
-    private TokenProvider tokenProvider;
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-    @Autowired
+    private final JwtUtils jwtUtils;
+
+    private final TokenProvider tokenProvider;
+
+    private final UserDetailsServiceImpl userDetailsService;
+
     private UserService userService;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
+
+    public AuthTokenFilter(JwtUtils jwtUtils, TokenProvider tokenProvider, UserDetailsServiceImpl userDetailsService, UserService userService) {
+        this.jwtUtils = jwtUtils;
+        this.tokenProvider = tokenProvider;
+        this.userDetailsService = userDetailsService;
+        this.userService = userService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
             String jwt = parseJwt(request);
+            System.out.println(jwt);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
+
                 UserDetails userDetails;
 
                 if (!NumberUtils.isCreatable(username))
@@ -52,6 +59,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
                         userDetails.getAuthorities());
+
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);

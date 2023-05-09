@@ -2,13 +2,15 @@ package com.codecool.elproyectegrande1.config.springSecurity;
 
 import com.codecool.elproyectegrande1.jwt.AuthEntryPointJwt;
 import com.codecool.elproyectegrande1.jwt.AuthTokenFilter;
+import com.codecool.elproyectegrande1.jwt.JwtUtils;
 import com.codecool.elproyectegrande1.security.RestAuthenticationEntryPoint;
-import com.codecool.elproyectegrande1.security.TokenAuthenticationFilter;
+import com.codecool.elproyectegrande1.security.TokenProvider;
 import com.codecool.elproyectegrande1.security.oauth.CustomOauth2UserService;
 import com.codecool.elproyectegrande1.security.oauth.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.codecool.elproyectegrande1.security.oauth.OAuth2AuthenticationFailureHandler;
 import com.codecool.elproyectegrande1.security.oauth.OAuth2AuthenticationSuccessHandler;
 import com.codecool.elproyectegrande1.service.UserDetailsServiceImpl;
+import com.codecool.elproyectegrande1.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,12 +49,13 @@ public class WebSecurityConfig {
 
     @Autowired
     private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
     @Autowired
     private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
     @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
+    public AuthTokenFilter authenticationJwtTokenFilter(JwtUtils jwtUtils, TokenProvider tokenProvider, UserDetailsServiceImpl userDetailsService, UserService userService) {
+        return new AuthTokenFilter(jwtUtils, tokenProvider, userDetailsService, userService);
     }
 
     @Bean
@@ -80,6 +83,10 @@ public class WebSecurityConfig {
 //        return new TokenAuthenticationFilter();
 //    }
 
+    @Bean
+    public AuthTokenFilter authTokenFilter(JwtUtils jwtUtils, TokenProvider tokenProvider, UserDetailsServiceImpl userDetailsService, UserService userService) {
+        return new AuthTokenFilter(jwtUtils, tokenProvider, userDetailsService, userService);
+    }
 
     /*
       By default, Spring OAuth2 uses HttpSessionOAuth2AuthorizationRequestRepository to save
@@ -92,10 +99,8 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChainSecured(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChainSecured(HttpSecurity http, AuthTokenFilter authTokenFilter) throws Exception {
         http.cors().and().csrf().disable()
-                .httpBasic()
-                .disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                 .and()
@@ -129,7 +134,7 @@ public class WebSecurityConfig {
 
         http.authenticationProvider(authenticationProvider());
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
