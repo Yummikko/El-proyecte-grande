@@ -6,23 +6,21 @@ import com.codecool.elproyectegrande1.payload.request.LoginRequest;
 import com.codecool.elproyectegrande1.payload.request.SignupRequest;
 import com.codecool.elproyectegrande1.payload.response.JwtResponse;
 import com.codecool.elproyectegrande1.payload.response.MessageResponse;
-import com.codecool.elproyectegrande1.repository.MentorRepository;
 import com.codecool.elproyectegrande1.repository.RoleRepository;
 import com.codecool.elproyectegrande1.repository.UserRepository;
 import com.codecool.elproyectegrande1.service.DreamerService;
 import com.codecool.elproyectegrande1.service.MentorService;
+import com.codecool.elproyectegrande1.service.RoleService;
+import com.codecool.elproyectegrande1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -52,19 +50,23 @@ public class AuthController {
 
     private final DreamerService dreamerService;
     private final MentorService mentorService;
+    private final UserService userService;
+    private final RoleService roleService;
 
     private final String DREAMER = "dreamer";
     private final String MENTOR = "mentor";
     private final String ADMIN = "admin";
-    private final MentorRepository mentorRepository;
+
 
     @Autowired
-    public AuthController(DreamerService dreamerService, MentorService mentorService,
-                          MentorRepository mentorRepository) {
+    public AuthController(DreamerService dreamerService, MentorService mentorService, UserService userService, RoleService roleService) {
         this.dreamerService = dreamerService;
         this.mentorService = mentorService;
-        this.mentorRepository = mentorRepository;
+        this.userService = userService;
+        this.roleService = roleService;
     }
+
+    //TODO refactor both endpoints
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpSession session) {
@@ -74,13 +76,7 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-        User user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        if(user.getRoles().iterator().next().getName()==ERole.ROLE_MENTOR){
-            Mentor mentor = mentorRepository.findByNickname(loginRequest.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-            if (!mentor.isVerified()) {
-                throw new BadCredentialsException("User not verified!");
-            }
-        }
+        userService.findUserIfExists(loginRequest);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
@@ -100,17 +96,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
-        }
-
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
-        }
+        userService.getMessageResponseResponseEntity(signUpRequest);
 
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
@@ -120,32 +106,7 @@ public class AuthController {
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_DREAMER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case ADMIN:
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-
-                        break;
-                    case MENTOR:
-                        Role mentorRole = roleRepository.findByName(ERole.ROLE_MENTOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(mentorRole);
-
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_DREAMER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
-        }
+        roleService.findRoleAndAddToRoles(strRoles, roles);
 
         for (String entry:strRoles) {
             if (!DREAMER.equals(entry) && !MENTOR.equals(entry) && !ADMIN.equals(entry)) {
@@ -153,8 +114,8 @@ public class AuthController {
             }
         }
 
-        user.setRoles(roles);
-        userRepository.save(user);
+        userService.setRoleAndSaveUser(user, roles);
+
         if (strRoles.contains(DREAMER))
             dreamerService.createDreamerFromUser(user);
         if (strRoles.contains(MENTOR))

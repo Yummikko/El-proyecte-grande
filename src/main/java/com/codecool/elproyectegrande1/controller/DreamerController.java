@@ -24,7 +24,6 @@ import java.util.List;
 public class DreamerController {
 
     private final DreamerService dreamerService;
-    private boolean isLoggedIn = false;
 
     @Autowired
     public DreamerController(DreamerService dreamerService) {
