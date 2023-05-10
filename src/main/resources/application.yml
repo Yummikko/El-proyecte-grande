@@ -10,3 +10,6 @@ spring:
             scope:
               - email
               - profile
+          paypal:
+            clientId: ${paypal.clientId}
+            clientSecret: ${paypal.secret}
