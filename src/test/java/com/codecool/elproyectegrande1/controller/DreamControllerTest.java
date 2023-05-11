@@ -1,6 +1,6 @@
 package com.codecool.elproyectegrande1.controller;
 
-import com.codecool.elproyectegrande1.config.springSecurity.WebSecurityConfig;
+import com.codecool.elproyectegrande1.config.spring.security.WebSecurityConfig;
 import com.codecool.elproyectegrande1.dto.dream.DreamDto;
 import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Image;

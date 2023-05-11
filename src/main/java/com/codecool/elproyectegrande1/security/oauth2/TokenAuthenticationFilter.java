@@ -1,7 +1,6 @@
-package com.codecool.elproyectegrande1.security;
+package com.codecool.elproyectegrande1.security.oauth2;
 
 import com.codecool.elproyectegrande1.jwt.JwtUtils;
-import com.codecool.elproyectegrande1.service.UserDetailsService;
 import com.codecool.elproyectegrande1.service.UserDetailsServiceImpl;
 import com.codecool.elproyectegrande1.service.UserService;
 import lombok.extern.slf4j.Slf4j;

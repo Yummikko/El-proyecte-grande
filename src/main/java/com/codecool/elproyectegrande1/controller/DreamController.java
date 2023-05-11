@@ -6,8 +6,6 @@ import com.codecool.elproyectegrande1.dto.dream.DreamDto;
 import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.payload.response.MessageResponse;
-import com.codecool.elproyectegrande1.security.CurrentUser;
-import com.codecool.elproyectegrande1.security.UserPrincipal;
 import com.codecool.elproyectegrande1.service.CommentService;
 import com.codecool.elproyectegrande1.service.DreamService;
 import com.codecool.elproyectegrande1.service.ImageService;

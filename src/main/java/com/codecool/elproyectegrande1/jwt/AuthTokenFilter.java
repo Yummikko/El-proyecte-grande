@@ -1,6 +1,6 @@
 package com.codecool.elproyectegrande1.jwt;
 
-import com.codecool.elproyectegrande1.security.TokenProvider;
+import com.codecool.elproyectegrande1.security.oauth2.TokenProvider;
 import com.codecool.elproyectegrande1.service.UserDetailsServiceImpl;
 import com.codecool.elproyectegrande1.service.UserService;
 import org.apache.commons.lang3.math.NumberUtils;

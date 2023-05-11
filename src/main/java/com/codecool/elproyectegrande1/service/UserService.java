@@ -10,7 +10,7 @@ import com.codecool.elproyectegrande1.payload.response.MessageResponse;
 import com.codecool.elproyectegrande1.repository.AvatarRepository;
 import com.codecool.elproyectegrande1.repository.MentorRepository;
 import com.codecool.elproyectegrande1.repository.UserRepository;
-import com.codecool.elproyectegrande1.security.UserPrincipal;
+import com.codecool.elproyectegrande1.security.oauth2.UserPrincipal;
 import com.codecool.elproyectegrande1.util.ImageUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;

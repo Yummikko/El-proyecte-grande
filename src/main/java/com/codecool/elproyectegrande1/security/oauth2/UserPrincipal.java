@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.security;
+package com.codecool.elproyectegrande1.security.oauth2;
 
 import com.codecool.elproyectegrande1.entity.User;
 import lombok.Getter;

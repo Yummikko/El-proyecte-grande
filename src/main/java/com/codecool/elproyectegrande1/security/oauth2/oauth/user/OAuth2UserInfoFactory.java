@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.security.oauth.user;
+package com.codecool.elproyectegrande1.security.oauth2.oauth.user;
 
 import com.codecool.elproyectegrande1.entity.AuthProvider;
 import com.codecool.elproyectegrande1.exceptions.OAuth2AuthenticationProcessingException;

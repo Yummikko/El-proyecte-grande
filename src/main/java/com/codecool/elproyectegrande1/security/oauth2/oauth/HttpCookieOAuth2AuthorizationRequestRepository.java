@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.security.oauth;
+package com.codecool.elproyectegrande1.security.oauth2.oauth;
 
 import com.codecool.elproyectegrande1.util.CookieUtils;
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;

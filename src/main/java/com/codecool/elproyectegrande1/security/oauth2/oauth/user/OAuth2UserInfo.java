@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.security.oauth.user;
+package com.codecool.elproyectegrande1.security.oauth2.oauth.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

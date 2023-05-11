@@ -1,14 +1,14 @@
-package com.codecool.elproyectegrande1.config.springSecurity;
+package com.codecool.elproyectegrande1.config.spring.security;
 
 import com.codecool.elproyectegrande1.jwt.AuthEntryPointJwt;
 import com.codecool.elproyectegrande1.jwt.AuthTokenFilter;
 import com.codecool.elproyectegrande1.jwt.JwtUtils;
-import com.codecool.elproyectegrande1.security.RestAuthenticationEntryPoint;
-import com.codecool.elproyectegrande1.security.TokenProvider;
-import com.codecool.elproyectegrande1.security.oauth.CustomOauth2UserService;
-import com.codecool.elproyectegrande1.security.oauth.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.codecool.elproyectegrande1.security.oauth.OAuth2AuthenticationFailureHandler;
-import com.codecool.elproyectegrande1.security.oauth.OAuth2AuthenticationSuccessHandler;
+import com.codecool.elproyectegrande1.security.oauth2.RestAuthenticationEntryPoint;
+import com.codecool.elproyectegrande1.security.oauth2.TokenProvider;
+import com.codecool.elproyectegrande1.security.oauth2.oauth.CustomOauth2UserService;
+import com.codecool.elproyectegrande1.security.oauth2.oauth.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.codecool.elproyectegrande1.security.oauth2.oauth.OAuth2AuthenticationFailureHandler;
+import com.codecool.elproyectegrande1.security.oauth2.oauth.OAuth2AuthenticationSuccessHandler;
 import com.codecool.elproyectegrande1.service.UserDetailsServiceImpl;
 import com.codecool.elproyectegrande1.service.UserService;
 import lombok.RequiredArgsConstructor;

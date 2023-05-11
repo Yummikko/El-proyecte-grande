@@ -1,12 +1,12 @@
-package com.codecool.elproyectegrande1.security.oauth;
+package com.codecool.elproyectegrande1.security.oauth2.oauth;
 
 import com.codecool.elproyectegrande1.entity.AuthProvider;
 import com.codecool.elproyectegrande1.entity.User;
 import com.codecool.elproyectegrande1.exceptions.OAuth2AuthenticationProcessingException;
 import com.codecool.elproyectegrande1.repository.UserRepository;
-import com.codecool.elproyectegrande1.security.UserPrincipal;
-import com.codecool.elproyectegrande1.security.oauth.user.OAuth2UserInfo;
-import com.codecool.elproyectegrande1.security.oauth.user.OAuth2UserInfoFactory;
+import com.codecool.elproyectegrande1.security.oauth2.UserPrincipal;
+import com.codecool.elproyectegrande1.security.oauth2.oauth.user.OAuth2UserInfo;
+import com.codecool.elproyectegrande1.security.oauth2.oauth.user.OAuth2UserInfoFactory;
 import com.codecool.elproyectegrande1.service.DreamerService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
