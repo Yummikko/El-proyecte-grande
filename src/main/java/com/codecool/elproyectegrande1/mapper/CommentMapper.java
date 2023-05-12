@@ -16,7 +16,7 @@ public class CommentMapper {
                 entity.getTimeUpdated(),
                 entity.getLikes(),
                 entity.getUsername()
-        );
+                );
     }
 
     public Comment mapNewCommentDtoToEntity(NewCommentDto dto, String username) {
@@ -24,6 +24,6 @@ public class CommentMapper {
                 dto.getComment(),
                 0,
                 username
-        );
+                );
     }
 }

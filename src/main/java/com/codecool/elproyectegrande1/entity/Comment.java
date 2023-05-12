@@ -1,5 +1,9 @@
 package com.codecool.elproyectegrande1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -27,6 +31,9 @@ public class Comment {
     private String username;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dream_id")
+    @Fetch(FetchMode.JOIN)
+    @JsonIgnoreProperties("comments")
     private Dream dream;
 
 
@@ -52,11 +59,6 @@ public class Comment {
     public String getCommentText() {
         return commentText;
     }
-
-//    public Dreamer getDreamer() {
-//        return dreamer;
-//    }
-
 
     public LocalDateTime getTimeCreated() {
         return timeCreated;
@@ -104,5 +106,9 @@ public class Comment {
 
     public void setDream(Dream dream) {
         this.dream = dream;
+    }
+
+    public Dream getDream() {
+        return dream;
     }
 }

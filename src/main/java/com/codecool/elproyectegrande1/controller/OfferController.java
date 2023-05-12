@@ -54,10 +54,10 @@ public class OfferController {
     }
 
     @PostMapping("/{id}/comment")
-    public CommentDto addComment(@RequestBody NewCommentDto newCommentDto) {
+    public CommentDto addComment(@RequestBody NewCommentDto newCommentDto, @PathVariable Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        return commentService.addComment(newCommentDto, username);
+        return commentService.addComment(newCommentDto, username, id);
     }
 }
 

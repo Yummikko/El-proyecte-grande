@@ -3,6 +3,8 @@ package com.codecool.elproyectegrande1.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -43,21 +45,16 @@ public class Dream {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JsonIgnoreProperties("dream")
     private Set<Comment> comments;
 
-//    @OneToMany(
-//            mappedBy = "dream",
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true
-//    )
-//    @JsonManagedReference
-//    private List<Image> images;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonManagedReference("dream-image")
     private Image mainImage;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     @JsonIgnoreProperties("dreams")
     private Dreamer dreamer;
 
