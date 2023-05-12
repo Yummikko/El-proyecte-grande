@@ -1,7 +1,7 @@
-package com.codecool.elproyectegrande1.security.oauth2.oauth.user;
+package com.codecool.elproyectegrande1.security.oauth2.authentication.user;
 
 import com.codecool.elproyectegrande1.entity.AuthProvider;
-import com.codecool.elproyectegrande1.exceptions.OAuth2AuthenticationProcessingException;
+import com.codecool.elproyectegrande1.service.exceptions.OAuth2AuthenticationProcessingException;
 
 import java.util.Map;
 

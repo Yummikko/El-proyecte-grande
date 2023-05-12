@@ -10,7 +10,7 @@ spring:
             scope:
               - email
               - profile
-        paypal:
-          client-id: AXZl_vIeral-jAJ82HJkaNbkXABa-gAgS2BOCwJfB8KOOLuAHOg2Ky8_UmiJfbnPRq4fAYVyq1ZDqD60
-          client-secret: EOV4EYbhhcQOmTqA4L8vb_pwBzLtZTYVfX0_DpCFCdTx9u0tMKTO139rxT9aX1mz3Q4PX_K-0EHxH9Hc
-          mode: sandbox
+paypal:
+  client-id: AXZl_vIeral-jAJ82HJkaNbkXABa-gAgS2BOCwJfB8KOOLuAHOg2Ky8_UmiJfbnPRq4fAYVyq1ZDqD60
+  client-secret: EOV4EYbhhcQOmTqA4L8vb_pwBzLtZTYVfX0_DpCFCdTx9u0tMKTO139rxT9aX1mz3Q4PX_K-0EHxH9Hc
+  mode: sandbox

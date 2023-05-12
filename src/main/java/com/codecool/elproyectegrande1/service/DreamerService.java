@@ -52,7 +52,7 @@ public class DreamerService {
     public DreamerDto getDreamerByNickname(String nickname) {
         Dreamer dreamer = dreamerRepository.findByNickname(nickname)
                 .orElseThrow(() -> new IllegalArgumentException("Dreamer with id " + nickname + " not found"));
-        System.out.println(dreamer.getNickname());
+
         return dreamerMapper.mapEntityToDreamerDto(dreamer);
     }
 

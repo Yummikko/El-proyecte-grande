@@ -2,11 +2,11 @@ package com.codecool.elproyectegrande1.service;
 
 import com.codecool.elproyectegrande1.dto.user.UserDto;
 import com.codecool.elproyectegrande1.entity.*;
-import com.codecool.elproyectegrande1.exceptions.ResourceNotFoundException;
+import com.codecool.elproyectegrande1.service.exceptions.ResourceNotFoundException;
 import com.codecool.elproyectegrande1.mapper.UserMapper;
-import com.codecool.elproyectegrande1.payload.request.LoginRequest;
-import com.codecool.elproyectegrande1.payload.request.SignupRequest;
-import com.codecool.elproyectegrande1.payload.response.MessageResponse;
+import com.codecool.elproyectegrande1.jwt.payload.request.LoginRequest;
+import com.codecool.elproyectegrande1.jwt.payload.request.SignupRequest;
+import com.codecool.elproyectegrande1.jwt.payload.response.MessageResponse;
 import com.codecool.elproyectegrande1.repository.AvatarRepository;
 import com.codecool.elproyectegrande1.repository.MentorRepository;
 import com.codecool.elproyectegrande1.repository.UserRepository;

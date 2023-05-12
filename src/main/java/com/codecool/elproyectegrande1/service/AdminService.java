@@ -1,13 +1,10 @@
 package com.codecool.elproyectegrande1.service;
 
 import com.codecool.elproyectegrande1.entity.Mentor;
-import com.codecool.elproyectegrande1.exceptions.MentorNotFoundException;
+import com.codecool.elproyectegrande1.service.exceptions.MentorNotFoundException;
 import com.codecool.elproyectegrande1.mapper.MentorMapper;
 import com.codecool.elproyectegrande1.repository.MentorRepository;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.nio.file.AccessDeniedException;
 
 @Service
 public class AdminService {

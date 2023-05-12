@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.controller.advice;
 
-import com.codecool.elproyectegrande1.exceptions.DreamNotFoundException;
-import com.codecool.elproyectegrande1.exceptions.MentorNotFoundException;
+import com.codecool.elproyectegrande1.service.exceptions.DreamNotFoundException;
+import com.codecool.elproyectegrande1.service.exceptions.MentorNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

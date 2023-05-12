@@ -24,7 +24,9 @@ public class DreamMapper {
                 entity.getComments()
                         .stream()
                         .map(commentMapper::mapEntityToCommentDto)
-                        .collect(Collectors.toSet())
+                        .collect(Collectors.toSet()),
+                entity.getLikes(),
+                entity.getViews()
         );
     }
 

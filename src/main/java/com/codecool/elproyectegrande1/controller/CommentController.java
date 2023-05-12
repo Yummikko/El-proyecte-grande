@@ -1,7 +1,7 @@
 package com.codecool.elproyectegrande1.controller;
 
 
-import com.codecool.elproyectegrande1.payload.response.MessageResponse;
+import com.codecool.elproyectegrande1.jwt.payload.response.MessageResponse;
 import com.codecool.elproyectegrande1.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

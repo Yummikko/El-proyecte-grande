@@ -24,16 +24,21 @@ public class PaypalController {
     }
 
     @PostMapping("/payment/create")
-    public RedirectView createPayment() {
+    public RedirectView createPayment(
+            @RequestParam("method") String method,
+            @RequestParam("amount") String amount,
+            @RequestParam("currency") String currency,
+            @RequestParam("description") String description
+    ) {
         try {
             String cancelUrl = "http://localhost:8080/payment/cancel";
             String successUrl = "http://localhost:8080/payment/success";
             Payment payment = paypalService.createPayment(
-                    10.0,
-                    "USD",
-                    "paypal",
+                    Double.valueOf(amount),
+                    currency,
+                    method,
                     "sale",
-                    "Payment description",
+                    description,
                     cancelUrl,
                     successUrl
             );

@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.payload.request;
+package com.codecool.elproyectegrande1.jwt.payload.request;
 
 import com.codecool.elproyectegrande1.entity.Image;
 import com.fasterxml.jackson.annotation.JsonIgnore;

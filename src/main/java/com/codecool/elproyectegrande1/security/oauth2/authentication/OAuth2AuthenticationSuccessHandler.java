@@ -1,7 +1,7 @@
-package com.codecool.elproyectegrande1.security.oauth2.oauth;
+package com.codecool.elproyectegrande1.security.oauth2.authentication;
 
 import com.codecool.elproyectegrande1.config.AppConfig;
-import com.codecool.elproyectegrande1.exceptions.BadRequestException;
+import com.codecool.elproyectegrande1.service.exceptions.BadRequestException;
 import com.codecool.elproyectegrande1.security.oauth2.TokenProvider;
 import com.codecool.elproyectegrande1.util.CookieUtils;
 import lombok.RequiredArgsConstructor;

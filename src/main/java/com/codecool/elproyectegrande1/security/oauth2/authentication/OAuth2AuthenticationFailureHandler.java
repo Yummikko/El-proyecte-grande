@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.security.oauth2.oauth;
+package com.codecool.elproyectegrande1.security.oauth2.authentication;
 
 import com.codecool.elproyectegrande1.util.CookieUtils;
 import lombok.AllArgsConstructor;

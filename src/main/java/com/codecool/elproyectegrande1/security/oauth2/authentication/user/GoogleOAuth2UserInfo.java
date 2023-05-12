@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.security.oauth2.oauth.user;
+package com.codecool.elproyectegrande1.security.oauth2.authentication.user;
 
 import java.util.Map;
 

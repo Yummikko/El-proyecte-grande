@@ -22,7 +22,7 @@ public class DreamDto {
     public DreamDto() {
     }
 
-    public DreamDto(Long id, String dreamTitle, String dreamDescription, List<String> hashtags, Image image, Set<CommentDto> comments) {
+    public DreamDto(Long id, String dreamTitle, String dreamDescription, List<String> hashtags, Image image, Set<CommentDto> comments, int likes, int views) {
         this.id = id;
         this.dreamTitle = dreamTitle;
         this.dreamDescription = dreamDescription;
@@ -30,6 +30,8 @@ public class DreamDto {
         this.image = image;
         this.dreamStatus = DreamStatus.PRESENTING;
         this.comments = comments;
+        this.likes = likes;
+        this.views = views;
     }
 
     public Long getId() {

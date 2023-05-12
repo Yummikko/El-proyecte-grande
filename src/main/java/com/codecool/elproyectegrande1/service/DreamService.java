@@ -5,7 +5,7 @@ import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.DreamStatus;
 import com.codecool.elproyectegrande1.entity.*;
-import com.codecool.elproyectegrande1.exceptions.DreamNotFoundException;
+import com.codecool.elproyectegrande1.service.exceptions.DreamNotFoundException;
 import com.codecool.elproyectegrande1.mapper.DreamMapper;
 import com.codecool.elproyectegrande1.repository.DreamRepository;
 import com.codecool.elproyectegrande1.repository.DreamerRepository;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

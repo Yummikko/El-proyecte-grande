@@ -5,10 +5,10 @@ import com.codecool.elproyectegrande1.jwt.AuthTokenFilter;
 import com.codecool.elproyectegrande1.jwt.JwtUtils;
 import com.codecool.elproyectegrande1.security.oauth2.RestAuthenticationEntryPoint;
 import com.codecool.elproyectegrande1.security.oauth2.TokenProvider;
-import com.codecool.elproyectegrande1.security.oauth2.oauth.CustomOauth2UserService;
-import com.codecool.elproyectegrande1.security.oauth2.oauth.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.codecool.elproyectegrande1.security.oauth2.oauth.OAuth2AuthenticationFailureHandler;
-import com.codecool.elproyectegrande1.security.oauth2.oauth.OAuth2AuthenticationSuccessHandler;
+import com.codecool.elproyectegrande1.security.oauth2.authentication.CustomOauth2UserService;
+import com.codecool.elproyectegrande1.security.oauth2.authentication.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.codecool.elproyectegrande1.security.oauth2.authentication.OAuth2AuthenticationFailureHandler;
+import com.codecool.elproyectegrande1.security.oauth2.authentication.OAuth2AuthenticationSuccessHandler;
 import com.codecool.elproyectegrande1.service.UserDetailsServiceImpl;
 import com.codecool.elproyectegrande1.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -38,8 +38,8 @@ public class WebSecurityConfig {
     @Value("${spring.h2.console.path}")
     private String h2ConsolePath;
 
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
+//    @Autowired
+//    UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
@@ -59,7 +59,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
+    public DaoAuthenticationProvider authenticationProvider(UserDetailsServiceImpl userDetailsService) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
         authProvider.setUserDetailsService(userDetailsService);
@@ -99,7 +99,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChainSecured(HttpSecurity http, AuthTokenFilter authTokenFilter) throws Exception {
+    public SecurityFilterChain filterChainSecured(HttpSecurity http, AuthTokenFilter authTokenFilter, UserDetailsServiceImpl userDetailsService) throws Exception {
         http.cors().and().csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
@@ -132,7 +132,7 @@ public class WebSecurityConfig {
         // fix H2 database console: Refused to display ' in a frame because it set 'X-Frame-Options' to 'deny'
         http.headers().frameOptions().sameOrigin();
 
-        http.authenticationProvider(authenticationProvider());
+        http.authenticationProvider(authenticationProvider(userDetailsService));
 
         http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
 

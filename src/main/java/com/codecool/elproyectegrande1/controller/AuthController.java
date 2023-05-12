@@ -2,10 +2,10 @@ package com.codecool.elproyectegrande1.controller;
 
 import com.codecool.elproyectegrande1.entity.*;
 import com.codecool.elproyectegrande1.jwt.JwtUtils;
-import com.codecool.elproyectegrande1.payload.request.LoginRequest;
-import com.codecool.elproyectegrande1.payload.request.SignupRequest;
-import com.codecool.elproyectegrande1.payload.response.JwtResponse;
-import com.codecool.elproyectegrande1.payload.response.MessageResponse;
+import com.codecool.elproyectegrande1.jwt.payload.request.LoginRequest;
+import com.codecool.elproyectegrande1.jwt.payload.request.SignupRequest;
+import com.codecool.elproyectegrande1.jwt.payload.response.JwtResponse;
+import com.codecool.elproyectegrande1.jwt.payload.response.MessageResponse;
 import com.codecool.elproyectegrande1.repository.RoleRepository;
 import com.codecool.elproyectegrande1.repository.UserRepository;
 import com.codecool.elproyectegrande1.service.DreamerService;

@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.payload.request;
+package com.codecool.elproyectegrande1.jwt.payload.request;
 
 import javax.validation.constraints.NotBlank;
 

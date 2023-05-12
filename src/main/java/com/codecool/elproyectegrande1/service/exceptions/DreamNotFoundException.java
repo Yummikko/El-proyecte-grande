@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.exceptions;
+package com.codecool.elproyectegrande1.service.exceptions;
 
 public class DreamNotFoundException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.payload.response;
+package com.codecool.elproyectegrande1.jwt.payload.response;
 
 import java.util.List;
 

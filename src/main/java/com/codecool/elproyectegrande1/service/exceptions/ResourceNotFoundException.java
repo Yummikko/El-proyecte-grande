@@ -1,4 +1,4 @@
-package com.codecool.elproyectegrande1.exceptions;
+package com.codecool.elproyectegrande1.service.exceptions;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;
