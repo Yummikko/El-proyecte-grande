@@ -1,5 +1,7 @@
 package com.codecool.elproyectegrande1.dto.comment;
 
+import com.codecool.elproyectegrande1.entity.Dream;
+
 import java.time.LocalDateTime;
 
 
@@ -15,6 +17,8 @@ public class CommentDto {
     private int likes = 0;
 
     private String username;
+
+    private Dream dream;
 
     public CommentDto(Long id, String comment, LocalDateTime createdDate, LocalDateTime updatedDate, int likes, String username) {
         this.id = id;
@@ -71,5 +75,13 @@ public class CommentDto {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Dream getDream() {
+        return dream;
+    }
+
+    public void setDream(Dream dream) {
+        this.dream = dream;
     }
 }

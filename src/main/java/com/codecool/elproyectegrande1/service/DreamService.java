@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande1.service;
 
+import com.codecool.elproyectegrande1.dto.comment.CommentDto;
 import com.codecool.elproyectegrande1.dto.dream.DreamDto;
 import com.codecool.elproyectegrande1.dto.dream.NewDreamDto;
 import com.codecool.elproyectegrande1.entity.Dream;
@@ -146,5 +147,4 @@ public class DreamService {
                 .map(dreamMapper::mapEntityToDreamDto)
                 .collect(Collectors.toList());
     }
-
 }

@@ -1,6 +1,7 @@
 package com.codecool.elproyectegrande1.controller;
 
 
+import com.codecool.elproyectegrande1.dto.comment.CommentDto;
 import com.codecool.elproyectegrande1.jwt.payload.response.MessageResponse;
 import com.codecool.elproyectegrande1.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/comments")
@@ -35,5 +38,15 @@ public class CommentController {
     public ResponseEntity<MessageResponse> deleteCommentById(@PathVariable Long id) {
         commentService.deleteComment(id);
         return ResponseEntity.ok().body(new MessageResponse("Comment deleted successfully!"));
+    }
+
+//    @GetMapping("/dream/{dreamId}")
+//    public Set<CommentDto> getAllCommentsForDream(@PathVariable Long dreamId) {
+//        return commentService.getAllCommentsByDreamId(dreamId);
+//    }
+
+    @GetMapping("/dream/{dreamId}")
+    public List<CommentDto> getAllCommentsByDream(@PathVariable Long dreamId) {
+        return commentService.getAllCommentsById(dreamId);
     }
 }
