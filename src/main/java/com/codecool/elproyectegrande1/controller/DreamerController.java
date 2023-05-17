@@ -43,13 +43,9 @@ public class DreamerController {
 
     @PutMapping("/{nickname}/follow")
     public ResponseEntity<String> followDreamer(@PathVariable("nickname") String nickname, Principal principal) {
-//        if (isLoggedIn) {
         String name = principal.getName();
         dreamerService.followDreamer(nickname, name);
             return new ResponseEntity<>("Followed successfully!", HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>("Please log in to follow the dreamer.", HttpStatus.BAD_REQUEST);
-//        }
     }
 
     @PutMapping("/{nickname}/unfollow")

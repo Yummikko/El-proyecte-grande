@@ -11,9 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.Instant;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users",
@@ -22,6 +20,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "email")
         })
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -72,7 +71,6 @@ public class User implements UserDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     private Avatar profilePicture;
 
-
     @Size(max = 120)
     private String imageUrl;
 
@@ -80,7 +78,15 @@ public class User implements UserDetails {
     @Column(length = 24)
     private AuthProvider provider;
 
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Parameter> parameters = new ArrayList<>();
+
     private String providerId;
+
 
 //    @OneToMany(
 //            mappedBy = "user",
@@ -204,7 +210,19 @@ public class User implements UserDetails {
         this.providerId = providerId;
     }
 
-    //    public Set<Letter> getLetters() {
+    public List<Parameter> getParameters() {
+        return parameters;
+    }
+
+    public void addParameters(Parameter parameter) {
+        this.parameters.add(parameter);
+    }
+
+    public void removeParameters(Parameter parameter) {
+        this.parameters.remove(parameter);
+    }
+
+//    public Set<Letter> getLetters() {
 //        return letters;
 //    }
 //

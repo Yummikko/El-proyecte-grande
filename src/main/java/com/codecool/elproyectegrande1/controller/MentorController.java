@@ -64,13 +64,9 @@ public class MentorController {
     }
 
     @PutMapping("/{nickname}/follow")
-    public ResponseEntity<String> followMentor(@PathVariable("nickname") String nickname, Principal principal) {
-//        if (!Objects.equals(principal.getName(), "")) {
+    public ResponseEntity<String> followMentor(@PathVariable("nickname") String nickname) {
             mentorService.followMentor(nickname);
             return new ResponseEntity<>("Followed successfully!", HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>("Please log in to follow the dreamer.", HttpStatus.BAD_REQUEST);
-//        }
     }
 
     @PutMapping("/{nickname}/unfollow")

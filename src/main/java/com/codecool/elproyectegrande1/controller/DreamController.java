@@ -38,7 +38,6 @@ public class DreamController {
     @PostMapping("/create")
     public DreamDto createNewDream(@RequestBody NewDreamDto newDreamDto, Principal principal) {
         String name = principal.getName();
-        System.out.println(principal);
         return dreamService.addDream(name, newDreamDto);
     }
 

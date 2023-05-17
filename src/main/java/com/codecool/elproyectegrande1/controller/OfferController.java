@@ -19,7 +19,6 @@ public class OfferController {
 
     private final OfferService offerService;
     private final CommentService commentService;
-    private boolean isLoggedIn = false;
 
     @Autowired
     public OfferController(OfferService offerService, CommentService commentService) {

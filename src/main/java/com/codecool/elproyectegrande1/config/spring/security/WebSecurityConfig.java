@@ -38,21 +38,6 @@ public class WebSecurityConfig {
     @Value("${spring.h2.console.path}")
     private String h2ConsolePath;
 
-//    @Autowired
-//    UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
-
-    @Autowired
-    private CustomOauth2UserService customOAuth2UserService;
-
-    @Autowired
-    private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
-
-    @Autowired
-    private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
-
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter(JwtUtils jwtUtils, TokenProvider tokenProvider, UserDetailsServiceImpl userDetailsService, UserService userService) {
         return new AuthTokenFilter(jwtUtils, tokenProvider, userDetailsService, userService);
@@ -78,11 +63,6 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public TokenAuthenticationFilter tokenAuthenticationFilter() {
-//        return new TokenAuthenticationFilter();
-//    }
-
     @Bean
     public AuthTokenFilter authTokenFilter(JwtUtils jwtUtils, TokenProvider tokenProvider, UserDetailsServiceImpl userDetailsService, UserService userService) {
         return new AuthTokenFilter(jwtUtils, tokenProvider, userDetailsService, userService);
@@ -99,8 +79,15 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChainSecured(HttpSecurity http, AuthTokenFilter authTokenFilter, UserDetailsServiceImpl userDetailsService) throws Exception {
-        http.cors().and().csrf().disable()
+    public SecurityFilterChain filterChainSecured(
+            HttpSecurity http,
+            AuthTokenFilter authTokenFilter,
+            UserDetailsServiceImpl userDetailsService,
+            AuthEntryPointJwt unauthorizedHandler,
+            CustomOauth2UserService customOAuth2UserService,
+            OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler,OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler
+    ) throws Exception {
+        http.csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                 .and()
@@ -108,7 +95,7 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**", "/auth/**", "/oauth2/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
-                .antMatchers("/api/**", "/image/**", "/update/profile-image", "/upload").permitAll()
+                .antMatchers("/api/**", "/image/**", "/update/profile-image", "/upload", "/payment/success", "/payment/cancel", "/payment/error").permitAll()
                 .antMatchers(h2ConsolePath + "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -131,6 +118,7 @@ public class WebSecurityConfig {
 
         // fix H2 database console: Refused to display ' in a frame because it set 'X-Frame-Options' to 'deny'
         http.headers().frameOptions().sameOrigin();
+        http.cors();
 
         http.authenticationProvider(authenticationProvider(userDetailsService));
 
