@@ -2,7 +2,6 @@ package com.codecool.elproyectegrande1.paypal;
 
 import com.codecool.elproyectegrande1.entity.Parameter;
 import com.codecool.elproyectegrande1.entity.User;
-import com.codecool.elproyectegrande1.repository.ParameterRepository;
 import com.codecool.elproyectegrande1.repository.UserRepository;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
@@ -75,14 +74,14 @@ public class PaypalService {
     public void saveParameter(String param, String userId) {
         Parameter parameter = new Parameter();
         parameter.setParameter(param);
-        User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(null);
+        User user = userRepository.findById(Long.valueOf(userId)).orElseThrow();
         parameter.setUser(user);
         user.addParameters(parameter);
         userRepository.update(user, user.getId());
     }
 
     public String findParameter(String userId) {
-        User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(null);
+        User user = userRepository.findById(Long.valueOf(userId)).orElseThrow();
         String parameter = user.getParameters().get(user.getParameters().size()-1).toString();
         return parameter;
     }

@@ -5,10 +5,9 @@ import com.codecool.elproyectegrande1.dto.letter.NewLetterDto;
 import com.codecool.elproyectegrande1.entity.Letter;
 import com.codecool.elproyectegrande1.service.LetterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -28,10 +27,9 @@ public class LetterController {
         return letterService.getLetterById(id);
     }
 
-    @PostMapping("/test/new_letter")
-    public LetterDto sendLetter(@RequestBody NewLetterDto newLetterDto) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String sender = authentication.getName();
+    @PostMapping("/new_letter")
+    public LetterDto sendLetter(@RequestBody NewLetterDto newLetterDto, Principal principal) {
+        String sender = principal.getName();
         return letterService.addLetter(sender, newLetterDto);
     }
 

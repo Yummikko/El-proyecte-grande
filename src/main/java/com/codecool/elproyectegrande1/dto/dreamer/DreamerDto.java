@@ -2,11 +2,9 @@ package com.codecool.elproyectegrande1.dto.dreamer;
 
 import com.codecool.elproyectegrande1.entity.Dream;
 import com.codecool.elproyectegrande1.entity.Image;
-import com.codecool.elproyectegrande1.entity.Offer;
+import com.codecool.elproyectegrande1.entity.Letter;
 import com.codecool.elproyectegrande1.entity.User;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +17,7 @@ public class DreamerDto {
     private int followers = 0;
     private BigDecimal funds;
     private User user;
-    private Set<String> letters;
+    private Set<Letter> letters;
     private Image profilePicture;
     private List<Dream> dreams = new ArrayList<>();
     private Set<String> followed;
@@ -27,7 +25,7 @@ public class DreamerDto {
     public DreamerDto() {
     }
 
-    public DreamerDto(Long id, String nickname, String email, int followers, User user, Set<String> letters, List<Dream> dreams, Set<String> followed) {
+    public DreamerDto(Long id, String nickname, String email, int followers, User user, Set<Letter> letters, List<Dream> dreams, Set<String> followed) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
@@ -84,11 +82,11 @@ public class DreamerDto {
         this.user = user;
     }
 
-    public Set<String> getLetters() {
+    public Set<Letter> getLetters() {
         return letters;
     }
 
-    public void setLetters(Set<String> letters) {
+    public void setLetters(Set<Letter> letters) {
         this.letters = letters;
     }
 

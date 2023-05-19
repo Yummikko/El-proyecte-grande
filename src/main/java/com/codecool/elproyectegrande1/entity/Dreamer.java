@@ -1,6 +1,5 @@
 package com.codecool.elproyectegrande1.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -8,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -39,8 +37,12 @@ public class Dreamer {
     @Fetch(FetchMode.JOIN)
     private User user;
 
-    @ElementCollection
-    private Set<String> letters;
+    @OneToMany(
+            mappedBy = "dreamer",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Letter> letters;
 
     @OneToMany(mappedBy = "dreamer", cascade = CascadeType.ALL)
     private List<Dream> dreams;
@@ -52,7 +54,7 @@ public class Dreamer {
     public Dreamer() {
     }
 
-    public Dreamer(String nickname, String email, User user, Set<String> letters, Set<String> followed) {
+    public Dreamer(String nickname, String email, User user, Set<Letter> letters, Set<String> followed) {
         this.nickname = nickname;
         this.email = email;
         this.user = user;
@@ -108,11 +110,11 @@ public class Dreamer {
         this.user = user;
     }
 
-    public Set<String> getLetters() {
+    public Set<Letter> getLetters() {
         return letters;
     }
 
-    public void setLetters(Set<String> letters) {
+    public void setLetters(Set<Letter> letters) {
         this.letters = letters;
     }
 

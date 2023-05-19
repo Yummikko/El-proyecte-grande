@@ -3,6 +3,7 @@ package com.codecool.elproyectegrande1.mapper;
 import com.codecool.elproyectegrande1.dto.dreamer.DreamerDto;
 import com.codecool.elproyectegrande1.dto.dreamer.NewDreamerDto;
 import com.codecool.elproyectegrande1.entity.Dreamer;
+import com.codecool.elproyectegrande1.entity.Letter;
 import com.codecool.elproyectegrande1.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,13 +17,13 @@ class NewDreamerMapperTest {
 
     @Test
     void shouldMapEntityToDreamerDto() {
-        Dreamer dreamer = new Dreamer("Test", "test", new User(), new HashSet<>());
+        Dreamer dreamer = new Dreamer("Test", "test", new User(), new HashSet<>(), new HashSet<>());
         dreamer.setId(1L);
         dreamer.setFollowers(10);
 
-        HashSet<String> letters = new HashSet<>();
-        letters.add("letter1");
-        letters.add("letter2");
+        HashSet<Letter> letters = new HashSet<>();
+        letters.add(new Letter("halo bro how are you", "duc@gmail.com"));
+        letters.add(new Letter("many from you, how is it?", "dawid@gmail.com"));
         dreamer.setLetters(letters);
 
         DreamerDto actual = newDreamerMapper.mapEntityToDreamerDto(dreamer);
@@ -38,11 +39,11 @@ class NewDreamerMapperTest {
     @Test
     void shouldMapNewDreamerDtoToEntity() {
 
-        NewDreamerDto newDreamerDto = new NewDreamerDto("test", "test", new User(), new HashSet<>());
+        NewDreamerDto newDreamerDto = new NewDreamerDto("test", "test", new User());
 
-        HashSet<String> letters = new HashSet<>();
-        letters.add("letter1");
-        letters.add("letter2");
+        HashSet<Letter> letters = new HashSet<>();
+        letters.add(new Letter("halo bro how are you", "duc@gmail.com"));
+        letters.add(new Letter("many from you, how is it?", "dawid@gmail.com"));
         newDreamerDto.setLetters(letters);
 
         Dreamer actual = newDreamerMapper.mapNewDreamerDtoToEntity(newDreamerDto);

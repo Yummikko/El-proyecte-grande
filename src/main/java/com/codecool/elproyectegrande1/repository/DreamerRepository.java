@@ -26,4 +26,6 @@ public interface DreamerRepository extends JpaRepository<Dreamer, Long> {
     @Query("update Dreamer d set d.dreams = :dreams where d.id = :id")
     void updateDreams(@Param(value = "id") Long id, @Param(value = "dreams") List<Dream> dreams);
 
+    Dreamer getByUserId(Long userId);
+
 }

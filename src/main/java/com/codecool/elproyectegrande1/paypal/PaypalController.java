@@ -1,17 +1,17 @@
 package com.codecool.elproyectegrande1.paypal;
 
+import com.codecool.elproyectegrande1.entity.Dreamer;
+import com.codecool.elproyectegrande1.service.DreamerService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.rmi.server.UID;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -21,6 +21,7 @@ import java.util.UUID;
 public class PaypalController {
 
     private final PaypalService paypalService;
+    private final DreamerService dreamerService;
 
     @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping("/payment/create")
@@ -32,12 +33,13 @@ public class PaypalController {
             @RequestParam("userId") String userId
     ) {
         UUID uuid = UUID.randomUUID();
-        System.out.println(uuid);
         String param = uuid.toString();
         paypalService.saveParameter(param, userId);
         try {
             String cancelUrl = "http://localhost:8080/payment/cancel";
             String successUrl = "http://localhost:8080/payment/success?param=" + param + "&userId=" + userId;
+            Dreamer dreamer = dreamerService.findDreamerByUserId(Long.valueOf(userId));
+            dreamerService.donateDreamer(dreamer.getId(), BigDecimal.valueOf(Long.valueOf(amount)));
             Payment payment = paypalService.createPayment(
                     Double.valueOf(amount),
                     currency,

@@ -1,5 +1,7 @@
 package com.codecool.elproyectegrande1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -19,6 +21,9 @@ public class Letter {
     private LocalDateTime dateTime;
 
     private String sender;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("letters")
+    private Dreamer dreamer;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    private User user;
@@ -72,5 +77,13 @@ public class Letter {
 
     public void setSender(String sender) {
         this.sender = sender;
+    }
+
+    public Dreamer getDreamer() {
+        return dreamer;
+    }
+
+    public void setDreamer(Dreamer dreamer) {
+        this.dreamer = dreamer;
     }
 }

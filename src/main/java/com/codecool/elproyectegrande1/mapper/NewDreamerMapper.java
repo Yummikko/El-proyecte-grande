@@ -21,7 +21,6 @@ public class NewDreamerMapper {
                 entity.getLetters(),
                 entity.getDreams(),
                 entity.getFollowed()
-
                 );
     }
 

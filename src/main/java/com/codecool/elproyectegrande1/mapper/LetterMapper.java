@@ -10,7 +10,6 @@ public class LetterMapper {
 
     public LetterDto mapEntityToLetterDto(Letter entity) {
         return new LetterDto(
-                entity.getId(),
                 entity.getContent(),
                 entity.getDateTime(),
                 entity.getSender()

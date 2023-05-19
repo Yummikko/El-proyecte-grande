@@ -103,7 +103,7 @@ public class DreamerService {
 
     public void donateDreamer(Long dreamerId, BigDecimal amount) {
         Dreamer dreamer = dreamerRepository.findById(dreamerId).orElseThrow();
-        dreamer.setFunds(amount);
+        dreamer.setFunds(amount.add(dreamer.getFunds()));
         dreamerRepository.save(dreamer);
     }
 
@@ -123,5 +123,10 @@ public class DreamerService {
         }
 
         return dreamDtos;
+    }
+
+    public Dreamer findDreamerByUserId(Long userId) {
+        Dreamer dreamer = dreamerRepository.getByUserId(userId);
+        return dreamer;
     }
 }

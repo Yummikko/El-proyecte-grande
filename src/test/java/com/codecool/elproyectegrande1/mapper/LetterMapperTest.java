@@ -24,7 +24,7 @@ class LetterMapperTest {
 
     @Test
     void shouldMapOfferDtoToEntity() {
-        NewLetterDto letterDto = new NewLetterDto("Test content 100");
+        NewLetterDto letterDto = new NewLetterDto("Test content 100", "Duc");
 
         Letter actual = letterMapper.mapNewLetterDtoToEntity(letterDto, "Test user");
 

@@ -10,7 +10,7 @@ public class LetterDto {
     private LocalDateTime dateTime;
     private String sender;
 
-    public LetterDto(Long id, String content, LocalDateTime dateTime, String sender) {
+    public LetterDto(String content, LocalDateTime dateTime, String sender) {
         this.id = id;
         this.content = content;
         this.dateTime = dateTime;

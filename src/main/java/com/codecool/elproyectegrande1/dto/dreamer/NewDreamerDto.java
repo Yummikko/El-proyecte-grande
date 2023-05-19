@@ -1,9 +1,6 @@
 package com.codecool.elproyectegrande1.dto.dreamer;
 
-import com.codecool.elproyectegrande1.entity.Dream;
-import com.codecool.elproyectegrande1.entity.Image;
-import com.codecool.elproyectegrande1.entity.Offer;
-import com.codecool.elproyectegrande1.entity.User;
+import com.codecool.elproyectegrande1.entity.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,7 +12,7 @@ public class NewDreamerDto {
     private String email;
     private BigDecimal funds = new BigDecimal(0);
     private User user;
-    private Set<String> letters;
+    private Set<Letter> letters;
     private String imageName;
     private Image image;
     private List<Dream> dreams = new ArrayList<>();
@@ -61,11 +58,11 @@ public class NewDreamerDto {
         this.user = user;
     }
 
-    public Set<String> getLetters() {
+    public Set<Letter> getLetters() {
         return letters;
     }
 
-    public void setLetters(Set<String> letters) {
+    public void setLetters(Set<Letter> letters) {
         this.letters = letters;
     }
 
