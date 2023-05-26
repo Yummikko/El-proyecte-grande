@@ -3,16 +3,16 @@ DreamCatcher is a website where You can share Your dreams and get support to rea
 
 ## Used technologies
 ### Java Backend
-Spring Boot
-Spring Security
-Hibernate
+* Spring Boot
+* Spring Security
+* Hibernate
 
 ### Javascript
-React.js
+* React.js
 
 ### Other
-PostgreSQL
-Jira Software
+* PostgreSQL
+* Jira Software
 
 ## Features 
 * Register/Login with Spring security and OpenId as dreamer or mentor
