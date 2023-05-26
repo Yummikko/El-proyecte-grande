@@ -23,3 +23,10 @@ DreamCatcher is a website where You can share Your dreams and get support to rea
 * Comment section under each dream 
 * Each user has a public page containing their posts & information about their followers 
 * User can like & dislike dream/offer
+
+## USAGE 
+### MAIN PAGE
+![image](https://github.com/Yummikko/El-proyecte-grande/assets/104222374/2f5127ed-c3d5-4d47-98f0-14cbaeddbfb3)
+
+### LOGIN
+![image](https://github.com/Yummikko/El-proyecte-grande/assets/104222374/b5b802ac-88b0-4e31-8a9f-fd9f88e6490d)
